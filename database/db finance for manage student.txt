@@ -1,0 +1,128 @@
+# Thiết Kế Thông Tin Tài Chính Cho Hệ Thống Quản Lý Học Sinh
+
+Tôi sẽ giúp bạn thiết kế lại phần thông tin tài chính để hệ thống quản lý học phí và các giao dịch hiệu quả hơn.
+
+## 1. Cấu Trúc Database Mới Cho Phần Tài Chính
+
+```dbml
+Table financial_accounts {
+  id integer [primary key, increment]
+  student_id integer [not null]
+  current_balance decimal(10,2) [not null, default: 0, note: 'Số dư hiện tại']
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+Table tuition_fees {
+  id integer [primary key, increment]
+  class_id integer [not null]
+  amount decimal(10,2) [not null, note: 'Học phí theo tháng']
+  effective_date date [not null, note: 'Ngày áp dụng']
+  created_at timestamp [default: `now()`]
+}
+
+Table transactions {
+  id integer [primary key, increment]
+  account_id integer [not null]
+  amount decimal(10,2) [not null]
+  transaction_type varchar(20) [not null, note: 'payment|tuition|refund|adjustment']
+  payment_method varchar(20) [note: 'cash|bank|transfer']
+  reference_id integer [note: 'ID tham chiếu (payment_id hoặc class_id)']
+  description text
+  receipt_image varchar(255)
+  created_by integer [note: 'user_id của người tạo']
+  created_at timestamp [default: `now()`]
+}
+
+Table monthly_invoices {
+  id integer [primary key, increment]
+  student_id integer [not null]
+  month date [not null, note: 'Tháng tính phí (ngày đầu tháng)']
+  total_amount decimal(10,2) [not null]
+  paid_amount decimal(10,2) [default: 0]
+  status varchar(20) [not null, default: 'pending', note: 'pending|partial|paid|overdue']
+  due_date date [not null]
+  created_at timestamp [default: `now()`]
+}
+
+Table invoice_items {
+  id integer [primary key, increment]
+  invoice_id integer [not null]
+  class_id integer [not null]
+  amount decimal(10,2) [not null]
+  description varchar(255)
+}
+```
+
+## 2. Các Mối Quan hệ
+
+```dbml
+Ref: financial_accounts.student_id > students.id
+Ref: tuition_fees.class_id > classes.id
+Ref: transactions.account_id > financial_accounts.id
+Ref: monthly_invoices.student_id > students.id
+Ref: invoice_items.invoice_id > monthly_invoices.id
+Ref: invoice_items.class_id > classes.id
+```
+
+## 3. Giải Thích Thiết Kế
+
+1. **financial_accounts**:
+   - Tài khoản tài chính riêng cho mỗi học sinh
+   - Theo dõi số dư hiện tại (có thể âm nếu nợ học phí)
+
+2. **tuition_fees**:
+   - Quản lý học phí theo từng lớp
+   - Cho phép thay đổi học phí theo thời gian (effective_date)
+
+3. **transactions**:
+   - Ghi lại mọi giao dịch tài chính
+   - Phân loại: thanh toán, học phí, hoàn tiền, điều chỉnh
+   - Liên kết với tài khoản tài chính
+
+4. **monthly_invoices**:
+   - Hóa đơn hàng tháng cho học sinh
+   - Tổng hợp tất cả các lớp đang học
+
+5. **invoice_items**:
+   - Chi tiết từng mục trong hóa đơn (từng lớp)
+
+## 4. Cơ Chế Hoạt Động
+
+1. **Khi học sinh đăng ký lớp**:
+   - Tự động tạo tài khoản tài chính nếu chưa có
+   - Cập nhật vào bảng student_classes
+
+2. **Hàng tháng**:
+   - Hệ thống tự động tạo hóa đơn (monthly_invoices)
+   - Tính phí cho từng lớp đang học (invoice_items)
+   - Cập nhật số dư tài khoản
+
+3. **Khi thanh toán**:
+   - Tạo transaction với type='payment'
+   - Cập nhật paid_amount trong invoice
+   - Tăng current_balance trong financial_accounts
+
+4. **Khi tính học phí**:
+   - Tạo transaction với type='tuition'
+   - Giảm current_balance trong financial_accounts
+
+## 5. Ưu Điểm Của Thiết Kế Mới
+
+1. **Tách biệt rõ ràng**:
+   - Tách phần tài chính khỏi thông tin học sinh chính
+   - Dễ dàng mở rộng và bảo trì
+
+2. **Lịch sử đầy đủ**:
+   - Theo dõi mọi thay đổi qua bảng transactions
+   - Lưu trữ hóa đơn hàng tháng
+
+3. **Linh hoạt**:
+   - Hỗ trợ nhiều loại giao dịch
+   - Cho phép thay đổi học phí theo thời gian
+
+4. **Báo cáo dễ dàng**:
+   - Dễ dàng truy vấn số liệu tài chính
+   - Theo dõi công nợ học sinh
+
+Bạn cần tôi giải thích thêm phần nào hoặc muốn điều chỉnh gì trong thiết kế này không?

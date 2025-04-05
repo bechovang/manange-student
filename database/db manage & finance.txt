@@ -1,0 +1,147 @@
+// Giữ nguyên các bảng cũ không liên quan đến tài chính
+Table users {
+  id integer [primary key, increment]
+  username varchar(50) [unique, not null]
+  password_hash varchar(255) [not null]
+  email varchar(100) [unique]
+  role varchar(20) [not null, note: 'admin|teacher|staff']
+  created_at timestamp [default: `now()`]
+}
+
+Table students {
+  id integer [primary key, increment]
+  name varchar(100) [not null]
+  date_of_birth date [not null]
+  gender varchar(10) [not null, note: 'male|female|other']
+  school varchar(255) [not null] 
+  grade varchar(10) [not null, note: 'khối lớp 6 - 12']
+  phone_student varchar(20)
+  phone_parent varchar(20)
+  facebook_link varchar(255)
+  note varchar(500)
+  created_at timestamp [default: `now()`]
+  
+  // Các trường tài chính cũ (có thể giữ để tương thích hoặc bỏ)
+  // attendance var(20) [not null, note: 'present|absent|no class']
+}
+
+Table student_classes {
+  student_id integer
+  class_id integer
+  enrollment_date date [default: `now()`]
+  status varchar(20) [default: 'active', note: 'active|inactive|dropped']
+  //primary_key (student_id, class_id)
+}
+Ref: student_classes.student_id <> students.id
+Ref: student_classes.class_id <> classes.id
+
+Table classes {
+  id integer [primary key, increment]
+  name varchar(100) [not null, note:'VD: Toán 10 NC']
+  teacher varchar(100) [not null]
+  subject varchar(10) [not null, note: 'math|physic|chemistry|other']
+  room varchar(10) [not null]
+  start_date date
+  end_date date
+  created_at timestamp [default: `now()`]
+}
+
+Table schedule {
+  class_id int [not null]
+  weekday varchar(3) [not null, note: 'mon|tue|wed|thu|fri|sat|sun']
+  time_start time [not null]
+  time_end time [not null]
+}
+Ref: schedule.class_id > classes.id
+
+Table notifications {
+  id integer [primary key, increment]
+  phone varchar(20) [not null, note:'student or parent']
+  title varchar(255) [not null]
+  content text [not null]
+  notification_type varchar(20) [note: 'payment|attendance|system']
+  is_read boolean [default: false]
+  read_at timestamp
+  is_rep boolean [default: false]
+  rep_at timestamp
+  created_at timestamp [default: `now()`]
+}
+Ref: notifications.phone > students.phone_student 
+Ref: notifications.phone > students.phone_parent
+
+// ========== PHẦN TÀI CHÍNH MỚI ========== //
+
+Table financial_accounts {
+  id integer [primary key, increment]
+  student_id integer [not null]
+  current_balance decimal(12,2) [not null, default: 0, note: 'Số dư hiện tại (có thể âm)']
+  credit_limit decimal(12,2) [default: 0, note: 'Hạn mức nợ cho phép']
+  last_updated timestamp [default: `now()`]
+}
+Ref: financial_accounts.student_id <> students.id
+
+Table tuition_plans {
+  id integer [primary key, increment]
+  class_id integer [not null]
+  amount decimal(12,2) [not null]
+  effective_date date [not null, note: 'Ngày áp dụng']
+  created_at timestamp [default: `now()`]
+}
+Ref: tuition_plans.class_id <> classes.id
+
+Table invoices {
+  id integer [primary key, increment]
+  student_id integer [not null]
+  invoice_number varchar(20) [not null, unique]
+  issue_date date [not null]
+  due_date date [not null]
+  total_amount decimal(12,2) [not null]
+  paid_amount decimal(12,2) [default: 0]
+  status varchar(20) [not null, default: 'pending', note: 'pending|partial|paid|overdue|cancelled']
+  notes text
+  created_at timestamp [default: `now()`]
+}
+Ref: invoices.student_id <> students.id
+
+Table invoice_items {
+  id integer [primary key, increment]
+  invoice_id integer [not null]
+  class_id integer [not null]
+  description varchar(255)
+  amount decimal(12,2) [not null]
+  quantity integer [default: 1]
+  subtotal decimal(12,2) [not null]
+}
+Ref: invoice_items.invoice_id <> invoices.id
+Ref: invoice_items.class_id <> classes.id
+
+Table transactions {
+  id integer [primary key, increment]
+  account_id integer [not null]
+  invoice_id integer
+  amount decimal(12,2) [not null]
+  transaction_type varchar(20) [not null, note: 'payment|tuition|refund|adjustment|discount']
+  payment_method varchar(20) [note: 'cash|bank|transfer|card']
+  reference_number varchar(50)
+  description text
+  receipt_image varchar(255)
+  created_by integer [note: 'user_id của người tạo']
+  created_at timestamp [default: `now()`]
+}
+Ref: transactions.account_id <> financial_accounts.id
+Ref: transactions.invoice_id <> invoices.id
+Ref: transactions.created_by <> users.id
+
+Table attendance_records {
+  id integer [primary key, increment]
+  student_id integer [not null]
+  class_id integer [not null]
+  date date [not null]
+  status varchar(20) [not null, note: 'present|absent|late|excused']
+  notes text
+  recorded_by integer [note: 'user_id của người điểm danh']
+  recorded_at timestamp [default: `now()`]
+}
+Ref: attendance_records.student_id <> students.id
+Ref: attendance_records.class_id <> classes.id
+Ref: attendance_records.recorded_by <> users.id

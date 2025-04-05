@@ -1,0 +1,186 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --ring: 0 84% 60%; /* Hiệu ứng border màu khi bạn nhấn vào các trường nhập liệu trong form đăng ký/* HSL của red-500 */
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 0 84% 60%; /* Hiệu ứng border màu khi bạn nhấn vào các trường nhập liệu trong form đăng ký/* HSL của red-500 */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Hiệu ứng lắc */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+@keyframes wiggle-more {
+  0%, 100% { transform: rotate(-10deg); }
+  50% { transform: rotate(10deg); }
+}
+
+/* Hiệu ứng lắc nhanh hơn cho điện thoại */
+@keyframes wiggle-faster {
+  0%, 100% { transform: rotate(-5deg); }
+  25%, 75% { transform: rotate(5deg); }
+}
+
+@keyframes wiggle-more-faster {
+  0%, 100% { transform: rotate(-12deg); }
+  25%, 75% { transform: rotate(12deg); }
+}
+
+.animate-wiggle {
+  animation: wiggle 1.5s ease-in-out infinite;
+}
+
+.hover\\:animate-wiggle-more:hover {
+  animation: wiggle-more 0.8s ease-in-out infinite;
+}
+
+.animate-wiggle-faster {
+  animation: wiggle-faster 1s ease-in-out infinite;
+}
+
+.hover\\:animate-wiggle-more-faster:hover {
+  animation: wiggle-more-faster 0.6s ease-in-out infinite;
+}
+
+/*Hiệu ứng đập nhẹ (Heartbeat)*/
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.05); }
+  50% { transform: scale(1); }
+  75% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.animate-heartbeat {
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+/*Hiệu ứng nảy lên (Bounce)*/
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-bounce-slow {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+/*Hiệu ứng đổi màu gradient*/
+@keyframes gradient-pulse {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.gradient-animate {
+  background: linear-gradient(45deg, #ef4444, #f97316, #eab308);
+  background-size: 200% 200%;
+  animation: gradient-pulse 3s ease infinite;
+}
+
+/*Hiệu ứng rung lắc (Shake) khi hover*/
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
+.hover\\:shake:hover {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Hiệu ứng nổi bật với màu amber */
+@keyframes pulse-glow-amber {
+  0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); /* amber-500 với opacity */ }
+  70% { box-shadow: 0 0 0 15px rgba(245, 158, 11, 0); /* amber-500 mờ dần */ }
+  100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); /* biến mất hoàn toàn */ }
+}
+
+.animate-pulse-glow-amber {
+  animation: pulse-glow-amber 2s infinite;
+}
+
+/* Hiệu ứng nổi bật với màu red */
+@keyframes pulse-glow-red {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.animate-pulse-glow-red {
+  animation: pulse-glow-red 2s infinite;
+}
