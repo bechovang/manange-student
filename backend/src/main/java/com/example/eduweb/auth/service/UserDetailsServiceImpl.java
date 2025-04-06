@@ -9,12 +9,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 import java.util.Collections;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+    
+    // Logger for this class
+    private static final Logger logger = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
     
     @Autowired
     private UserRepository userRepository;  // Tiêm repository để truy cập dữ liệu người dùng từ cơ sở dữ liệu.
@@ -29,16 +34,29 @@ public class UserDetailsServiceImpl implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // Tìm người dùng từ cơ sở dữ liệu dựa trên username
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        logger.debug("Attempting to load user by username: {}", username);
         
-        // Trả về đối tượng UserDetails với thông tin người dùng và quyền truy cập của họ
-        return new org.springframework.security.core.userdetails.User(
-                user.getUsername(),  // Tên người dùng
-                user.getPasswordHash(),  // Mật khẩu đã được mã hóa
-                getAuthorities(user.getRole())  // Quyền truy cập của người dùng dựa trên vai trò
-        );
+        try {
+            // Tìm người dùng từ cơ sở dữ liệu dựa trên username
+            User user = userRepository.findByUsername(username)
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+            
+            logger.info("User found: {}", username);
+            logger.debug("User role: {}", user.getRole());
+            
+            // Trả về đối tượng UserDetails với thông tin người dùng và quyền truy cập của họ
+            return new org.springframework.security.core.userdetails.User(
+                    user.getUsername(),  // Tên người dùng
+                    user.getPasswordHash(),  // Mật khẩu đã được mã hóa
+                    getAuthorities(user.getRole())  // Quyền truy cập của người dùng dựa trên vai trò
+            );
+        } catch (UsernameNotFoundException e) {
+            logger.warn("Failed to find user: {}", username);
+            throw e;
+        } catch (Exception e) {
+            logger.error("Error loading user: {}", username, e);
+            throw new UsernameNotFoundException("Error loading user", e);
+        }
     }
 
     /**
@@ -49,6 +67,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
      * @return Collection các quyền truy cập của người dùng.
      */
     private Collection<? extends GrantedAuthority> getAuthorities(String role) {
+        logger.debug("Creating authority for role: {}", role);
         // Trả về quyền truy cập dạng Collection. Mỗi vai trò sẽ được chuyển thành quyền "ROLE_<role>"
         return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role));
     }
