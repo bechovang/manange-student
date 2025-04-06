@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 
 // Danh sách các route không cần xác thực
-const publicRoutes = ["/login", "/", "/forgot-password"]
+const publicRoutes = ["/login", "/", "/forgot-password", "/api"]
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
@@ -15,9 +15,9 @@ export function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  // Kiểm tra token trong localStorage (thông qua cookie)
-  const accessToken = request.cookies.get("accessToken")?.value
-  const refreshToken = request.cookies.get("refreshToken")?.value
+  // Kiểm tra token trong cookies
+  const accessToken = request.cookies.get(process.env.NEXT_PUBLIC_JWT_COOKIE_NAME || "accessToken")?.value
+  const refreshToken = request.cookies.get(process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE_NAME || "refreshToken")?.value
 
   // Nếu không có token, chuyển hướng đến trang đăng nhập
   if (!accessToken && !refreshToken) {

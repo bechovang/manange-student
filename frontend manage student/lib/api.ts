@@ -6,6 +6,106 @@
 
 import type { Student, Class, Payment, TuitionRecord, Attendance, ScheduleEvent, Notification } from "./types"
 import { students, classes, payments, tuitionRecords, attendanceData, scheduleEvents, notifications } from "./mockData"
+import axios from "axios"
+import Cookies from "js-cookie"
+
+// Axios instance cho API calls
+export const apiClient = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+  withCredentials: true, // Cho phép gửi cookies
+})
+
+// Thêm interceptor để tự động gắn token vào request
+apiClient.interceptors.request.use(
+  (config) => {
+    const token = Cookies.get(process.env.NEXT_PUBLIC_JWT_COOKIE_NAME || "accessToken")
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+    return config
+  },
+  (error) => Promise.reject(error)
+)
+
+// Thêm interceptor để tự động refresh token khi token hết hạn
+apiClient.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config
+
+    // Nếu lỗi 401 và chưa thử refresh token
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true
+
+      try {
+        // Thử refresh token
+        const refreshToken = Cookies.get(process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE_NAME || "refreshToken")
+        if (!refreshToken) throw new Error("No refresh token")
+
+        const response = await apiClient.post(
+          `${process.env.NEXT_PUBLIC_API_AUTH_ENDPOINT}/refresh`,
+          { refreshToken }
+        )
+
+        const { accessToken, refreshToken: newRefreshToken } = response.data
+
+        // Lưu token mới
+        Cookies.set(process.env.NEXT_PUBLIC_JWT_COOKIE_NAME || "accessToken", accessToken)
+        Cookies.set(process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE_NAME || "refreshToken", newRefreshToken)
+
+        // Cập nhật token trong header và thử lại request
+        originalRequest.headers.Authorization = `Bearer ${accessToken}`
+        return apiClient(originalRequest)
+      } catch (error) {
+        // Nếu refresh token lỗi, đăng xuất
+        Cookies.remove(process.env.NEXT_PUBLIC_JWT_COOKIE_NAME || "accessToken")
+        Cookies.remove(process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE_NAME || "refreshToken")
+
+        // Chuyển về trang login
+        window.location.href = "/login"
+        return Promise.reject(error)
+      }
+    }
+
+    return Promise.reject(error)
+  }
+)
+
+// API Authentication
+export const login = async (username: string, password: string) => {
+  try {
+    const response = await apiClient.post(`${process.env.NEXT_PUBLIC_API_AUTH_ENDPOINT}/login`, {
+      username,
+      password,
+    })
+    
+    const { accessToken, refreshToken } = response.data
+    
+    // Lưu token vào cookies
+    Cookies.set(process.env.NEXT_PUBLIC_JWT_COOKIE_NAME || "accessToken", accessToken)
+    Cookies.set(process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE_NAME || "refreshToken", refreshToken)
+    
+    return response.data
+  } catch (error) {
+    console.error("Login failed:", error)
+    throw error
+  }
+}
+
+export const logout = async () => {
+  try {
+    await apiClient.post(`${process.env.NEXT_PUBLIC_API_AUTH_ENDPOINT}/logout`)
+  } catch (error) {
+    console.error("Logout API failed:", error)
+  } finally {
+    // Xóa token
+    Cookies.remove(process.env.NEXT_PUBLIC_JWT_COOKIE_NAME || "accessToken")
+    Cookies.remove(process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE_NAME || "refreshToken")
+  }
+}
 
 // Thời gian trễ giả lập cho API
 const FAKE_DELAY = 500

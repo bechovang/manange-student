@@ -15,7 +15,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 
 const formSchema = z.object({
   username: z.string().min(1, {
-    message: "Vui lòng nhập email hoặc số điện thoại",
+    message: "Vui lòng nhập tên đăng nhập",
   }),
   password: z.string().min(6, {
     message: "Mật khẩu phải có ít nhất 6 ký tự",
@@ -61,9 +61,9 @@ export function LoginForm() {
           name="username"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email hoặc Số điện thoại</FormLabel>
+              <FormLabel>Tên đăng nhập</FormLabel>
               <FormControl>
-                <Input placeholder="Nhập email hoặc số điện thoại" {...field} />
+                <Input placeholder="Nhập tên đăng nhập" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

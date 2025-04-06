@@ -6,14 +6,11 @@ import {
   AuthContext,
   type AuthState,
   apiClient,
-  getStoredAccessToken,
-  getStoredRefreshToken,
-  setStoredTokens,
-  removeStoredTokens,
   decodeToken,
   isTokenExpired,
-  setupAuthInterceptors,
 } from "@/lib/auth"
+import { login as loginApi, logout as logoutApi } from "@/lib/api"
+import Cookies from "js-cookie"
 
 interface AuthProviderProps {
   children: ReactNode
@@ -32,13 +29,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
   // Hàm refresh token
   const refreshToken = async (): Promise<string | null> => {
     try {
-      const storedRefreshToken = getStoredRefreshToken()
+      const storedRefreshToken = Cookies.get(process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE_NAME || "refreshToken")
 
       if (!storedRefreshToken) {
         return null
       }
 
-      const response = await apiClient.post("/auth/refresh", {
+      const response = await apiClient.post(`${process.env.NEXT_PUBLIC_API_AUTH_ENDPOINT}/refresh`, {
         refreshToken: storedRefreshToken,
       })
 
@@ -46,7 +43,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       if (accessToken) {
         // Lưu token mới
-        setStoredTokens(accessToken, newRefreshToken || storedRefreshToken)
+        Cookies.set(process.env.NEXT_PUBLIC_JWT_COOKIE_NAME || "accessToken", accessToken)
+        Cookies.set(process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE_NAME || "refreshToken", newRefreshToken || storedRefreshToken)
 
         const user = decodeToken(accessToken)
         setState((prev) => ({ ...prev, accessToken, refreshToken: newRefreshToken || storedRefreshToken, user }))
@@ -66,11 +64,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     try {
       // Gọi API đăng nhập
-      const response = await apiClient.post("/auth/login", { username, password })
-      const { accessToken, refreshToken } = response.data
+      const response = await loginApi(username, password)
+      const { accessToken, refreshToken } = response
 
-      // Lưu token và cập nhật state
-      setStoredTokens(accessToken, refreshToken)
+      // Lấy thông tin user từ token
       const user = decodeToken(accessToken)
 
       setState({
@@ -88,7 +85,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setState((prev) => ({
         ...prev,
         isLoading: false,
-        error: error.response?.data?.message || "Đăng nhập thất bại. Vui lòng kiểm tra thông tin đăng nhập.",
+        error: error.response?.data?.error || "Đăng nhập thất bại. Vui lòng kiểm tra thông tin đăng nhập.",
       }))
     }
   }
@@ -97,12 +94,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const logout = async (): Promise<void> => {
     try {
       // Gọi API đăng xuất
-      await apiClient.post("/auth/logout")
+      await logoutApi()
     } catch (error) {
       console.error("Logout API failed:", error)
     } finally {
-      // Xóa token và state ngay cả khi API thất bại
-      removeStoredTokens()
+      // Xóa state ngay cả khi API thất bại
       setState({
         user: null,
         accessToken: null,
@@ -118,8 +114,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   // Hàm kiểm tra xác thực
   const checkAuth = async (): Promise<boolean> => {
-    const accessToken = getStoredAccessToken()
-    const storedRefreshToken = getStoredRefreshToken()
+    const accessToken = Cookies.get(process.env.NEXT_PUBLIC_JWT_COOKIE_NAME || "accessToken")
+    const storedRefreshToken = Cookies.get(process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE_NAME || "refreshToken")
 
     if (!accessToken) {
       if (!storedRefreshToken) {
@@ -139,7 +135,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
 
     // Kiểm tra token hết hạn
-    if (isTokenExpired(accessToken)) {
+    if (accessToken && isTokenExpired(accessToken)) {
       // Thử refresh token
       const newAccessToken = await refreshToken()
       if (!newAccessToken) {
@@ -160,17 +156,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setState({
       user,
       accessToken,
-      refreshToken: storedRefreshToken,
+      refreshToken: storedRefreshToken || null,
       isLoading: false,
       error: null,
     })
     return true
   }
-
-  // Thiết lập interceptors
-  useEffect(() => {
-    setupAuthInterceptors(refreshToken, logout)
-  }, [])
 
   // Kiểm tra xác thực khi component mount
   useEffect(() => {
@@ -179,20 +170,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
 
     initAuth()
-  }, [])
-
-  // Xử lý đăng xuất đồng bộ trên nhiều tab
-  useEffect(() => {
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === "logout") {
-        logout()
-      }
-    }
-
-    window.addEventListener("storage", handleStorageChange)
-    return () => {
-      window.removeEventListener("storage", handleStorageChange)
-    }
   }, [])
 
   const contextValue = {
