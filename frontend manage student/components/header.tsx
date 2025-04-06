@@ -1,6 +1,7 @@
 "use client"
 
-import { Bell, Menu, Search } from "lucide-react"
+import { useState } from "react"
+import { Bell, LogOut, Menu, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useSidebar } from "./sidebar-provider"
@@ -14,9 +15,13 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Badge } from "@/components/ui/badge"
 import { UserNav } from "@/components/user-nav"
+import { useAuth } from "@/lib/auth"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { LogoutDialog } from "./logout-dialog"
 
 export function Header() {
   const { toggle } = useSidebar()
+  const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false)
 
   return (
     <header className="sticky top-0 z-10 flex h-16 items-center border-b bg-white px-4 md:px-6">
@@ -86,7 +91,29 @@ export function Header() {
           <DropdownMenuItem className="justify-center font-medium">Xem tất cả thông báo</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+      
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="mr-2 text-red-500 border-red-200 hover:bg-red-50 hover:text-red-600 hover:border-red-300 flex items-center gap-1"
+              onClick={() => setIsLogoutDialogOpen(true)}
+            >
+              <LogOut className="h-4 w-4" />
+              <span className="hidden sm:inline">Đăng xuất</span>
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Đăng xuất</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+      
       <UserNav />
+      
+      <LogoutDialog isOpen={isLogoutDialogOpen} onOpenChange={setIsLogoutDialogOpen} />
     </header>
   )
 }

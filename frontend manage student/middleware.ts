@@ -8,14 +8,11 @@ const apiRoutes = ["/api"]
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
   
-  // Debug để xem vấn đề
-  console.log(`Middleware checking path: ${pathname}`)
+  // DEBUG: Bỏ hầu hết các log để không làm rối terminal
   
   // Kiểm tra xem route hiện tại có cần xác thực không
   const isPublicRoute = publicRoutes.some(route => pathname === route || pathname.startsWith(`${route}/`))
   const isApiRoute = apiRoutes.some(route => pathname.startsWith(route))
-  
-  console.log(`isPublicRoute: ${isPublicRoute}, isApiRoute: ${isApiRoute}`)
   
   // Nếu là route công khai hoặc API, cho phép truy cập
   if (isPublicRoute || isApiRoute) {
@@ -26,13 +23,20 @@ export function middleware(request: NextRequest) {
   const accessToken = request.cookies.get(process.env.NEXT_PUBLIC_JWT_COOKIE_NAME || "accessToken")?.value
   const refreshToken = request.cookies.get(process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE_NAME || "refreshToken")?.value
   
-  console.log(`Checking auth for ${pathname} - tokens exist: ${!!accessToken || !!refreshToken}`)
-  
   // Nếu không có token, chuyển hướng đến trang đăng nhập
   if (!accessToken && !refreshToken) {
-    console.log(`No tokens found, redirecting to login`)
-    // Sử dụng URL đầy đủ để ngăn chặn relative URL issues
-    return NextResponse.redirect(new URL('/login', request.url))
+    // Check for circular redirects
+    const referer = request.headers.get("referer") || ""
+    const redirectUrl = new URL("/login", request.url)
+    
+    // Nếu đã đang trong quá trình redirect từ /login, ngăn vòng lặp
+    if (referer.includes("/login") && referer.includes(request.url)) {
+      // Giải quyết vòng lặp bằng cách đánh dấu lỗi
+      console.error("Redirect loop detected:", referer, "->", request.url)
+      return NextResponse.next()
+    }
+    
+    return NextResponse.redirect(redirectUrl)
   }
   
   // Cho phép truy cập nếu có token

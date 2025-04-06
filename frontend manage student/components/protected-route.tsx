@@ -85,8 +85,6 @@ export function ProtectedRoute({ children, requiredRoles }: ProtectedRouteProps)
   return <>{children}</>
 }
 
-// Thêm Button component để tránh lỗi
-import { Button } from "@/components/ui/button"
 
 // Cần kiểm tra nếu file này gây ra vấn đề vòng lặp
 

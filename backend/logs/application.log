@@ -3055,3 +3055,105 @@ org.springframework.security.authentication.BadCredentialsException: Bad credent
 2025-04-06T22:50:16.801+07:00  INFO 5896 --- [http-nio-8080-exec-7] c.e.eduweb.auth.service.AuthService      : Hoàn t?t quá trình xác th?c cho user: admin
 2025-04-06T22:50:16.802+07:00 DEBUG 5896 --- [http-nio-8080-exec-7] c.e.eduweb.auth.service.JwtService       : L?y th?i gian h?t h?n cho ACCESS token (tính b?ng giây)
 2025-04-06T22:50:16.802+07:00  INFO 5896 --- [http-nio-8080-exec-7] c.e.e.auth.controller.AuthController     : Login successful for user: admin
+2025-04-06T22:59:31.783+07:00  INFO 7236 --- [main] com.example.eduweb.EduwebApplication     : Starting EduwebApplication using Java 17.0.12 with PID 7236 (C:\Users\Admin\Desktop\manage student\backend\target\classes started by Admin in C:\Users\Admin\Desktop\manage student\backend)
+2025-04-06T22:59:31.786+07:00 DEBUG 7236 --- [main] com.example.eduweb.EduwebApplication     : Running with Spring Boot v3.1.5, Spring v6.0.13
+2025-04-06T22:59:31.788+07:00  INFO 7236 --- [main] com.example.eduweb.EduwebApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-04-06T22:59:33.380+07:00  INFO 7236 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-06T22:59:33.479+07:00  INFO 7236 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 87 ms. Found 2 JPA repository interfaces.
+2025-04-06T22:59:35.244+07:00  INFO 7236 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2025-04-06T22:59:35.265+07:00  INFO 7236 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-06T22:59:35.266+07:00  INFO 7236 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2025-04-06T22:59:35.513+07:00  INFO 7236 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-06T22:59:35.513+07:00  INFO 7236 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3615 ms
+2025-04-06T22:59:35.728+07:00  INFO 7236 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-06T22:59:35.850+07:00  INFO 7236 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.13.Final
+2025-04-06T22:59:35.855+07:00  INFO 7236 --- [main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2025-04-06T22:59:36.494+07:00  INFO 7236 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-06T22:59:36.557+07:00  INFO 7236 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-04-06T22:59:36.999+07:00  INFO 7236 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3a209918
+2025-04-06T22:59:37.001+07:00  INFO 7236 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-04-06T22:59:39.688+07:00  INFO 7236 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-06T22:59:39.799+07:00  INFO 7236 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-06T22:59:41.225+07:00  INFO 7236 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-06T22:59:42.396+07:00 DEBUG 7236 --- [main] c.e.eduweb.auth.config.JwtAuthFilter     : JwtAuthFilter initialized
+2025-04-06T22:59:42.545+07:00 DEBUG 7236 --- [main] c.e.eduweb.auth.config.JwtAuthFilter     : Filter 'jwtAuthFilter' configured for use
+2025-04-06T22:59:42.754+07:00  INFO 7236 --- [main] c.e.e.a.service.TokenBlacklistService    : TokenBlacklistService initialized
+2025-04-06T22:59:42.762+07:00  INFO 7236 --- [main] c.e.e.a.service.TokenBlacklistService    : Scheduled blacklist cleanup task every 1 hour
+2025-04-06T22:59:43.232+07:00  WARN 7236 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-06T22:59:43.964+07:00  INFO 7236 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3d84f113, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@51d26fed, org.springframework.security.web.context.SecurityContextHolderFilter@4ad57db1, org.springframework.security.web.header.HeaderWriterFilter@5e6ad84c, org.springframework.web.filter.CorsFilter@6779959d, org.springframework.security.web.authentication.logout.LogoutFilter@77e24d3c, com.example.eduweb.auth.config.JwtAuthFilter@75aeec0a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@53bc6492, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7fda84cf, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@335a45a8, org.springframework.security.web.session.SessionManagementFilter@23d0f6be, org.springframework.security.web.access.ExceptionTranslationFilter@34947355, org.springframework.security.web.access.intercept.AuthorizationFilter@4265cbed]
+2025-04-06T22:59:44.580+07:00  INFO 7236 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2025-04-06T22:59:44.615+07:00  INFO 7236 --- [main] com.example.eduweb.EduwebApplication     : Started EduwebApplication in 13.7 seconds (process running for 14.497)
+2025-04-06T23:10:50.938+07:00  INFO 4044 --- [main] com.example.eduweb.EduwebApplication     : Starting EduwebApplication using Java 17.0.12 with PID 4044 (C:\Users\Admin\Desktop\manage student\backend\target\classes started by Admin in C:\Users\Admin\Desktop\manage student\backend)
+2025-04-06T23:10:50.940+07:00 DEBUG 4044 --- [main] com.example.eduweb.EduwebApplication     : Running with Spring Boot v3.1.5, Spring v6.0.13
+2025-04-06T23:10:50.941+07:00  INFO 4044 --- [main] com.example.eduweb.EduwebApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-04-06T23:10:51.695+07:00  INFO 4044 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-06T23:10:51.768+07:00  INFO 4044 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 64 ms. Found 2 JPA repository interfaces.
+2025-04-06T23:10:52.646+07:00  INFO 4044 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2025-04-06T23:10:52.667+07:00  INFO 4044 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-06T23:10:52.667+07:00  INFO 4044 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2025-04-06T23:10:52.814+07:00  INFO 4044 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-06T23:10:52.814+07:00  INFO 4044 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1817 ms
+2025-04-06T23:10:52.986+07:00  INFO 4044 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-06T23:10:53.091+07:00  INFO 4044 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.13.Final
+2025-04-06T23:10:53.095+07:00  INFO 4044 --- [main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2025-04-06T23:10:53.492+07:00  INFO 4044 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-06T23:10:53.529+07:00  INFO 4044 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-04-06T23:10:53.772+07:00  INFO 4044 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6fb0261e
+2025-04-06T23:10:53.778+07:00  INFO 4044 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-04-06T23:10:55.024+07:00  INFO 4044 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-06T23:10:55.086+07:00  INFO 4044 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-06T23:10:55.480+07:00  INFO 4044 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-06T23:10:55.962+07:00 DEBUG 4044 --- [main] c.e.eduweb.auth.config.JwtAuthFilter     : JwtAuthFilter initialized
+2025-04-06T23:10:56.119+07:00 DEBUG 4044 --- [main] c.e.eduweb.auth.config.JwtAuthFilter     : Filter 'jwtAuthFilter' configured for use
+2025-04-06T23:10:56.288+07:00  INFO 4044 --- [main] c.e.e.a.service.TokenBlacklistService    : TokenBlacklistService initialized
+2025-04-06T23:10:56.289+07:00  INFO 4044 --- [main] c.e.e.a.service.TokenBlacklistService    : Scheduled blacklist cleanup task every 1 hour
+2025-04-06T23:10:56.386+07:00  WARN 4044 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-06T23:10:56.708+07:00  INFO 4044 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@21cb5648, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@69fa5536, org.springframework.security.web.context.SecurityContextHolderFilter@5471342, org.springframework.security.web.header.HeaderWriterFilter@45e49d3d, org.springframework.web.filter.CorsFilter@1ee5792a, org.springframework.security.web.authentication.logout.LogoutFilter@13f255ed, com.example.eduweb.auth.config.JwtAuthFilter@6fc1a1d5, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4e9d1119, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6079d219, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@37f60cd4, org.springframework.security.web.session.SessionManagementFilter@7fda84cf, org.springframework.security.web.access.ExceptionTranslationFilter@281d3ce7, org.springframework.security.web.access.intercept.AuthorizationFilter@294c36b9]
+2025-04-06T23:10:56.990+07:00  INFO 4044 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2025-04-06T23:10:57.004+07:00  INFO 4044 --- [main] com.example.eduweb.EduwebApplication     : Started EduwebApplication in 6.545 seconds (process running for 7.079)
+2025-04-06T23:11:51.920+07:00  INFO 4044 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-06T23:11:51.921+07:00  INFO 4044 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-06T23:11:51.924+07:00  INFO 4044 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-04-06T23:11:51.975+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Skipping JWT filter for auth endpoint: /api/auth/login
+2025-04-06T23:11:51.989+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Skipping JWT filter for auth endpoint: /api/auth/login
+2025-04-06T23:11:52.084+07:00  INFO 4044 --- [http-nio-8080-exec-2] c.e.e.auth.controller.AuthController     : Login attempt for user: admin
+2025-04-06T23:11:52.256+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.AuthService      : User role: admin
+2025-04-06T23:11:52.256+07:00  INFO 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.AuthService      : B?t ??u quá trình xác th?c cho user: admin
+2025-04-06T23:11:52.257+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.AuthService      : Thông tin yêu c?u: username=admin
+2025-04-06T23:11:52.258+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.AuthService      : ?ang xác th?c thông tin ??ng nh?p...
+2025-04-06T23:11:52.376+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-04-06T23:11:52.382+07:00  INFO 4044 --- [http-nio-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-04-06T23:11:52.382+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-04-06T23:11:52.384+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-04-06T23:11:52.499+07:00  INFO 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.AuthService      : Xác th?c thành công cho user: admin
+2025-04-06T23:11:52.500+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.AuthService      : ?ang t?i thông tin user details...
+2025-04-06T23:11:52.502+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-04-06T23:11:52.506+07:00  INFO 4044 --- [http-nio-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-04-06T23:11:52.506+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-04-06T23:11:52.507+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-04-06T23:11:52.507+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.AuthService      : ?ã t?i thông tin user details thành công
+2025-04-06T23:11:52.507+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.AuthService      : ?ang t?o access token...
+2025-04-06T23:11:52.508+07:00  INFO 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : B?t ??u t?o ACCESS token cho user: admin
+2025-04-06T23:11:52.556+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : ?ã t?o thành công ACCESS token cho user: admin
+2025-04-06T23:11:52.556+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.AuthService      : ?ã t?o access token thành công
+2025-04-06T23:11:52.557+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.AuthService      : ?ang t?o refresh token...
+2025-04-06T23:11:52.559+07:00  INFO 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : T?o refresh token cho user: admin
+2025-04-06T23:11:52.560+07:00  INFO 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : B?t ??u t?o REFRESH token cho user: admin
+2025-04-06T23:11:52.561+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : ?ã t?o thành công REFRESH token cho user: admin
+2025-04-06T23:11:52.561+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.AuthService      : ?ã t?o refresh token thành công
+2025-04-06T23:11:52.562+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.AuthService      : ?ang t?o UserDto...
+2025-04-06T23:11:52.563+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.AuthService      : ?ã t?o UserDto v?i username: admin
+2025-04-06T23:11:52.563+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : L?y th?i gian h?t h?n cho ACCESS token (tính b?ng giây)
+2025-04-06T23:11:52.564+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.AuthService      : Access token s? h?t h?n sau: 86400 giây
+2025-04-06T23:11:52.564+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : L?y th?i gian h?t h?n cho REFRESH token (tính b?ng giây)
+2025-04-06T23:11:52.564+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.AuthService      : Refresh token s? h?t h?n sau: 604800 giây
+2025-04-06T23:11:52.565+07:00  INFO 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.AuthService      : Hoàn t?t quá trình xác th?c cho user: admin
+2025-04-06T23:11:52.566+07:00 DEBUG 4044 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : L?y th?i gian h?t h?n cho ACCESS token (tính b?ng giây)
+2025-04-06T23:11:52.566+07:00  INFO 4044 --- [http-nio-8080-exec-2] c.e.e.auth.controller.AuthController     : Login successful for user: admin
+2025-04-06T23:12:10.840+07:00 DEBUG 4044 --- [http-nio-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Skipping JWT filter for auth endpoint: /api/auth/logout
+2025-04-06T23:12:10.841+07:00 DEBUG 4044 --- [http-nio-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Skipping JWT filter for auth endpoint: /api/auth/logout
+2025-04-06T23:12:10.850+07:00  INFO 4044 --- [http-nio-8080-exec-6] c.e.e.auth.controller.AuthController     : Logout attempt
+2025-04-06T23:12:10.851+07:00 DEBUG 4044 --- [http-nio-8080-exec-6] c.e.e.auth.controller.AuthController     : Bearer token extracted from header
+2025-04-06T23:12:10.851+07:00  INFO 4044 --- [http-nio-8080-exec-6] c.e.eduweb.auth.service.AuthService      : Logout token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0Mzk1NTkxMiwiZXhwIjoxNzQ0MDQyMzEyfQ.KoOCWmrN-g6mrJEuhpvbzb901qHiAclS4dPze8XSgUk
+2025-04-06T23:12:10.852+07:00 DEBUG 4044 --- [http-nio-8080-exec-6] c.e.e.a.service.TokenBlacklistService    : Token added to blacklist: eyJhbGciOi...
+2025-04-06T23:12:10.852+07:00  INFO 4044 --- [http-nio-8080-exec-6] c.e.e.auth.controller.AuthController     : Logout successful
