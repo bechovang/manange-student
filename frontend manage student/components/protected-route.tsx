@@ -2,10 +2,11 @@
 
 import type React from "react"
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/lib/auth"
 import { Loader2 } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 interface ProtectedRouteProps {
   children: React.ReactNode
@@ -13,19 +14,18 @@ interface ProtectedRouteProps {
 }
 
 export function ProtectedRoute({ children, requiredRoles }: ProtectedRouteProps) {
-  const { user, isLoading, checkAuth } = useAuth()
+  const { user, isLoading } = useAuth()
   const router = useRouter()
+  const [isVerifying, setIsVerifying] = useState(true)
 
   useEffect(() => {
-    const verifyAuth = async () => {
-      const isAuthenticated = await checkAuth()
-      if (!isAuthenticated && !isLoading) {
-        router.push("/login")
-      }
+    // Chỉ kiểm tra nếu chưa có user và không đang loading
+    if (!user && !isLoading) {
+      router.push("/login")
+    } else {
+      setIsVerifying(false)
     }
-
-    verifyAuth()
-  }, [checkAuth, isLoading, router])
+  }, [user, isLoading, router])
 
   // Kiểm tra quyền hạn nếu có yêu cầu
   const hasRequiredRole = () => {
@@ -35,7 +35,7 @@ export function ProtectedRoute({ children, requiredRoles }: ProtectedRouteProps)
     return requiredRoles.includes(user.role)
   }
 
-  if (isLoading) {
+  if (isLoading || isVerifying) {
     return (
       <div className="flex h-screen w-full items-center justify-center">
         <div className="flex flex-col items-center gap-2">
@@ -87,4 +87,6 @@ export function ProtectedRoute({ children, requiredRoles }: ProtectedRouteProps)
 
 // Thêm Button component để tránh lỗi
 import { Button } from "@/components/ui/button"
+
+// Cần kiểm tra nếu file này gây ra vấn đề vòng lặp
 

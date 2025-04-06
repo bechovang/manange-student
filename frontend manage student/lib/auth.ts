@@ -47,38 +47,6 @@ export function useAuth() {
   return context
 }
 
-// Lấy access token từ localStorage
-export const getStoredAccessToken = (): string | null => {
-  if (typeof window !== "undefined") {
-    return localStorage.getItem("accessToken")
-  }
-  return null
-}
-
-// Lấy refresh token từ localStorage
-export const getStoredRefreshToken = (): string | null => {
-  if (typeof window !== "undefined") {
-    return localStorage.getItem("refreshToken")
-  }
-  return null
-}
-
-// Lưu token vào localStorage
-export const setStoredTokens = (accessToken: string, refreshToken: string): void => {
-  if (typeof window !== "undefined") {
-    localStorage.setItem("accessToken", accessToken)
-    localStorage.setItem("refreshToken", refreshToken)
-  }
-}
-
-// Xóa token khỏi localStorage
-export const removeStoredTokens = (): void => {
-  if (typeof window !== "undefined") {
-    localStorage.removeItem("accessToken")
-    localStorage.removeItem("refreshToken")
-  }
-}
-
 // Giải mã token để lấy thông tin user
 export const decodeToken = (token: string): User | null => {
   try {
@@ -98,52 +66,5 @@ export const isTokenExpired = (token: string): boolean => {
   } catch {
     return true
   }
-}
-
-// Thiết lập interceptor cho API client
-export const setupAuthInterceptors = (refreshTokenFn: () => Promise<string | null>, logoutFn: () => Promise<void>) => {
-  apiClient.interceptors.request.use(
-    (config) => {
-      const token = getStoredAccessToken()
-      if (token) {
-        config.headers["Authorization"] = `Bearer ${token}`
-      }
-      return config
-    },
-    (error) => Promise.reject(error),
-  )
-
-  apiClient.interceptors.response.use(
-    (response) => response,
-    async (error) => {
-      const originalRequest = error.config
-
-      // Nếu lỗi 401 và chưa thử refresh token
-      if (error.response?.status === 401 && !originalRequest._retry) {
-        originalRequest._retry = true
-
-        try {
-          // Thử refresh token
-          const newToken = await refreshTokenFn()
-
-          if (newToken) {
-            // Cập nhật token trong header và thử lại request
-            originalRequest.headers["Authorization"] = `Bearer ${newToken}`
-            return apiClient(originalRequest)
-          } else {
-            // Nếu không refresh được, đăng xuất
-            await logoutFn()
-            return Promise.reject(error)
-          }
-        } catch (refreshError) {
-          // Nếu refresh lỗi, đăng xuất
-          await logoutFn()
-          return Promise.reject(refreshError)
-        }
-      }
-
-      return Promise.reject(error)
-    },
-  )
 }
 

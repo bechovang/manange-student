@@ -26,10 +26,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
     error: null,
   })
   
-  useEffect(() => {
-    console.log("AuthProvider state:", state)
-  }, [state])
-
   // Hàm refresh token
   const refreshToken = async (): Promise<string | null> => {
     try {
