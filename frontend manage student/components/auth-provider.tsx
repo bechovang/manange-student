@@ -25,11 +25,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
     isLoading: true,
     error: null,
   })
+  
+  useEffect(() => {
+    console.log("AuthProvider state:", state)
+  }, [state])
 
   // Hàm refresh token
   const refreshToken = async (): Promise<string | null> => {
     try {
       const storedRefreshToken = Cookies.get(process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE_NAME || "refreshToken")
+      console.log("Trying to refresh token, stored token exists:", !!storedRefreshToken)
 
       if (!storedRefreshToken) {
         return null
@@ -61,14 +66,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
   // Hàm đăng nhập
   const login = async (username: string, password: string): Promise<void> => {
     setState((prev) => ({ ...prev, isLoading: true, error: null }))
+    console.log("Login attempt with username:", username)
 
     try {
       // Gọi API đăng nhập
       const response = await loginApi(username, password)
+      console.log("Login successful, response:", response)
+      
       const { accessToken, refreshToken } = response
 
       // Lấy thông tin user từ token
       const user = decodeToken(accessToken)
+      console.log("Decoded user from token:", user)
 
       setState({
         user,
@@ -79,6 +88,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       })
 
       // Chuyển hướng đến trang dashboard
+      console.log("Navigating to dashboard")
       router.push("/dashboard")
     } catch (error: any) {
       console.error("Login failed:", error)
@@ -116,6 +126,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const checkAuth = async (): Promise<boolean> => {
     const accessToken = Cookies.get(process.env.NEXT_PUBLIC_JWT_COOKIE_NAME || "accessToken")
     const storedRefreshToken = Cookies.get(process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE_NAME || "refreshToken")
+    
+    console.log("Checking auth - Access token exists:", !!accessToken, "Refresh token exists:", !!storedRefreshToken)
 
     if (!accessToken) {
       if (!storedRefreshToken) {
@@ -136,6 +148,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     // Kiểm tra token hết hạn
     if (accessToken && isTokenExpired(accessToken)) {
+      console.log("Access token expired, trying to refresh")
       // Thử refresh token
       const newAccessToken = await refreshToken()
       if (!newAccessToken) {
@@ -153,6 +166,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     // Token còn hạn
     const user = decodeToken(accessToken)
+    console.log("Valid token found, user:", user)
     setState({
       user,
       accessToken,
@@ -166,6 +180,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   // Kiểm tra xác thực khi component mount
   useEffect(() => {
     const initAuth = async () => {
+      console.log("Initializing auth")
       await checkAuth()
     }
 

@@ -52,7 +52,20 @@ export function LoginForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         {error && (
           <Alert variant="destructive">
-            <AlertDescription>{error}</AlertDescription>
+            <AlertDescription>
+              {error}
+              {error.includes("thông tin đăng nhập") && (
+                <div className="mt-2 text-sm">
+                  <p><strong>Lưu ý:</strong> Mật khẩu mặc định cho các tài khoản:</p>
+                  <ul className="list-disc pl-5 mt-1">
+                    <li>admin: admin123</li>
+                    <li>teacher1: teacher123</li>
+                    <li>staff1: staff123</li>
+                  </ul>
+                  <p className="mt-1">Nếu vẫn không đăng nhập được, hãy thử khởi động backend và chạy <code className="bg-gray-200 px-1 rounded">http://localhost:8080/api/setup/fix-all-passwords</code></p>
+                </div>
+              )}
+            </AlertDescription>
           </Alert>
         )}
 

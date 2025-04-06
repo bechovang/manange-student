@@ -52,6 +52,7 @@ public class SecurityConfig {
                     "/swagger-ui/**",
                     "/api/auth/**",
                     "/api/public/**"
+                    //"/api/setup/**"  cái này ko bảo mật
                 ).permitAll()
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
                 .requestMatchers("/api/teacher/**").hasAnyRole("TEACHER", "ADMIN")

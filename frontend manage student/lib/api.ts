@@ -77,21 +77,23 @@ apiClient.interceptors.response.use(
 // API Authentication
 export const login = async (username: string, password: string) => {
   try {
+    console.log("Calling login API with:", { username });
     const response = await apiClient.post(`${process.env.NEXT_PUBLIC_API_AUTH_ENDPOINT}/login`, {
       username,
       password,
-    })
+    });
     
-    const { accessToken, refreshToken } = response.data
+    console.log("Login response:", response.data);
+    const { accessToken, refreshToken } = response.data;
     
     // Lưu token vào cookies
-    Cookies.set(process.env.NEXT_PUBLIC_JWT_COOKIE_NAME || "accessToken", accessToken)
-    Cookies.set(process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE_NAME || "refreshToken", refreshToken)
+    Cookies.set(process.env.NEXT_PUBLIC_JWT_COOKIE_NAME || "accessToken", accessToken);
+    Cookies.set(process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE_NAME || "refreshToken", refreshToken);
     
-    return response.data
+    return response.data;
   } catch (error) {
-    console.error("Login failed:", error)
-    throw error
+    console.error("Login failed:", error);
+    throw error;
   }
 }
 
