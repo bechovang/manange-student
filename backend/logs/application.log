@@ -850,3 +850,31 @@ org.springframework.security.authentication.BadCredentialsException: Bad credent
 2025-04-07T14:07:47.141+07:00  INFO 9272 --- [http-nio-8080-exec-7] c.e.eduweb.auth.service.AuthService      : Hoàn t?t quá trình xác th?c cho user: staff1
 2025-04-07T14:07:47.142+07:00 DEBUG 9272 --- [http-nio-8080-exec-7] c.e.eduweb.auth.service.JwtService       : L?y th?i gian h?t h?n cho ACCESS token (tính b?ng giây)
 2025-04-07T14:07:47.142+07:00  INFO 9272 --- [http-nio-8080-exec-7] c.e.e.auth.controller.AuthController     : Login successful for user: staff1
+2025-04-07T14:20:27.610+07:00  INFO 6224 --- [main] com.example.eduweb.EduwebApplication     : Starting EduwebApplication using Java 17.0.12 with PID 6224 (C:\Users\Admin\Desktop\manage student\backend\target\classes started by Admin in C:\Users\Admin\Desktop\manage student\backend)
+2025-04-07T14:20:27.613+07:00 DEBUG 6224 --- [main] com.example.eduweb.EduwebApplication     : Running with Spring Boot v3.1.5, Spring v6.0.13
+2025-04-07T14:20:27.614+07:00  INFO 6224 --- [main] com.example.eduweb.EduwebApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-04-07T14:20:28.546+07:00  INFO 6224 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-07T14:20:28.643+07:00  INFO 6224 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 84 ms. Found 2 JPA repository interfaces.
+2025-04-07T14:20:29.600+07:00  INFO 6224 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2025-04-07T14:20:29.639+07:00  INFO 6224 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-07T14:20:29.647+07:00  INFO 6224 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2025-04-07T14:20:29.863+07:00  INFO 6224 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-07T14:20:29.863+07:00  INFO 6224 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2178 ms
+2025-04-07T14:20:30.049+07:00  INFO 6224 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-07T14:20:30.160+07:00  INFO 6224 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.13.Final
+2025-04-07T14:20:30.165+07:00  INFO 6224 --- [main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2025-04-07T14:20:30.615+07:00  INFO 6224 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-07T14:20:30.657+07:00  INFO 6224 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-04-07T14:20:30.925+07:00  INFO 6224 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6fb0261e
+2025-04-07T14:20:30.927+07:00  INFO 6224 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-04-07T14:20:32.247+07:00  INFO 6224 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-07T14:20:32.375+07:00  INFO 6224 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-07T14:20:32.751+07:00  INFO 6224 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-07T14:20:33.099+07:00 DEBUG 6224 --- [main] c.e.eduweb.auth.config.JwtAuthFilter     : JwtAuthFilter initialized
+2025-04-07T14:20:33.163+07:00 DEBUG 6224 --- [main] c.e.eduweb.auth.config.JwtAuthFilter     : Filter 'jwtAuthFilter' configured for use
+2025-04-07T14:20:33.253+07:00  INFO 6224 --- [main] c.e.e.a.service.TokenBlacklistService    : TokenBlacklistService initialized
+2025-04-07T14:20:33.254+07:00  INFO 6224 --- [main] c.e.e.a.service.TokenBlacklistService    : Scheduled blacklist cleanup task every 1 hour
+2025-04-07T14:20:33.362+07:00  WARN 6224 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-07T14:20:33.782+07:00  INFO 6224 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@69fa5536, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1ee5792a, org.springframework.security.web.context.SecurityContextHolderFilter@2e1003d9, org.springframework.security.web.header.HeaderWriterFilter@72e5206, org.springframework.web.filter.CorsFilter@37f60cd4, org.springframework.security.web.authentication.logout.LogoutFilter@36a7586f, com.example.eduweb.auth.config.JwtAuthFilter@6fc1a1d5, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5d1907fb, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4ed90b04, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4cf46574, org.springframework.security.web.session.SessionManagementFilter@313a3af8, org.springframework.security.web.access.ExceptionTranslationFilter@fdfd984, org.springframework.security.web.access.intercept.AuthorizationFilter@6b23897a]
+2025-04-07T14:20:34.087+07:00  INFO 6224 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2025-04-07T14:20:34.098+07:00  INFO 6224 --- [main] com.example.eduweb.EduwebApplication     : Started EduwebApplication in 7.115 seconds (process running for 7.623)
