@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import {
   type ColumnDef,
   type ColumnFiltersState,
@@ -13,7 +13,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import { ChevronDown, Settings, Search } from "lucide-react"
+import { ChevronDown, Settings, Search, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -26,6 +26,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { StudentActions } from "@/components/student-crud"
+import axios from "axios"
+import { useRouter } from "next/navigation"
+import Cookies from "js-cookie"
 
 type Student = {
   id: string
@@ -46,8 +49,8 @@ type Student = {
   balanceMonths: number
 }
 
-// Dữ liệu mẫu - sẽ được thay thế bằng API call
-const data: Student[] = [
+// Dữ liệu mẫu fallback - chỉ sử dụng khi API lỗi
+const fallbackData: Student[] = [
   {
     id: "STU001",
     name: "Nguyễn Văn A",
@@ -140,251 +143,296 @@ const data: Student[] = [
   },
 ]
 
-const columns: ColumnDef<Student>[] = [
-  {
-    accessorKey: "name",
-    header: ({ column }) => {
-      return (
-        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          Học sinh
-          <ChevronDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-    cell: ({ row }) => (
-      <div className="flex items-center gap-3">
-        <Avatar>
-          <AvatarImage src={row.original.avatar} alt={row.original.name} />
-          <AvatarFallback>
-            {row.original.name
-              .split(" ")
-              .map((n) => n[0])
-              .join("")}
-          </AvatarFallback>
-        </Avatar>
-        <div>
-          <div className="font-medium">{row.original.name}</div>
-          <div className="text-sm text-muted-foreground">{row.original.id}</div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    accessorKey: "enrollmentDate",
-    header: ({ column }) => {
-      return (
-        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          Ngày nhập học
-          <ChevronDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-  },
-  {
-    accessorKey: "phone",
-    header: ({ column }) => {
-      return (
-        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          SĐT học sinh
-          <ChevronDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-  },
-  {
-    accessorKey: "parentPhone",
-    header: ({ column }) => {
-      return (
-        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          SĐT phụ huynh
-          <ChevronDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-  },
-  {
-    accessorKey: "balance",
-    header: ({ column }) => {
-      return (
-        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          Số tiền dư/nợ
-          <ChevronDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-    cell: ({ row }) => {
-      const balance = row.getValue("balance") as number
-      const formatted = new Intl.NumberFormat("vi-VN", {
-        style: "currency",
-        currency: "VND",
-      }).format(Math.abs(balance))
-
-      return (
-        <div className={balance > 0 ? "text-green-600" : balance < 0 ? "text-red-600" : ""}>
-          {balance > 0 ? "+" : balance < 0 ? "-" : ""}
-          {formatted}
-        </div>
-      )
-    },
-  },
-  {
-    accessorKey: "balanceMonths",
-    header: ({ column }) => {
-      return (
-        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          Số tháng dư/nợ
-          <ChevronDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-    cell: ({ row }) => {
-      const months = row.getValue("balanceMonths") as number
-      return (
-        <Badge
-          variant="outline"
-          className={
-            months > 0
-              ? "bg-green-100 text-green-800 hover:bg-green-100"
-              : months < 0
-                ? "bg-red-100 text-red-800 hover:bg-red-100"
-                : ""
-          }
-        >
-          {months > 0 ? "+" : months < 0 ? "-" : ""}
-          {Math.abs(months)} tháng
-        </Badge>
-      )
-    },
-  },
-  {
-    accessorKey: "school",
-    header: ({ column }) => {
-      return (
-        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          Trường
-          <ChevronDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-  },
-  {
-    accessorKey: "subjects",
-    header: ({ column }) => {
-      return (
-        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          Môn học
-          <ChevronDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-    cell: ({ row }) => (
-      <div className="flex flex-wrap gap-1">
-        {row.original.subjects.map((subject, index) => (
-          <Badge key={index} variant="outline" className="bg-blue-100 text-blue-800 hover:bg-blue-100">
-            {subject}
-          </Badge>
-        ))}
-      </div>
-    ),
-  },
-  {
-    accessorKey: "grade",
-    header: ({ column }) => {
-      return (
-        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          Khối lớp
-          <ChevronDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-    cell: ({ row }) => (
-      <Badge variant="outline" className="bg-purple-100 text-purple-800 hover:bg-purple-100">
-        {row.getValue("grade")}
-      </Badge>
-    ),
-  },
-  {
-    accessorKey: "teacher",
-    header: ({ column }) => {
-      return (
-        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          Giáo viên
-          <ChevronDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-    cell: ({ row }) => (
-      <Badge variant="outline" className="bg-green-100 text-green-800 hover:bg-green-100">
-        {row.getValue("teacher")}
-      </Badge>
-    ),
-  },
-  {
-    accessorKey: "classTime",
-    header: ({ column }) => {
-      return (
-        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          Ca học
-          <ChevronDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-    cell: ({ row }) => (
-      <Badge variant="outline" className="bg-orange-100 text-orange-800 hover:bg-orange-100">
-        {row.getValue("classTime")}
-      </Badge>
-    ),
-  },
-  {
-    accessorKey: "status",
-    header: ({ column }) => {
-      return (
-        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          Trạng thái
-          <ChevronDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-    cell: ({ row }) => (
-      <Badge
-        variant={row.original.status === "active" ? "default" : "secondary"}
-        className={
-          row.original.status === "active"
-            ? "bg-green-100 text-green-800 hover:bg-green-100"
-            : "bg-gray-100 text-gray-800 hover:bg-gray-100"
-        }
-      >
-        {row.original.status === "active" ? "Đang học" : "Nghỉ học"}
-      </Badge>
-    ),
-  },
-  {
-    accessorKey: "notes",
-    header: ({ column }) => {
-      return (
-        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          Ghi chú
-          <ChevronDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-  },
-  {
-    id: "actions",
-    cell: ({ row }) => <StudentActions student={row.original} />,
-  },
-]
-
 export function EnhancedStudentTable() {
+  const router = useRouter()
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
-    facebook: false,
-    notes: false,
-  })
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
+  const [rowSelection, setRowSelection] = useState({})
+  const [students, setStudents] = useState<Student[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    // Fetch data from API
+    const fetchStudents = async () => {
+      try {
+        setLoading(true)
+        const accessToken = Cookies.get('accessToken')
+        if (!accessToken) {
+          router.push('/login')
+          return
+        }
+
+        const response = await axios.get('http://localhost:8080/api/students', {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`
+          }
+        })
+        setStudents(response.data)
+        setError(null)
+      } catch (error: any) {
+        console.error('Error fetching students:', error)
+        if (error.response?.status === 403) {
+          // Token hết hạn hoặc không hợp lệ, chuyển về trang login
+          router.push('/login')
+          return
+        }
+        setError('Không thể tải dữ liệu học sinh. Đang sử dụng dữ liệu mẫu.')
+        setStudents(fallbackData) // Sử dụng dữ liệu mẫu khi API lỗi
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchStudents()
+  }, [router])
+
+  const columns: ColumnDef<Student>[] = [
+    {
+      accessorKey: "name",
+      header: ({ column }) => {
+        return (
+          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+            Học sinh
+            <ChevronDown className="ml-2 h-4 w-4" />
+          </Button>
+        )
+      },
+      cell: ({ row }) => (
+        <div className="flex items-center gap-3">
+          <Avatar>
+            <AvatarImage src={row.original.avatar} alt={row.original.name} />
+            <AvatarFallback>
+              {row.original.name
+                .split(" ")
+                .map((n) => n[0])
+                .join("")}
+            </AvatarFallback>
+          </Avatar>
+          <div>
+            <div className="font-medium">{row.original.name}</div>
+            <div className="text-sm text-muted-foreground">{row.original.id}</div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      accessorKey: "enrollmentDate",
+      header: ({ column }) => {
+        return (
+          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+            Ngày nhập học
+            <ChevronDown className="ml-2 h-4 w-4" />
+          </Button>
+        )
+      },
+    },
+    {
+      accessorKey: "phone",
+      header: ({ column }) => {
+        return (
+          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+            SĐT học sinh
+            <ChevronDown className="ml-2 h-4 w-4" />
+          </Button>
+        )
+      },
+    },
+    {
+      accessorKey: "parentPhone",
+      header: ({ column }) => {
+        return (
+          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+            SĐT phụ huynh
+            <ChevronDown className="ml-2 h-4 w-4" />
+          </Button>
+        )
+      },
+    },
+    {
+      accessorKey: "balance",
+      header: ({ column }) => {
+        return (
+          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+            Số tiền dư/nợ
+            <ChevronDown className="ml-2 h-4 w-4" />
+          </Button>
+        )
+      },
+      cell: ({ row }) => {
+        const balance = parseFloat(row.getValue("balance") as string)
+        const formatted = new Intl.NumberFormat("vi-VN", {
+          style: "currency",
+          currency: "VND",
+        }).format(Math.abs(balance))
+
+        return (
+          <div className={balance > 0 ? "text-green-600" : balance < 0 ? "text-red-600" : ""}>
+            {balance > 0 ? "+" : balance < 0 ? "-" : ""}
+            {formatted}
+          </div>
+        )
+      },
+    },
+    {
+      accessorKey: "balanceMonths",
+      header: ({ column }) => {
+        return (
+          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+            Số tháng dư/nợ
+            <ChevronDown className="ml-2 h-4 w-4" />
+          </Button>
+        )
+      },
+      cell: ({ row }) => {
+        const months = parseInt(row.getValue("balanceMonths") as string)
+        return (
+          <Badge
+            variant="outline"
+            className={
+              months > 0
+                ? "bg-green-100 text-green-800 hover:bg-green-100"
+                : months < 0
+                  ? "bg-red-100 text-red-800 hover:bg-red-100"
+                  : ""
+            }
+          >
+            {months > 0 ? "+" : months < 0 ? "-" : ""}
+            {Math.abs(months)} tháng
+          </Badge>
+        )
+      },
+    },
+    {
+      accessorKey: "school",
+      header: ({ column }) => {
+        return (
+          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+            Trường
+            <ChevronDown className="ml-2 h-4 w-4" />
+          </Button>
+        )
+      },
+    },
+    {
+      accessorKey: "subjects",
+      header: ({ column }) => {
+        return (
+          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+            Môn học
+            <ChevronDown className="ml-2 h-4 w-4" />
+          </Button>
+        )
+      },
+      cell: ({ row }) => {
+        const subjects = row.getValue("subjects") as string[]
+        return (
+          <div className="flex flex-wrap gap-1">
+            {subjects.map((subject) => (
+              <Badge key={subject} variant="outline" className="bg-blue-50 text-blue-800 hover:bg-blue-50">
+                {subject}
+              </Badge>
+            ))}
+          </div>
+        )
+      },
+    },
+    {
+      accessorKey: "grade",
+      header: ({ column }) => {
+        return (
+          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+            Lớp
+            <ChevronDown className="ml-2 h-4 w-4" />
+          </Button>
+        )
+      },
+    },
+    {
+      accessorKey: "teacher",
+      header: ({ column }) => {
+        return (
+          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+            Giáo viên
+            <ChevronDown className="ml-2 h-4 w-4" />
+          </Button>
+        )
+      },
+    },
+    {
+      accessorKey: "classTime",
+      header: ({ column }) => {
+        return (
+          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+            Lịch học
+            <ChevronDown className="ml-2 h-4 w-4" />
+          </Button>
+        )
+      },
+    },
+    {
+      accessorKey: "status",
+      header: ({ column }) => {
+        return (
+          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+            Trạng thái
+            <ChevronDown className="ml-2 h-4 w-4" />
+          </Button>
+        )
+      },
+      cell: ({ row }) => {
+        const status = row.getValue("status") as string
+        return (
+          <Badge
+            variant="outline"
+            className={
+              status === "active"
+                ? "bg-green-100 text-green-800 hover:bg-green-100"
+                : "bg-red-100 text-red-800 hover:bg-red-100"
+            }
+          >
+            {status === "active" ? "Đang học" : "Đã nghỉ"}
+          </Badge>
+        )
+      },
+    },
+    {
+      accessorKey: "notes",
+      header: ({ column }) => {
+        return (
+          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+            Ghi chú
+            <ChevronDown className="ml-2 h-4 w-4" />
+          </Button>
+        )
+      },
+      cell: ({ row }) => {
+        return <div className="max-w-[200px] truncate">{row.getValue("notes")}</div>
+      },
+    },
+    {
+      accessorKey: "facebook",
+      header: ({ column }) => {
+        return (
+          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+            Facebook
+            <ChevronDown className="ml-2 h-4 w-4" />
+          </Button>
+        )
+      },
+    },
+    {
+      id: "actions",
+      cell: ({ row }) => {
+        const student = row.original
+        return <StudentActions student={student} />
+      },
+    },
+  ]
 
   const table = useReactTable({
-    data,
+    data: students,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -393,129 +441,47 @@ export function EnhancedStudentTable() {
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
     state: {
       sorting,
       columnFilters,
       columnVisibility,
+      rowSelection,
     },
   })
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
+    <div className="w-full">
+      <div className="flex items-center justify-between py-4">
         <div className="flex items-center gap-2">
-          <div className="relative flex-1 max-w-sm">
+          <div className="relative max-w-sm">
             <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Tìm kiếm học sinh..."
+              placeholder="Tìm kiếm theo tên..."
               value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
               onChange={(event) => table.getColumn("name")?.setFilterValue(event.target.value)}
               className="pl-8"
             />
           </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="ml-auto">
-                Khối lớp <ChevronDown className="ml-2 h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuCheckboxItem checked={true} onCheckedChange={() => {}}>
-                Tất cả
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem checked={false} onCheckedChange={() => {}}>
-                Lớp 10
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem checked={false} onCheckedChange={() => {}}>
-                Lớp 11
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem checked={false} onCheckedChange={() => {}}>
-                Lớp 12
-              </DropdownMenuCheckboxItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="ml-auto">
-                Môn học <ChevronDown className="ml-2 h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuCheckboxItem checked={true} onCheckedChange={() => {}}>
-                Tất cả
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem checked={false} onCheckedChange={() => {}}>
-                Toán
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem checked={false} onCheckedChange={() => {}}>
-                Lý
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem checked={false} onCheckedChange={() => {}}>
-                Hóa
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem checked={false} onCheckedChange={() => {}}>
-                Sinh
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem checked={false} onCheckedChange={() => {}}>
-                Anh Văn
-              </DropdownMenuCheckboxItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="ml-auto">
-                Giáo viên <ChevronDown className="ml-2 h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuCheckboxItem checked={true} onCheckedChange={() => {}}>
-                Tất cả
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem checked={false} onCheckedChange={() => {}}>
-                Nguyễn Văn X
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem checked={false} onCheckedChange={() => {}}>
-                Trần Văn Y
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem checked={false} onCheckedChange={() => {}}>
-                Lê Văn Z
-              </DropdownMenuCheckboxItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="ml-auto">
-                Ca học <ChevronDown className="ml-2 h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuCheckboxItem checked={true} onCheckedChange={() => {}}>
-                Tất cả
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem checked={false} onCheckedChange={() => {}}>
-                Sáng 7-CN
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem checked={false} onCheckedChange={() => {}}>
-                Chiều 2-4-6
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem checked={false} onCheckedChange={() => {}}>
-                Chiều 3-5-7
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem checked={false} onCheckedChange={() => {}}>
-                Tối 2-4-6
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem checked={false} onCheckedChange={() => {}}>
-                Tối 3-5-7
-              </DropdownMenuCheckboxItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <Button variant="outline" onClick={() => table.getColumn("status")?.setFilterValue("active")}>
+            Đang học
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => table.getColumn("status")?.setFilterValue("inactive")}
+          >
+            Đã nghỉ
+          </Button>
+          <Button variant="outline" onClick={() => table.getColumn("status")?.setFilterValue("")}>
+            Tất cả
+          </Button>
         </div>
         <div className="flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm" className="h-8 px-2 lg:px-3">
+              <Button variant="outline" className="ml-auto">
                 <Settings className="mr-2 h-4 w-4" />
-                Hiển thị cột
+                <span>Cột hiển thị</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
@@ -532,93 +498,128 @@ export function EnhancedStudentTable() {
                     >
                       {column.id === "name"
                         ? "Học sinh"
+                        : column.id === "enrollmentDate"
+                        ? "Ngày nhập học"
                         : column.id === "phone"
-                          ? "SĐT học sinh"
-                          : column.id === "parentPhone"
-                            ? "SĐT phụ huynh"
-                            : column.id === "enrollmentDate"
-                              ? "Ngày nhập học"
-                              : column.id === "balance"
-                                ? "Số tiền dư/nợ"
-                                : column.id === "balanceMonths"
-                                  ? "Số tháng dư/nợ"
-                                  : column.id === "school"
-                                    ? "Trường"
-                                    : column.id === "subjects"
-                                      ? "Môn học"
-                                      : column.id === "grade"
-                                        ? "Khối lớp"
-                                        : column.id === "teacher"
-                                          ? "Giáo viên"
-                                          : column.id === "classTime"
-                                            ? "Ca học"
-                                            : column.id === "status"
-                                              ? "Trạng thái"
-                                              : column.id === "notes"
-                                                ? "Ghi chú"
-                                                : column.id}
+                        ? "SĐT học sinh"
+                        : column.id === "parentPhone"
+                        ? "SĐT phụ huynh"
+                        : column.id === "balance"
+                        ? "Số tiền dư/nợ"
+                        : column.id === "balanceMonths"
+                        ? "Số tháng dư/nợ"
+                        : column.id === "school"
+                        ? "Trường"
+                        : column.id === "grade"
+                        ? "Lớp"
+                        : column.id === "subjects"
+                        ? "Môn học"
+                        : column.id === "teacher"
+                        ? "Giáo viên"
+                        : column.id === "classTime"
+                        ? "Lịch học"
+                        : column.id === "status"
+                        ? "Trạng thái"
+                        : column.id === "notes"
+                        ? "Ghi chú"
+                        : column.id === "facebook"
+                        ? "Facebook"
+                        : column.id}
                     </DropdownMenuCheckboxItem>
                   )
                 })}
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button variant="outline" size="sm" className="h-8 px-2 lg:px-3">
-            Xuất Excel
-          </Button>
-          <Button variant="outline" size="sm" className="h-8 px-2 lg:px-3">
-            In danh sách
-          </Button>
+          <Button>Thêm học sinh mới</Button>
         </div>
       </div>
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                    </TableHead>
-                  )
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
-                  ))}
+      
+      {loading ? (
+        <div className="flex items-center justify-center py-8">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          <span className="ml-2">Đang tải dữ liệu...</span>
+        </div>
+      ) : error ? (
+        <div className="rounded-md bg-yellow-50 p-4 my-4">
+          <div className="flex">
+            <div className="flex-shrink-0">
+              <svg className="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <div className="ml-3">
+              <p className="text-sm text-yellow-700">{error}</p>
+            </div>
+          </div>
+        </div>
+      ) : students.length === 0 ? (
+        <div className="text-center py-10">
+          <p className="text-muted-foreground">Không có dữ liệu học sinh</p>
+        </div>
+      ) : (
+        <div className="rounded-md border">
+          <Table>
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(header.column.columnDef.header, header.getContext())}
+                      </TableHead>
+                    )
+                  })}
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
-                  Không tìm thấy kết quả.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">{table.getFilteredRowModel().rows.length} học sinh</div>
-        <div className="space-x-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            Trước
-          </Button>
-          <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
-            Sau
-          </Button>
+              ))}
+            </TableHeader>
+            <TableBody>
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={columns.length} className="h-24 text-center">
+                    Không tìm thấy kết quả.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
         </div>
+      )}
+      <div className="flex items-center justify-end space-x-2 py-4">
+        <div className="text-muted-foreground text-sm">
+          Trang{" "}
+          <strong>
+            {table.getState().pagination.pageIndex + 1} / {table.getPageCount()}
+          </strong>{" "}
+          | Tổng <strong>{table.getFilteredRowModel().rows.length}</strong> học sinh
+        </div>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          Trước
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          Sau
+        </Button>
       </div>
     </div>
   )
