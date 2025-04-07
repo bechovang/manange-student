@@ -969,3 +969,37 @@ org.springframework.security.authentication.BadCredentialsException: Bad credent
 2025-04-07T15:10:22.582+07:00 DEBUG 4760 --- [http-nio-8080-exec-5] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
 2025-04-07T15:10:22.583+07:00  INFO 4760 --- [http-nio-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
 2025-04-07T15:10:22.587+07:00 DEBUG 4760 --- [http-nio-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-04-07T15:13:59.297+07:00 DEBUG 4760 --- [http-nio-8080-exec-7] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/students
+2025-04-07T15:13:59.302+07:00 DEBUG 4760 --- [http-nio-8080-exec-7] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-04-07T15:13:59.304+07:00 DEBUG 4760 --- [http-nio-8080-exec-7] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-07T15:13:59.304+07:00 DEBUG 4760 --- [http-nio-8080-exec-7] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-07T15:13:59.310+07:00 DEBUG 4760 --- [http-nio-8080-exec-7] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-04-07T15:13:59.311+07:00 DEBUG 4760 --- [http-nio-8080-exec-7] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-04-07T15:13:59.312+07:00 DEBUG 4760 --- [http-nio-8080-exec-7] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-04-07T15:13:59.319+07:00  INFO 4760 --- [http-nio-8080-exec-7] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-04-07T15:13:59.319+07:00 DEBUG 4760 --- [http-nio-8080-exec-7] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-04-07T15:13:59.320+07:00 DEBUG 4760 --- [http-nio-8080-exec-7] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-04-07T15:13:59.321+07:00 DEBUG 4760 --- [http-nio-8080-exec-7] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-04-07T15:13:59.321+07:00 DEBUG 4760 --- [http-nio-8080-exec-7] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-07T15:13:59.322+07:00 DEBUG 4760 --- [http-nio-8080-exec-7] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-07T15:13:59.324+07:00 DEBUG 4760 --- [http-nio-8080-exec-7] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-07T15:13:59.326+07:00 DEBUG 4760 --- [http-nio-8080-exec-7] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-04-07T15:13:59.326+07:00  INFO 4760 --- [http-nio-8080-exec-7] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-04-07T15:13:59.327+07:00 DEBUG 4760 --- [http-nio-8080-exec-7] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-04-07T15:13:59.427+07:00 DEBUG 4760 --- [http-nio-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/students
+2025-04-07T15:13:59.427+07:00 DEBUG 4760 --- [http-nio-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-04-07T15:13:59.428+07:00 DEBUG 4760 --- [http-nio-8080-exec-8] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-07T15:13:59.429+07:00 DEBUG 4760 --- [http-nio-8080-exec-8] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-07T15:13:59.431+07:00 DEBUG 4760 --- [http-nio-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-04-07T15:13:59.431+07:00 DEBUG 4760 --- [http-nio-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-04-07T15:13:59.432+07:00 DEBUG 4760 --- [http-nio-8080-exec-8] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-04-07T15:13:59.435+07:00  INFO 4760 --- [http-nio-8080-exec-8] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-04-07T15:13:59.436+07:00 DEBUG 4760 --- [http-nio-8080-exec-8] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-04-07T15:13:59.436+07:00 DEBUG 4760 --- [http-nio-8080-exec-8] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-04-07T15:13:59.436+07:00 DEBUG 4760 --- [http-nio-8080-exec-8] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-04-07T15:13:59.437+07:00 DEBUG 4760 --- [http-nio-8080-exec-8] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-07T15:13:59.437+07:00 DEBUG 4760 --- [http-nio-8080-exec-8] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-07T15:13:59.441+07:00 DEBUG 4760 --- [http-nio-8080-exec-8] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-07T15:13:59.444+07:00 DEBUG 4760 --- [http-nio-8080-exec-8] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-04-07T15:13:59.444+07:00  INFO 4760 --- [http-nio-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-04-07T15:13:59.445+07:00 DEBUG 4760 --- [http-nio-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
