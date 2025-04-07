@@ -1,7 +1,7 @@
-package com.example.eduweb.studentmanage.controller;
+package com.example.eduweb.managesystem.controller;
 
-import com.example.eduweb.studentmanage.dto.StudentDTO;
-import com.example.eduweb.studentmanage.service.StudentService;
+import com.example.eduweb.managesystem.dto.StudentDTO;
+import com.example.eduweb.managesystem.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

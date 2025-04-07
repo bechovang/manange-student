@@ -1,9 +1,9 @@
-package com.example.eduweb.studentmanage.service;
+package com.example.eduweb.managesystem.service;
 
-import com.example.eduweb.studentmanage.dto.StudentDTO;
-import com.example.eduweb.studentmanage.model.*;
-import com.example.eduweb.studentmanage.model.Class;
-import com.example.eduweb.studentmanage.repository.*;
+import com.example.eduweb.managesystem.dto.StudentDTO;
+import com.example.eduweb.managesystem.model.*;
+import com.example.eduweb.managesystem.model.Class;
+import com.example.eduweb.managesystem.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

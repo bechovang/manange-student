@@ -1,4 +1,4 @@
-package com.example.eduweb.studentmanage.dto;
+package com.example.eduweb.managesystem.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

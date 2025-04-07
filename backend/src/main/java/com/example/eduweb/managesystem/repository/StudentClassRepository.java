@@ -1,6 +1,6 @@
-package com.example.eduweb.studentmanage.repository;
+package com.example.eduweb.managesystem.repository;
 
-import com.example.eduweb.studentmanage.model.StudentClass;
+import com.example.eduweb.managesystem.model.StudentClass;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

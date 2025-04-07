@@ -1,4 +1,4 @@
-package com.example.eduweb.studentmanage.model;
+package com.example.eduweb.managesystem.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

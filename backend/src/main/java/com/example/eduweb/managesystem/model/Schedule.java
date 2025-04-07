@@ -1,37 +1,33 @@
-package com.example.eduweb.studentmanage.model;
+package com.example.eduweb.managesystem.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "student_classes")
-public class StudentClass {
+@Table(name = "schedule")
+public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "student_id")
-    private Long studentId;
-    
     @Column(name = "class_id")
     private Long classId;
     
-    @Column(name = "enrollment_date")
-    private LocalDate enrollmentDate;
+    @Column(nullable = false)
+    private String weekday;
     
-    @Column
-    private String status;
+    @Column(name = "time_start", nullable = false)
+    private LocalTime timeStart;
     
-    @ManyToOne
-    @JoinColumn(name = "student_id", insertable = false, updatable = false)
-    private Student student;
+    @Column(name = "time_end", nullable = false)
+    private LocalTime timeEnd;
     
     @ManyToOne
     @JoinColumn(name = "class_id", insertable = false, updatable = false)
