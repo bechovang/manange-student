@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -63,6 +64,45 @@ public class AdminController {
             Map.of("username", "teacher1", "password", "teacher123", "role", "teacher"),
             Map.of("username", "staff1", "password", "staff123", "role", "staff")
         });
+        return ResponseEntity.ok(response);
+    }
+    
+    @GetMapping("/update-password/{username}")
+    public ResponseEntity<?> updatePassword(@PathVariable String username, @RequestParam String password) {
+        Optional<User> userOpt = userRepository.findByUsername(username);
+        
+        if (userOpt.isEmpty()) {
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "User not found");
+            return ResponseEntity.badRequest().body(response);
+        }
+        
+        User user = userOpt.get();
+        user.setPasswordHash(passwordEncoder.encode(password));
+        userRepository.save(user);
+        
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Password updated successfully for user: " + username);
+        return ResponseEntity.ok(response);
+    }
+    
+    @GetMapping("/fix-all-passwords")
+    public ResponseEntity<?> fixAllPasswords() {
+        // Tìm tất cả người dùng
+        List<User> users = userRepository.findAll();
+        int count = 0;
+        
+        // Cập nhật tất cả mật khẩu thành username + "123"
+        for (User user : users) {
+            String newPassword = user.getUsername() + "123";
+            user.setPasswordHash(passwordEncoder.encode(newPassword));
+            userRepository.save(user);
+            count++;
+        }
+        
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Fixed passwords for " + count + " users");
+        response.put("note", "Each user's password is now their username + '123'");
         return ResponseEntity.ok(response);
     }
 } 
