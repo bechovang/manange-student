@@ -272,7 +272,8 @@ public class StudentService {
             Optional<TuitionPlan> tuitionPlanOpt = tuitionPlanRepository
                 .findByClassEntityAndEffectiveDateLessThanEqualOrderByEffectiveDateDesc(
                     studentClass.getClassEntity(),
-                    LocalDate.now()
+                    //LocalDate.now()
+                    getCurrentDateForTesting() // Use testing date instead of now()
                 );
             
             if (tuitionPlanOpt.isPresent()) {
@@ -283,6 +284,12 @@ public class StudentService {
         return totalMonthlyTuition;
     }
 
+    // Helper method for testing - adjust current date
+    private LocalDate getCurrentDateForTesting() {
+        // For testing: Add 2 months to the current date
+        return LocalDate.now().plusMonths(2);
+    }
+
     /**
      * Tính số tiền dư/nợ của học sinh
      * Balance = Tổng tiền đã đóng - Tổng tiền phải đóng
@@ -290,7 +297,8 @@ public class StudentService {
     private double calculateBalance(Student student) {
         double monthlyTuition = calculateMonthlyTuition(student);
         LocalDate enrollmentDate = student.getCreatedAt();
-        LocalDate currentDate = LocalDate.now();
+        //LocalDate currentDate = LocalDate.now();
+        LocalDate currentDate = getCurrentDateForTesting(); // Use testing date instead of now()
 
         // Tính số tháng từ ngày nhập học đến hiện tại
         long months = ChronoUnit.MONTHS.between(enrollmentDate, currentDate);
