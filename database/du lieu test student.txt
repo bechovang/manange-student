@@ -1,0 +1,81 @@
+-- Thêm dữ liệu vào bảng class
+INSERT INTO class (name, subject, grade, schedule) VALUES
+('Toán 10A1', 'Toán', 'Lớp 10', 'Tối 2-4-6, 19:00-21:00'),
+('Toán 10A2', 'Toán', 'Lớp 10', 'Tối 3-5-7, 19:00-21:00'),
+('Lý 10A1', 'Lý', 'Lớp 10', 'Tối 2-4-6, 19:00-21:00'),
+('Hóa 10A1', 'Hóa', 'Lớp 10', 'Tối 3-5-7, 19:00-21:00'),
+('Anh 10A1', 'Anh Văn', 'Lớp 10', 'Tối 2-4-6, 19:00-21:00'),
+('Toán 11A1', 'Toán', 'Lớp 11', 'Tối 2-4-6, 19:00-21:00'),
+('Lý 11A1', 'Lý', 'Lớp 11', 'Tối 3-5-7, 19:00-21:00'),
+('Hóa 11A1', 'Hóa', 'Lớp 11', 'Tối 2-4-6, 19:00-21:00'),
+('Anh 11A1', 'Anh Văn', 'Lớp 11', 'Tối 3-5-7, 19:00-21:00');
+
+-- Thêm dữ liệu vào bảng tuition_plan
+INSERT INTO tuition_plan (class_id, monthly_fee) VALUES
+(1, 1500000), -- Toán 10A1: 1.5 triệu/tháng
+(2, 1500000), -- Toán 10A2: 1.5 triệu/tháng
+(3, 1200000), -- Lý 10A1: 1.2 triệu/tháng
+(4, 1200000), -- Hóa 10A1: 1.2 triệu/tháng
+(5, 1000000), -- Anh 10A1: 1 triệu/tháng
+(6, 1500000), -- Toán 11A1: 1.5 triệu/tháng
+(7, 1200000), -- Lý 11A1: 1.2 triệu/tháng
+(8, 1200000), -- Hóa 11A1: 1.2 triệu/tháng
+(9, 1000000); -- Anh 11A1: 1 triệu/tháng
+
+-- Thêm dữ liệu vào bảng student
+INSERT INTO student (name, phone, parent_phone, facebook, school, grade, teacher, class_time, status, notes, avatar, enrollment_date) VALUES
+('Nguyễn Văn A', '0901234567', '0909876543', 'facebook.com/nguyenvana', 'THPT Nguyễn Du', 'Lớp 10', 'Nguyễn Văn X', 'Tối 2-4-6', 'active', 'Học sinh chăm chỉ', '/avatar1.jpg', '2023-06-01'),
+('Trần Thị B', '0901234568', '0909876544', 'facebook.com/tranthib', 'THPT Lê Quý Đôn', 'Lớp 11', 'Trần Văn Y', 'Tối 3-5-7', 'active', 'Học sinh năng động', '/avatar2.jpg', '2023-05-15'),
+('Lê Văn C', '0901234569', '0909876545', 'facebook.com/levanc', 'THPT Chu Văn An', 'Lớp 12', 'Lê Văn Z', 'Chiều 2-4-6', 'inactive', 'Học sinh cần cải thiện', '/avatar3.jpg', '2023-04-10'),
+('Phạm Thị D', '0901234570', '0909876546', 'facebook.com/phamthid', 'THPT Trần Phú', 'Lớp 10', 'Phạm Văn W', 'Tối 2-4-6', 'active', 'Học sinh xuất sắc', '/avatar4.jpg', '2023-07-01'),
+('Hoàng Văn E', '0901234571', '0909876547', 'facebook.com/hoangvane', 'THPT Nguyễn Huệ', 'Lớp 11', 'Hoàng Văn V', 'Tối 3-5-7', 'active', 'Học sinh tiềm năng', '/avatar5.jpg', '2023-05-20');
+
+-- Thêm dữ liệu vào bảng student_class
+INSERT INTO student_class (student_id, class_id) VALUES
+(1, 1), -- Nguyễn Văn A học Toán 10A1
+(1, 3), -- Nguyễn Văn A học Lý 10A1
+(2, 6), -- Trần Thị B học Toán 11A1
+(2, 9), -- Trần Thị B học Anh 11A1
+(3, 1), -- Lê Văn C học Toán 10A1
+(3, 4), -- Lê Văn C học Hóa 10A1
+(4, 2), -- Phạm Thị D học Toán 10A2
+(4, 5), -- Phạm Thị D học Anh 10A1
+(5, 6), -- Hoàng Văn E học Toán 11A1
+(5, 7); -- Hoàng Văn E học Lý 11A1
+
+-- Thêm dữ liệu vào bảng payment
+INSERT INTO payment (student_id, amount, payment_date, notes) VALUES
+-- Nguyễn Văn A (Toán 1.5tr + Lý 1.2tr = 2.7tr/tháng)
+(1, 2700000, '2023-06-01 10:00:00', 'Đóng học phí tháng 6'),
+(1, 2700000, '2023-07-01 10:00:00', 'Đóng học phí tháng 7'),
+(1, 2700000, '2023-08-01 10:00:00', 'Đóng học phí tháng 8'),
+(1, 2700000, '2023-09-01 10:00:00', 'Đóng học phí tháng 9'),
+(1, 2700000, '2023-10-01 10:00:00', 'Đóng học phí tháng 10'),
+
+-- Trần Thị B (Toán 1.5tr + Anh 1tr = 2.5tr/tháng)
+(2, 2500000, '2023-05-15 10:00:00', 'Đóng học phí tháng 5'),
+(2, 2500000, '2023-06-15 10:00:00', 'Đóng học phí tháng 6'),
+(2, 2500000, '2023-07-15 10:00:00', 'Đóng học phí tháng 7'),
+(2, 2500000, '2023-08-15 10:00:00', 'Đóng học phí tháng 8'),
+(2, 2500000, '2023-09-15 10:00:00', 'Đóng học phí tháng 9'),
+
+-- Lê Văn C (Toán 1.5tr + Hóa 1.2tr = 2.7tr/tháng)
+(3, 2700000, '2023-04-10 10:00:00', 'Đóng học phí tháng 4'),
+(3, 2700000, '2023-05-10 10:00:00', 'Đóng học phí tháng 5'),
+(3, 2700000, '2023-06-10 10:00:00', 'Đóng học phí tháng 6'),
+(3, 2700000, '2023-07-10 10:00:00', 'Đóng học phí tháng 7'),
+(3, 2700000, '2023-08-10 10:00:00', 'Đóng học phí tháng 8'),
+
+-- Phạm Thị D (Toán 1.5tr + Anh 1tr = 2.5tr/tháng)
+(4, 2500000, '2023-07-01 10:00:00', 'Đóng học phí tháng 7'),
+(4, 2500000, '2023-08-01 10:00:00', 'Đóng học phí tháng 8'),
+(4, 2500000, '2023-09-01 10:00:00', 'Đóng học phí tháng 9'),
+(4, 2500000, '2023-10-01 10:00:00', 'Đóng học phí tháng 10'),
+(4, 2500000, '2023-11-01 10:00:00', 'Đóng học phí tháng 11'),
+
+-- Hoàng Văn E (Toán 1.5tr + Lý 1.2tr = 2.7tr/tháng)
+(5, 2700000, '2023-05-20 10:00:00', 'Đóng học phí tháng 5'),
+(5, 2700000, '2023-06-20 10:00:00', 'Đóng học phí tháng 6'),
+(5, 2700000, '2023-07-20 10:00:00', 'Đóng học phí tháng 7'),
+(5, 2700000, '2023-08-20 10:00:00', 'Đóng học phí tháng 8'),
+(5, 2700000, '2023-09-20 10:00:00', 'Đóng học phí tháng 9');

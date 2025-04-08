@@ -1,41 +1,49 @@
 package com.example.eduweb.managesystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.List;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@Data
 @Table(name = "classes")
 public class Class {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(nullable = false)
     private String name;
-    
+
     @Column(nullable = false)
     private String teacher;
-    
+
     @Column(nullable = false)
     private String subject;
-    
+
     @Column(nullable = false)
     private String room;
-    
+
     @Column(name = "start_date")
     private LocalDate startDate;
-    
+
     @Column(name = "end_date")
     private LocalDate endDate;
-    
+
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
+
+    @OneToMany(mappedBy = "classEntity")
+    @JsonIgnore
+    private List<StudentClass> studentClasses;
+
+    @OneToMany(mappedBy = "classEntity")
+    @JsonIgnore
+    private List<Schedule> schedules;
+
+    @OneToMany(mappedBy = "classEntity")
+    @JsonIgnore
+    private List<TuitionPlan> tuitionPlans;
 } 

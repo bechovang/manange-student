@@ -1,3 +1,22 @@
+-- form đk
+CREATE TABLE registrations (
+    id BIGSERIAL PRIMARY KEY,
+    created_at TIMESTAMP NOT NULL,
+    facebook_link TEXT,
+    full_name VARCHAR(255) NOT NULL,
+    grade VARCHAR(10) NOT NULL,
+    note TEXT,
+    parent_phone VARCHAR(20),
+    school VARCHAR(255) NOT NULL,
+    student_phone VARCHAR(20),
+    subject VARCHAR(50) NOT NULL
+);
+
+COMMENT ON COLUMN registrations.grade IS 'Khối lớp từ 6-12';
+COMMENT ON COLUMN registrations.subject IS 'Môn học đăng ký';
+
+-- phân quản lí
+
 -- Tạo extension nếu cần
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 

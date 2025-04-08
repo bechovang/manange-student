@@ -1,4 +1,4 @@
-import { AddStudentDialog } from "@/components/student-crud"
+import { AddStudentDialog } from "@/components/student-crud/add-student-dialog"
 import { EnhancedStudentTable } from "@/components/enhanced-student-table"
 
 export default function StudentsPage() {

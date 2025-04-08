@@ -1,4 +1,19 @@
-// Giữ nguyên các bảng cũ không liên quan đến tài chính
+// Phần form đk 
+Table registrations {
+  id integer [primary key, increment]
+  full_name varchar(100) [not null]
+  grade varchar(10) [not null, note: 'khối lớp 6 - 12']
+  school varchar(255) [not null]
+  student_phone varchar(20)
+  parent_phone varchar(20)
+  facebook_link varchar(255)
+  subject varchar(50) [note: 'Môn học đăng ký']
+  note text
+  created_at timestamp [default: `now()`]
+  
+}
+
+// Phần manage 
 Table users {
   id integer [primary key, increment]
   username varchar(50) [unique, not null]

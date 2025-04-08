@@ -8,6 +8,7 @@ import type { Student, Class, Payment, TuitionRecord, Attendance, ScheduleEvent,
 import { students, classes, payments, tuitionRecords, attendanceData, scheduleEvents, notifications } from "./mockData"
 import axios from "axios"
 import Cookies from "js-cookie"
+import { StudentFormValues } from "@/components/student-crud/types"
 
 // Axios instance cho API calls
 export const apiClient = axios.create({
@@ -126,41 +127,30 @@ export const fetchStudentById = async (id: string): Promise<Student | undefined>
   return students.find((student) => student.id === id)
 }
 
-export const createStudent = async (
-  studentData: Omit<Student, "id" | "avatar" | "balance" | "balanceMonths">,
-): Promise<Student> => {
-  await delay(FAKE_DELAY)
-
-  // Tạo học sinh mới với ID tự động và các giá trị mặc định
-  const newStudent: Student = {
-    id: `STU${String(students.length + 1).padStart(3, "0")}`,
-    avatar: "/placeholder.svg?height=40&width=40",
-    balance: 0,
-    balanceMonths: 0,
-    ...studentData,
+export const createStudent = async (studentData: StudentFormValues): Promise<Student> => {
+  try {
+    const response = await apiClient.post("/api/students", studentData)
+    return response.data
+  } catch (error) {
+    console.error("Error creating student:", error)
+    throw error
   }
-
-  // Trong môi trường thực tế, đây sẽ là API POST
-  return newStudent
 }
 
-export const updateStudent = async (id: string, studentData: Partial<Student>): Promise<Student> => {
-  await delay(FAKE_DELAY)
-
-  const studentIndex = students.findIndex((student) => student.id === id)
-  if (studentIndex === -1) {
-    throw new Error("Không tìm thấy học sinh")
+export const updateStudent = async (id: string, studentData: StudentFormValues): Promise<Student> => {
+  try {
+    const response = await apiClient.put(`/api/students/${id}`, studentData)
+    return response.data
+  } catch (error) {
+    console.error("Error updating student:", error)
+    throw error
   }
-
-  // Trong môi trường thực tế, đây sẽ là API PUT hoặc PATCH
-  const updatedStudent = { ...students[studentIndex], ...studentData }
-  return updatedStudent
 }
 
 export const deleteStudent = async (id: string): Promise<boolean> => {
   await delay(FAKE_DELAY)
 
-  // Trong môi trường thực tế, đây sẽ là API DELETE
+  // TODOTrong môi trường thực tế, đây sẽ là API DELETE
   return true
 }
 

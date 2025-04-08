@@ -1,39 +1,31 @@
 package com.example.eduweb.managesystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@Data
 @Table(name = "student_classes")
 public class StudentClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @Column(name = "student_id")
-    private Long studentId;
-    
-    @Column(name = "class_id")
-    private Long classId;
-    
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_id", nullable = false)
+    @JsonIgnore
+    private Student student;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "class_id", nullable = false)
+    private Class classEntity;
+
     @Column(name = "enrollment_date")
     private LocalDate enrollmentDate;
-    
-    @Column
+
+    @Column(nullable = false)
     private String status;
-    
-    @ManyToOne
-    @JoinColumn(name = "student_id", insertable = false, updatable = false)
-    private Student student;
-    
-    @ManyToOne
-    @JoinColumn(name = "class_id", insertable = false, updatable = false)
-    private Class classEntity;
 } 
+

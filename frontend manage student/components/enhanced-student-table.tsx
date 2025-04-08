@@ -25,121 +25,51 @@ import { Input } from "@/components/ui/input"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
-import { StudentActions } from "@/components/student-crud"
+import { StudentActions } from "@/components/student-crud/student-actions"
+import { type Student } from "@/components/student-crud/types"
 import axios from "axios"
 import { useRouter } from "next/navigation"
 import Cookies from "js-cookie"
-
-type Student = {
-  id: string
-  name: string
-  phone: string
-  parentPhone: string
-  facebook: string
-  school: string
-  subjects: string[]
-  grade: string
-  teacher: string
-  classTime: string
-  status: "active" | "inactive"
-  notes: string
-  avatar: string
-  enrollmentDate: string
-  balance: number
-  balanceMonths: number
-}
 
 // Dữ liệu mẫu fallback - chỉ sử dụng khi API lỗi
 const fallbackData: Student[] = [
   {
     id: "STU001",
     name: "Nguyễn Văn A",
-    phone: "0901234567",
-    parentPhone: "0909876543",
-    facebook: "facebook.com/nguyenvana",
+    phoneStudent: "0901234567",
+    phoneParent: "0909876543",
+    facebookLink: "facebook.com/nguyenvana",
     school: "THPT Nguyễn Du",
     subjects: ["Toán", "Lý"],
     grade: "Lớp 10",
     teacher: "Nguyễn Văn X",
     classTime: "Tối 2-4-6",
     status: "active",
-    notes: "Học sinh chăm chỉ",
-    avatar: "/placeholder.svg?height=40&width=40",
-    enrollmentDate: "01/06/2023",
+    note: "Học sinh chăm chỉ",
+    dateOfBirth: "01/06/2023",
+    gender: "male",
+    createdAt: "2023-06-05",
     balance: 1500000,
-    balanceMonths: 1,
+    balanceMonths: 1
   },
   {
     id: "STU002",
     name: "Trần Thị B",
-    phone: "0901234568",
-    parentPhone: "0909876544",
-    facebook: "facebook.com/tranthib",
+    phoneStudent: "0901234568",
+    phoneParent: "0909876544",
+    facebookLink: "facebook.com/tranthib",
     school: "THPT Lê Quý Đôn",
     subjects: ["Anh Văn"],
     grade: "Lớp 11",
     teacher: "Trần Văn Y",
     classTime: "Tối 3-5-7",
     status: "active",
-    notes: "Học sinh năng động",
-    avatar: "/placeholder.svg?height=40&width=40",
-    enrollmentDate: "15/05/2023",
+    note: "Học sinh năng động",
+    dateOfBirth: "15/05/2023",
+    gender: "female",
+    createdAt: "2023-06-05",
     balance: -1800000,
-    balanceMonths: -1,
-  },
-  {
-    id: "STU003",
-    name: "Lê Văn C",
-    phone: "0901234569",
-    parentPhone: "0909876545",
-    facebook: "facebook.com/levanc",
-    school: "THPT Chu Văn An",
-    subjects: ["Lý", "Hóa"],
-    grade: "Lớp 12",
-    teacher: "Lê Văn Z",
-    classTime: "Chiều 2-4-6",
-    status: "inactive",
-    notes: "Học sinh cần cải thiện",
-    avatar: "/placeholder.svg?height=40&width=40",
-    enrollmentDate: "10/04/2023",
-    balance: -4000000,
-    balanceMonths: -2,
-  },
-  {
-    id: "STU004",
-    name: "Phạm Thị D",
-    phone: "0901234570",
-    parentPhone: "0909876546",
-    facebook: "facebook.com/phamthid",
-    school: "THPT Nguyễn Trãi",
-    subjects: ["Hóa", "Sinh"],
-    grade: "Lớp 11",
-    teacher: "Phạm Văn W",
-    classTime: "Chiều 3-5-7",
-    status: "active",
-    notes: "",
-    avatar: "/placeholder.svg?height=40&width=40",
-    enrollmentDate: "20/05/2023",
-    balance: 0,
-    balanceMonths: 0,
-  },
-  {
-    id: "STU005",
-    name: "Hoàng Văn E",
-    phone: "0901234571",
-    parentPhone: "0909876547",
-    facebook: "facebook.com/hoangvane",
-    school: "THPT Lê Hồng Phong",
-    subjects: ["Toán", "Anh Văn"],
-    grade: "Lớp 10",
-    teacher: "Hoàng Văn V",
-    classTime: "Sáng 7-CN",
-    status: "active",
-    notes: "Học sinh tiến bộ",
-    avatar: "/placeholder.svg?height=40&width=40",
-    enrollmentDate: "05/06/2023",
-    balance: 3000000,
-    balanceMonths: 2,
+    balanceMonths: -1
   },
 ]
 
@@ -147,7 +77,23 @@ export function EnhancedStudentTable() {
   const router = useRouter()
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
+    name: true,
+    createdAt: true,
+    phoneStudent: true,
+    phoneParent: true,
+    facebookLink: true,
+    note: true,
+    school: true,
+    subjects: true,
+    grade: true,
+    teacher: true,
+    classTime: true,
+    status: true,
+    balance: true,
+    balanceMonths: true,
+    actions: true
+  })
   const [rowSelection, setRowSelection] = useState({})
   const [students, setStudents] = useState<Student[]>([])
   const [loading, setLoading] = useState(true)
@@ -202,7 +148,6 @@ export function EnhancedStudentTable() {
       cell: ({ row }) => (
         <div className="flex items-center gap-3">
           <Avatar>
-            <AvatarImage src={row.original.avatar} alt={row.original.name} />
             <AvatarFallback>
               {row.original.name
                 .split(" ")
@@ -218,7 +163,7 @@ export function EnhancedStudentTable() {
       ),
     },
     {
-      accessorKey: "enrollmentDate",
+      accessorKey: "createdAt",
       header: ({ column }) => {
         return (
           <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
@@ -227,9 +172,13 @@ export function EnhancedStudentTable() {
           </Button>
         )
       },
+      cell: ({ row }) => {
+        const date = new Date(row.getValue("createdAt"))
+        return <div>{date.toLocaleDateString("vi-VN")}</div>
+      },
     },
     {
-      accessorKey: "phone",
+      accessorKey: "phoneStudent",
       header: ({ column }) => {
         return (
           <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
@@ -240,7 +189,7 @@ export function EnhancedStudentTable() {
       },
     },
     {
-      accessorKey: "parentPhone",
+      accessorKey: "phoneParent",
       header: ({ column }) => {
         return (
           <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
@@ -251,57 +200,39 @@ export function EnhancedStudentTable() {
       },
     },
     {
-      accessorKey: "balance",
+      accessorKey: "facebookLink",
       header: ({ column }) => {
         return (
           <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-            Số tiền dư/nợ
+            Facebook
             <ChevronDown className="ml-2 h-4 w-4" />
           </Button>
         )
       },
       cell: ({ row }) => {
-        const balance = parseFloat(row.getValue("balance") as string)
-        const formatted = new Intl.NumberFormat("vi-VN", {
-          style: "currency",
-          currency: "VND",
-        }).format(Math.abs(balance))
-
-        return (
-          <div className={balance > 0 ? "text-green-600" : balance < 0 ? "text-red-600" : ""}>
-            {balance > 0 ? "+" : balance < 0 ? "-" : ""}
-            {formatted}
-          </div>
+        const facebookLink = row.getValue("facebookLink") as string
+        return facebookLink ? (
+          <a href={facebookLink} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+            {facebookLink}
+          </a>
+        ) : (
+          <span className="text-muted-foreground">Không có</span>
         )
       },
     },
     {
-      accessorKey: "balanceMonths",
+      accessorKey: "note",
       header: ({ column }) => {
         return (
           <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-            Số tháng dư/nợ
+            Ghi chú
             <ChevronDown className="ml-2 h-4 w-4" />
           </Button>
         )
       },
       cell: ({ row }) => {
-        const months = parseInt(row.getValue("balanceMonths") as string)
-        return (
-          <Badge
-            variant="outline"
-            className={
-              months > 0
-                ? "bg-green-100 text-green-800 hover:bg-green-100"
-                : months < 0
-                  ? "bg-red-100 text-red-800 hover:bg-red-100"
-                  : ""
-            }
-          >
-            {months > 0 ? "+" : months < 0 ? "-" : ""}
-            {Math.abs(months)} tháng
-          </Badge>
-        )
+        const note = row.getValue("note") as string
+        return <div className="max-w-[200px] truncate">{note || "Không có ghi chú"}</div>
       },
     },
     {
@@ -389,36 +320,71 @@ export function EnhancedStudentTable() {
             className={
               status === "active"
                 ? "bg-green-100 text-green-800 hover:bg-green-100"
-                : "bg-red-100 text-red-800 hover:bg-red-100"
+                : status === "inactive"
+                ? "bg-red-100 text-red-800 hover:bg-red-100"
+                : "bg-yellow-100 text-yellow-800 hover:bg-yellow-100"
             }
           >
-            {status === "active" ? "Đang học" : "Đã nghỉ"}
+            {status === "active"
+              ? "Đang học"
+              : status === "inactive"
+              ? "Đã nghỉ"
+              : "Chưa có lớp"}
           </Badge>
         )
       },
     },
     {
-      accessorKey: "notes",
+      accessorKey: "balance",
       header: ({ column }) => {
         return (
           <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-            Ghi chú
+            Số tiền dư/nợ
             <ChevronDown className="ml-2 h-4 w-4" />
           </Button>
         )
       },
       cell: ({ row }) => {
-        return <div className="max-w-[200px] truncate">{row.getValue("notes")}</div>
+        const balance = row.getValue("balance") as number
+        const formatted = new Intl.NumberFormat("vi-VN", {
+          style: "currency",
+          currency: "VND",
+        }).format(Math.abs(balance))
+
+        return (
+          <div className={balance > 0 ? "text-green-600" : balance < 0 ? "text-red-600" : ""}>
+            {balance > 0 ? "+" : balance < 0 ? "-" : ""}
+            {formatted}
+          </div>
+        )
       },
     },
     {
-      accessorKey: "facebook",
+      accessorKey: "balanceMonths",
       header: ({ column }) => {
         return (
           <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-            Facebook
+            Số tháng dư/nợ
             <ChevronDown className="ml-2 h-4 w-4" />
           </Button>
+        )
+      },
+      cell: ({ row }) => {
+        const months = row.getValue("balanceMonths") as number
+        return (
+          <Badge
+            variant="outline"
+            className={
+              months > 0
+                ? "bg-green-100 text-green-800 hover:bg-green-100"
+                : months < 0
+                  ? "bg-red-100 text-red-800 hover:bg-red-100"
+                  : ""
+            }
+          >
+            {months > 0 ? "+" : months < 0 ? "-" : ""}
+            {Math.abs(months)} tháng
+          </Badge>
         )
       },
     },
@@ -498,32 +464,32 @@ export function EnhancedStudentTable() {
                     >
                       {column.id === "name"
                         ? "Học sinh"
-                        : column.id === "enrollmentDate"
+                        : column.id === "createdAt"
                         ? "Ngày nhập học"
-                        : column.id === "phone"
+                        : column.id === "phoneStudent"
                         ? "SĐT học sinh"
-                        : column.id === "parentPhone"
+                        : column.id === "phoneParent"
                         ? "SĐT phụ huynh"
+                        : column.id === "facebookLink"
+                        ? "Facebook"
+                        : column.id === "note"
+                        ? "Ghi chú"
                         : column.id === "balance"
                         ? "Số tiền dư/nợ"
                         : column.id === "balanceMonths"
                         ? "Số tháng dư/nợ"
                         : column.id === "school"
                         ? "Trường"
-                        : column.id === "grade"
-                        ? "Lớp"
                         : column.id === "subjects"
                         ? "Môn học"
+                        : column.id === "grade"
+                        ? "Lớp"
                         : column.id === "teacher"
                         ? "Giáo viên"
                         : column.id === "classTime"
                         ? "Lịch học"
                         : column.id === "status"
                         ? "Trạng thái"
-                        : column.id === "notes"
-                        ? "Ghi chú"
-                        : column.id === "facebook"
-                        ? "Facebook"
                         : column.id}
                     </DropdownMenuCheckboxItem>
                   )
@@ -624,4 +590,5 @@ export function EnhancedStudentTable() {
     </div>
   )
 }
+
 

@@ -2,12 +2,13 @@ package com.example.eduweb.managesystem.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import java.time.LocalTime;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Data
-@Table(name = "schedule")
-public class Schedule {
+@Table(name = "tuition_plans")
+public class TuitionPlan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,13 +18,11 @@ public class Schedule {
     private Class classEntity;
 
     @Column(nullable = false)
-    private String weekday;
+    private BigDecimal amount;
 
-    @Column(name = "time_start", nullable = false)
-    private LocalTime timeStart;
+    @Column(name = "effective_date", nullable = false)
+    private LocalDate effectiveDate;
 
-    @Column(name = "time_end", nullable = false)
-    private LocalTime timeEnd;
-
-} 
-
+    @Column(name = "created_at")
+    private LocalDate createdAt;
+}
