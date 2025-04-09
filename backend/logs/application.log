@@ -579,3 +579,45 @@
 2025-04-10T00:48:26.855+07:00 DEBUG 7660 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting subjects for student: 3
 2025-04-10T00:48:26.859+07:00 DEBUG 7660 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Found 1 subjects for student 3
 2025-04-10T00:48:26.873+07:00  INFO 7660 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Successfully fetched 3 students
+2025-04-10T00:51:38.915+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/students
+2025-04-10T00:51:39.070+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-04-10T00:51:39.125+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-10T00:51:39.140+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-10T00:51:39.899+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-04-10T00:51:39.911+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-04-10T00:51:39.911+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-04-10T00:51:39.914+07:00  INFO 7660 --- [http-nio-8080-exec-4] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-04-10T00:51:39.915+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-04-10T00:51:39.915+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-04-10T00:51:39.916+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-04-10T00:51:39.916+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-10T00:51:39.916+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-10T00:51:39.918+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-10T00:51:40.018+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-04-10T00:51:40.026+07:00  INFO 7660 --- [http-nio-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-04-10T00:51:40.026+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-04-10T00:51:40.028+07:00  INFO 7660 --- [http-nio-8080-exec-4] c.e.e.m.service.StudentService           : Fetching all students
+2025-04-10T00:51:40.033+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.e.m.service.StudentService           : Getting teacher for student: 1
+2025-04-10T00:51:40.037+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.e.m.service.StudentService           : Found teacher Nguyen Thi D for student 1
+2025-04-10T00:51:40.037+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.e.m.service.StudentService           : Getting class time for student: 1
+2025-04-10T00:51:40.042+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.e.m.service.StudentService           : Found class time 08:00 - 10:00 for student 1
+2025-04-10T00:51:40.043+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.e.m.service.StudentService           : Generated random status: present
+2025-04-10T00:51:40.043+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.e.m.service.StudentService           : Getting subjects for student: 1
+2025-04-10T00:51:40.046+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.e.m.service.StudentService           : Found 2 subjects for student 1
+2025-04-10T00:51:40.071+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.e.m.service.StudentService           : Getting teacher for student: 2
+2025-04-10T00:51:40.076+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.e.m.service.StudentService           : Found teacher Nguyen Thi D for student 2
+2025-04-10T00:51:40.076+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.e.m.service.StudentService           : Getting class time for student: 2
+2025-04-10T00:51:40.079+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.e.m.service.StudentService           : Found class time 08:00 - 10:00 for student 2
+2025-04-10T00:51:40.079+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.e.m.service.StudentService           : Generated random status: present
+2025-04-10T00:51:40.079+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.e.m.service.StudentService           : Getting subjects for student: 2
+2025-04-10T00:51:40.105+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.e.m.service.StudentService           : Found 1 subjects for student 2
+2025-04-10T00:51:40.120+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.e.m.service.StudentService           : Getting teacher for student: 3
+2025-04-10T00:51:40.128+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.e.m.service.StudentService           : Found teacher Le Thi F for student 3
+2025-04-10T00:51:40.156+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.e.m.service.StudentService           : Getting class time for student: 3
+2025-04-10T00:51:40.219+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.e.m.service.StudentService           : Found class time 15:00 - 17:00 for student 3
+2025-04-10T00:51:40.219+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.e.m.service.StudentService           : Generated random status: present
+2025-04-10T00:51:40.219+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.e.m.service.StudentService           : Getting subjects for student: 3
+2025-04-10T00:51:40.283+07:00 DEBUG 7660 --- [http-nio-8080-exec-4] c.e.e.m.service.StudentService           : Found 1 subjects for student 3
+2025-04-10T00:51:40.618+07:00  INFO 7660 --- [http-nio-8080-exec-4] c.e.e.m.service.StudentService           : Successfully fetched 3 students
+2025-04-10T01:00:50.971+07:00  INFO 7660 --- [pool-2-thread-1] c.e.e.a.service.TokenBlacklistService    : Starting blacklist cleanup, current size: 0
+2025-04-10T01:00:50.974+07:00  INFO 7660 --- [pool-2-thread-1] c.e.e.a.service.TokenBlacklistService    : Blacklist cleanup completed
