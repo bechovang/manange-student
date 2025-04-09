@@ -100,16 +100,15 @@ export function EnhancedStudentTable() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    // Fetch data from API
-    const fetchStudents = async () => {
-      try {
-        setLoading(true)
-        const accessToken = Cookies.get('accessToken')
-        if (!accessToken) {
-          router.push('/login')
-          return
-        }
+  // Hàm để lấy danh sách học sinh từ API
+  const fetchStudents = async () => {
+    try {
+      setLoading(true)
+      const accessToken = Cookies.get('accessToken')
+      if (!accessToken) {
+        router.push('/login')
+        return
+      }
 
         const response = await axios.get('http://localhost:8080/api/students', {
           headers: {
@@ -132,6 +131,21 @@ export function EnhancedStudentTable() {
       }
     }
 
+  // Hàm làm mới danh sách học sinh (dùng để callback khi thêm, sửa, xóa)
+  const refreshStudents = () => {
+    fetchStudents()
+    toast.success("Đã cập nhật danh sách học sinh", {
+      icon: '✅',
+      style: {
+        background: '#f0fdf4',
+        color: '#166534',
+        border: '1px solid #bbf7d0'
+      }
+    })
+  }
+
+  useEffect(() => {
+    // Fetch data from API when component mounts
     fetchStudents()
   }, [router])
 
@@ -393,7 +407,7 @@ export function EnhancedStudentTable() {
       id: "actions",
       cell: ({ row }) => {
         const student = row.original
-        return <StudentActions student={student} />
+        return <StudentActions student={student} onSuccess={refreshStudents} />
       },
     },
   ]
@@ -451,7 +465,7 @@ export function EnhancedStudentTable() {
             variant="outline"
             onClick={() => {
               table.getColumn("status")?.setFilterValue("inactive")
-              toast.success("Đã lọc học sinh đã nghỉ", {
+              toast.success("Đã lọc học sinh nghỉ học", {
                 icon: '✅',
                 style: {
                   background: '#fef2f2',
@@ -462,7 +476,7 @@ export function EnhancedStudentTable() {
             }}
             className="bg-red-100 hover:bg-red-200 text-red-800 border-red-300 transition-colors duration-200"
           >
-            Đã nghỉ
+            Nghỉ học
           </Button>
           <Button 
             variant="outline" 

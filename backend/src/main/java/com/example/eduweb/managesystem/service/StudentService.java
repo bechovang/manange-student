@@ -201,6 +201,10 @@ public class StudentService {
     public Student createStudent(Student student) {
         try {
             logger.info("Creating new student");
+            // Đặt ngày tạo là ngày hiện tại
+            if (student.getCreatedAt() == null) {
+                student.setCreatedAt(LocalDate.now());
+            }
             Student savedStudent = studentRepository.save(student);
             logger.info("Successfully created student with ID: {}", savedStudent.getId());
             return savedStudent;
@@ -297,6 +301,13 @@ public class StudentService {
     private double calculateBalance(Student student) {
         double monthlyTuition = calculateMonthlyTuition(student);
         LocalDate enrollmentDate = student.getCreatedAt();
+        
+        // Kiểm tra nếu enrollmentDate là null, gán giá trị mặc định là ngày hiện tại
+        if (enrollmentDate == null) {
+            logger.warn("Student {} has null createdAt date, using current date instead", student.getId());
+            enrollmentDate = LocalDate.now();
+        }
+        
         //LocalDate currentDate = LocalDate.now();
         LocalDate currentDate = getCurrentDateForTesting(); // Use testing date instead of now()
 
@@ -307,9 +318,10 @@ public class StudentService {
         double totalAmount = monthlyTuition * months;
 
         // Lấy tổng số tiền đã đóng từ các payment
-        double totalPaid = student.getPayments().stream()
+        double totalPaid = student.getPayments() != null ? 
+            student.getPayments().stream()
                 .mapToDouble(payment -> payment.getAmount().doubleValue())
-                .sum();
+                .sum() : 0.0;
 
         // Balance = Tổng đã đóng - Tổng phải đóng
         return totalPaid - totalAmount;

@@ -22,7 +22,7 @@ import { Loader2 } from "lucide-react"
 import { updateStudent } from "@/lib/api"
 import { StudentFormValues, studentFormSchema, Student } from "./types"
 
-export function EditStudentDialog({ student }: { student: Student }) {
+export function EditStudentDialog({ student, onSuccess }: { student: Student, onSuccess?: () => void }) {
   const [open, setOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { toast } = useToast()
@@ -33,11 +33,12 @@ export function EditStudentDialog({ student }: { student: Student }) {
       dateOfBirth: student.dateOfBirth || new Date().toISOString().split('T')[0],
       gender: student.gender || "male",
       school: student.school || "",
+      grade: student.grade || "",
       phoneStudent: student.phoneStudent || "",
       phoneParent: student.phoneParent || "",
       facebookLink: student.facebookLink || "",
       note: student.note || "",
-      enrollDate: student.enrollDate || "",
+      enrollDate: student.enrollDate || new Date().toISOString().split('T')[0],
     }
   }
 
@@ -56,6 +57,11 @@ export function EditStudentDialog({ student }: { student: Student }) {
         description: "Đã cập nhật thông tin học sinh",
       })
       setOpen(false)
+      
+      // Gọi callback để cập nhật danh sách
+      if (onSuccess) {
+        onSuccess()
+      }
     } catch (error) {
       toast({
         title: "Lỗi",
@@ -199,6 +205,22 @@ export function EditStudentDialog({ student }: { student: Student }) {
                     <FormLabel>Trường đang học</FormLabel>
                     <FormControl>
                       <Input placeholder="Nhập tên trường đang học" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="grade"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Khối lớp</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Nhập khối lớp (ví dụ: 10, 11, 12)" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

@@ -22,7 +22,7 @@ import { Loader2, PlusCircle } from "lucide-react"
 import { createStudent } from "@/lib/api"
 import { StudentFormValues, studentFormSchema } from "./types"
 
-export function AddStudentDialog() {
+export function AddStudentDialog({ onSuccess }: { onSuccess?: () => void }) {
   const [open, setOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { toast } = useToast()
@@ -31,9 +31,10 @@ export function AddStudentDialog() {
     resolver: zodResolver(studentFormSchema) as any,
     defaultValues: {
       name: "",
-      dateOfBirth: "",
+      dateOfBirth: new Date().toISOString().split('T')[0],
       gender: "male",
       school: "",
+      grade: "",
       phoneStudent: "",
       phoneParent: "",
       facebookLink: "",
@@ -44,17 +45,29 @@ export function AddStudentDialog() {
   const onSubmit: SubmitHandler<StudentFormValues> = async (values) => {
     try {
       setIsSubmitting(true)
-      await createStudent(values)
+      console.log("Submitting form with values:", values)
+      
+      const result = await createStudent(values)
+      console.log("Student created successfully:", result)
+      
       toast({
         title: "Thành công",
         description: "Đã thêm học sinh mới",
       })
       setOpen(false)
       form.reset()
-    } catch (error) {
+      
+      // Gọi callback để cập nhật danh sách
+      if (onSuccess) {
+        onSuccess()
+      }
+    } catch (error: any) {
+      console.error("Error in onSubmit:", error)
+      
+      // Hiển thị thông báo lỗi chi tiết hơn
       toast({
         title: "Lỗi",
-        description: "Không thể thêm học sinh",
+        description: error?.message || "Không thể thêm học sinh. Vui lòng thử lại sau.",
         variant: "destructive",
       })
     } finally {
@@ -188,6 +201,20 @@ export function AddStudentDialog() {
                 )}
               />
             </div>
+
+            <FormField
+              control={form.control}
+              name="grade"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Khối lớp</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Nhập khối lớp (ví dụ: 10, 11, 12)" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
             <FormField
               control={form.control}

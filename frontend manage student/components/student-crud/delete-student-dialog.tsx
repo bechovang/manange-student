@@ -16,7 +16,7 @@ import { Loader2 } from "lucide-react"
 import { deleteStudent } from "@/lib/api"
 import { Student } from "./types"
 
-export function DeleteStudentDialog({ student }: { student: Student }) {
+export function DeleteStudentDialog({ student, onSuccess }: { student: Student, onSuccess?: () => void }) {
   const [open, setOpen] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
   const { toast } = useToast()
@@ -33,7 +33,7 @@ export function DeleteStudentDialog({ student }: { student: Student }) {
     setIsDeleting(true)
 
     try {
-      await deleteStudent(student.id)
+      await deleteStudent(student.id.toString())
 
       toast({
         title: "Xóa học sinh thành công",
@@ -41,6 +41,11 @@ export function DeleteStudentDialog({ student }: { student: Student }) {
       })
 
       setOpen(false)
+      
+      // Gọi callback để cập nhật danh sách
+      if (onSuccess) {
+        onSuccess()
+      }
     } catch (error) {
       toast({
         variant: "destructive",
