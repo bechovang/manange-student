@@ -725,7 +725,7 @@ export const sendNotification = async (
         'Authorization': `Bearer ${accessToken}`
       }
     })
-    return true
+  return true
   } catch (error) {
     logErrorDetails(error)
     if (axios.isAxiosError(error)) {
