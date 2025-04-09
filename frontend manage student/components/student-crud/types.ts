@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-export type StudentStatus = "no class" | "active" | "inactive"
+export type StudentStatus = "no class" | "present" | "absent" | "late"
 
 export type Student = {
   id: string | number
@@ -17,12 +17,24 @@ export type Student = {
   note: string
   dateOfBirth: string
   gender: "male" | "female"
-  createdAt: string
   balance: number
   balanceMonths: number
+  enrollDate?: string
 }
 
-export type StudentFormValues = Omit<Student, "id" | "createdAt" | "balance" | "balanceMonths">
+export type StudentFormValues = {
+  name: string
+  phoneStudent: string
+  phoneParent: string
+  facebookLink: string
+  school: string
+  note: string
+  dateOfBirth: string
+  gender: "male" | "female"
+  enrollDate: string
+}
+
+
 
 export const studentFormSchema = z.object({
   name: z.string().min(1, "Vui lòng nhập tên học sinh"),
@@ -34,7 +46,7 @@ export const studentFormSchema = z.object({
   grade: z.string().min(1, "Vui lòng chọn khối lớp"),
   teacher: z.string().min(1, "Vui lòng chọn giáo viên"),
   classTime: z.string().min(1, "Vui lòng chọn ca học"),
-  status: z.enum(["no class", "active", "inactive"] as const),
+  status: z.enum(["no class", "present", "absent", "late"] as const),
   note: z.string().default(""),
   dateOfBirth: z.string().min(1, "Vui lòng nhập ngày sinh"),
   gender: z.enum(["male", "female"] as const)

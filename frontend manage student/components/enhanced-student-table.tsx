@@ -45,11 +45,11 @@ const fallbackData: Student[] = [
     grade: "Lớp 10",
     teacher: "Nguyễn Văn X",
     classTime: "Tối 2-4-6",
-    status: "active",
+    status: "present", 
     note: "Học sinh chăm chỉ",
     dateOfBirth: "01/06/2023",
     gender: "male",
-    createdAt: "2023-06-05",
+    enrollDate: "2023-06-05",
     balance: 1500000,
     balanceMonths: 1
   },
@@ -64,11 +64,11 @@ const fallbackData: Student[] = [
     grade: "Lớp 11",
     teacher: "Trần Văn Y",
     classTime: "Tối 3-5-7",
-    status: "active",
+    status: "present",
     note: "Học sinh năng động",
     dateOfBirth: "15/05/2023",
     gender: "female",
-    createdAt: "2023-06-05",
+    enrollDate: "2023-06-05",
     balance: -1800000,
     balanceMonths: -1
   },
@@ -319,18 +319,18 @@ export function EnhancedStudentTable() {
           <Badge
             variant="outline"
             className={
-              status === "active"
+              status === "present"
                 ? "bg-green-100 text-green-800 hover:bg-green-100"
-                : status === "inactive"
+                : status === "absent"
                 ? "bg-red-100 text-red-800 hover:bg-red-100"
                 : "bg-yellow-100 text-yellow-800 hover:bg-yellow-100"
             }
           >
-            {status === "active"
+            {status === "present"
               ? "Đang học"
-              : status === "inactive"
-              ? "Đã nghỉ"
-              : "Chưa có lớp"}
+              : status === "absent"
+              ? "Vắng"
+              : "Không có lớp"}
           </Badge>
         )
       },
