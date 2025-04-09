@@ -74,7 +74,11 @@ const fallbackData: Student[] = [
   },
 ]
 
-export function EnhancedStudentTable() {
+export function EnhancedStudentTable({ 
+  setRefreshFunction 
+}: { 
+  setRefreshFunction?: (refreshFn: () => void) => void 
+}) {
   const router = useRouter()
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
@@ -147,7 +151,12 @@ export function EnhancedStudentTable() {
   useEffect(() => {
     // Fetch data from API when component mounts
     fetchStudents()
-  }, [router])
+    
+    // Truyền hàm refreshStudents lên component cha thông qua setRefreshFunction
+    if (setRefreshFunction) {
+      setRefreshFunction(refreshStudents);
+    }
+  }, [router, setRefreshFunction])
 
   const columns: ColumnDef<Student>[] = [
     {
@@ -404,10 +413,15 @@ export function EnhancedStudentTable() {
       },
     },
     {
-      id: "actions",
+      accessorKey: "actions",
+      header: "Thao tác",
       cell: ({ row }) => {
-        const student = row.original
-        return <StudentActions student={student} onSuccess={refreshStudents} />
+        return (
+          <StudentActions 
+            student={row.original} 
+            onSuccess={refreshStudents}
+          />
+        )
       },
     },
   ]

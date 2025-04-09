@@ -29,28 +29,27 @@ export function DeleteStudentDialog({ student, onSuccess }: { student: Student, 
       .join("")
   }
 
-  async function handleDelete() {
-    setIsDeleting(true)
-
+  const handleDelete = async () => {
     try {
-      await deleteStudent(student.id.toString())
-
+      setIsDeleting(true)
+      const result = await deleteStudent(String(student.id))
+      console.log("Delete result:", result)
       toast({
-        title: "Xóa học sinh thành công",
-        description: `Đã xóa học sinh ${student.name || "Không có tên"} khỏi hệ thống.`,
+        title: "Đã xóa học sinh",
+        description: "Thông tin học sinh đã được xóa thành công."
       })
-
       setOpen(false)
       
-      // Gọi callback để cập nhật danh sách
+      // Gọi callback nếu có
       if (onSuccess) {
         onSuccess()
       }
-    } catch (error) {
+    } catch (error: any) {
+      console.error("Error deleting student:", error)
       toast({
         variant: "destructive",
-        title: "Có lỗi xảy ra",
-        description: "Không thể xóa học sinh. Vui lòng thử lại sau.",
+        title: "Lỗi khi xóa",
+        description: error?.message || "Không thể xóa học sinh. Vui lòng thử lại sau."
       })
     } finally {
       setIsDeleting(false)

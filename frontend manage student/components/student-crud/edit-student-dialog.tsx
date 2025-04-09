@@ -50,23 +50,26 @@ export function EditStudentDialog({ student, onSuccess }: { student: Student, on
   const onSubmit: SubmitHandler<StudentFormValues> = async (values) => {
     try {
       setIsSubmitting(true)
-      const studentId = student.id.toString()
-      await updateStudent(studentId, values)
+      const result = await updateStudent(String(student.id), values)
+      console.log("Update result:", result)
+      
       toast({
-        title: "Thành công",
-        description: "Đã cập nhật thông tin học sinh",
+        title: "Cập nhật thành công",
+        description: "Thông tin học sinh đã được cập nhật."
       })
+      
       setOpen(false)
       
-      // Gọi callback để cập nhật danh sách
+      // Gọi callback nếu có
       if (onSuccess) {
         onSuccess()
       }
-    } catch (error) {
+    } catch (error: any) {
+      console.error("Error updating student:", error)
       toast({
-        title: "Lỗi",
-        description: "Không thể cập nhật thông tin học sinh",
         variant: "destructive",
+        title: "Lỗi khi cập nhật",
+        description: error?.message || "Không thể cập nhật thông tin học sinh. Vui lòng thử lại sau."
       })
     } finally {
       setIsSubmitting(false)
