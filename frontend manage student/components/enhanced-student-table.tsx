@@ -518,7 +518,21 @@ export function EnhancedStudentTable({
                 <span>Cột hiển thị</span>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent align="end" className="min-w-[200px]" onClick={(e) => e.stopPropagation()}>
+              <DropdownMenuCheckboxItem
+                className="font-bold border-b pb-2 mb-1"
+                checked={table.getAllColumns().every((col) => col.getIsVisible())}
+                onCheckedChange={(value) => {
+                  table.getAllColumns().forEach((column) => {
+                    if (column.getCanHide()) {
+                      column.toggleVisibility(!!value);
+                    }
+                  });
+                }}
+                onSelect={(e) => e.preventDefault()}
+              >
+                Hiển thị tất cả
+              </DropdownMenuCheckboxItem>
               {table
                 .getAllColumns()
                 .filter((column) => column.getCanHide())
@@ -528,7 +542,10 @@ export function EnhancedStudentTable({
                       key={column.id}
                       className="capitalize"
                       checked={column.getIsVisible()}
-                      onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                      onCheckedChange={(value) => {
+                        column.toggleVisibility(!!value);
+                      }}
+                      onSelect={(e) => e.preventDefault()}
                     >
                       {column.id === "name"
                         ? "Học sinh"
