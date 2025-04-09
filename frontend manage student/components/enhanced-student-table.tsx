@@ -30,6 +30,7 @@ import { type Student } from "@/components/student-crud/types"
 import axios from "axios"
 import { useRouter } from "next/navigation"
 import Cookies from "js-cookie"
+import { toast } from "react-hot-toast"
 
 // Dữ liệu mẫu fallback - chỉ sử dụng khi API lỗi
 const fallbackData: Student[] = [
@@ -429,23 +430,62 @@ export function EnhancedStudentTable() {
               className="pl-8"
             />
           </div>
-          <Button variant="outline" onClick={() => table.getColumn("status")?.setFilterValue("active")}>
+          <Button 
+            variant="outline" 
+            onClick={() => {
+              table.getColumn("status")?.setFilterValue("active")
+              toast.success("Đã lọc học sinh đang học", {
+                icon: '✅',
+                style: {
+                  background: '#f0fdf4',
+                  color: '#166534',
+                  border: '1px solid #bbf7d0'
+                }
+              })
+            }}
+            className="bg-green-100 hover:bg-green-200 text-green-800 border-green-300 transition-colors duration-200"
+          >
             Đang học
           </Button>
           <Button
             variant="outline"
-            onClick={() => table.getColumn("status")?.setFilterValue("inactive")}
+            onClick={() => {
+              table.getColumn("status")?.setFilterValue("inactive")
+              toast.success("Đã lọc học sinh đã nghỉ", {
+                icon: '✅',
+                style: {
+                  background: '#fef2f2',
+                  color: '#991b1b',
+                  border: '1px solid #fecaca'
+                }
+              })
+            }}
+            className="bg-red-100 hover:bg-red-200 text-red-800 border-red-300 transition-colors duration-200"
           >
             Đã nghỉ
           </Button>
-          <Button variant="outline" onClick={() => table.getColumn("status")?.setFilterValue("")}>
+          <Button 
+            variant="outline" 
+            onClick={() => {
+              table.getColumn("status")?.setFilterValue("")
+              toast.success("Đã hiển thị tất cả học sinh", {
+                icon: '✅',
+                style: {
+                  background: '#eff6ff',
+                  color: '#1e40af',
+                  border: '1px solid #bfdbfe'
+                }
+              })
+            }}
+            className="bg-blue-100 hover:bg-blue-200 text-blue-800 border-blue-300 transition-colors duration-200"
+          >
             Tất cả
           </Button>
         </div>
         <div className="flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="ml-auto">
+              <Button variant="outline" className="ml-auto bg-purple-100 hover:bg-purple-200 text-purple-800 border-purple-300 transition-colors duration-200">
                 <Settings className="mr-2 h-4 w-4" />
                 <span>Cột hiển thị</span>
               </Button>
@@ -496,7 +536,6 @@ export function EnhancedStudentTable() {
                 })}
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button>Thêm học sinh mới</Button>
         </div>
       </div>
       
