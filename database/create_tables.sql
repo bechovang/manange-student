@@ -49,19 +49,28 @@ CREATE TABLE students (
 
 COMMENT ON COLUMN students.grade IS 'khối lớp 6 - 12';
 
+-- Bảng teachers
+CREATE TABLE teachers (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    subject VARCHAR(50) NOT NULL
+);
+
 -- Bảng classes
 CREATE TABLE classes (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    teacher VARCHAR(100) NOT NULL,
+    teacher_id INTEGER NOT NULL,
     subject VARCHAR(10) NOT NULL,
     room VARCHAR(10) NOT NULL,
     start_date DATE,
     end_date DATE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (teacher_id) REFERENCES teachers(id) ON DELETE RESTRICT
 );
 
 COMMENT ON COLUMN classes.subject IS 'math|physic|chemistry|other';
+COMMENT ON COLUMN classes.name IS 'VD: Toán 10 NC';
 
 -- Bảng student_classes
 CREATE TABLE student_classes (
