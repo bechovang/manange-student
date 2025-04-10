@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { AlertCircle, Calendar, Search, Users } from "lucide-react"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { fetchTeachers, fetchClasses } from "@/lib/api"
 
 // Mảng màu cho các giáo viên
 const teacherColors = [
@@ -127,48 +128,40 @@ export function ClassList({ filterStatus }: { filterStatus?: string }) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  // Fetch data from backend
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true)
-        setError(null)
-        
-        // Fetch teachers
-        const teachersResponse = await fetch('/api/teachers')
-        if (!teachersResponse.ok) {
-          throw new Error(`Không thể tải dữ liệu giáo viên: ${teachersResponse.statusText}`)
-        }
-        const teachersData = await teachersResponse.json()
-        
-        // Assign random color indices to teachers
-        const teachersWithColors = teachersData.map((teacher: Teacher, index: number) => ({
-          ...teacher,
-          colorIndex: index % teacherColors.length // Ensure color index is within bounds
-        }))
-        
-        setTeachers(teachersWithColors)
-        
-        // Fetch classes
-        const classesResponse = await fetch('/api/classes')
-        if (!classesResponse.ok) {
-          throw new Error(`Không thể tải dữ liệu lớp học: ${classesResponse.statusText}`)
-        }
-        const classesData = await classesResponse.json()
-        setClasses(classesData)
-      } catch (error) {
-        console.error("Error fetching data:", error)
-        setError("Không thể kết nối tới API. Hiển thị dữ liệu mẫu.")
-        // Use fallback data
-        setTeachers(fallbackTeachers)
-        setClasses(fallbackClasses)
-      } finally {
-        setLoading(false)
-      }
+  // Sử dụng apiClient đã được cấu hình thay vì fetch trực tiếp
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      setLoading(true)
+      setError(null)
+      
+      // Fetch teachers - sử dụng apiClient đã cấu hình
+      const teachersData = await fetchTeachers()
+      
+      // Assign random color indices to teachers
+      const teachersWithColors = teachersData.map((teacher: Teacher, index: number) => ({
+        ...teacher,
+        colorIndex: index % teacherColors.length
+      }))
+      
+      setTeachers(teachersWithColors)
+      
+      // Fetch classes - sử dụng apiClient đã cấu hình
+      const classesData = await fetchClasses()
+      setClasses(classesData)
+    } catch (error) {
+      console.error("Error fetching data:", error)
+      setError("Không thể kết nối tới API. Hiển thị dữ liệu mẫu.")
+      // Use fallback data
+      setTeachers(fallbackTeachers)
+      setClasses(fallbackClasses)
+    } finally {
+      setLoading(false)
     }
-    
-    fetchData()
-  }, [])
+  }
+  
+  fetchData()
+}, [])
 
   // Lọc lớp học theo trạng thái và tìm kiếm
   const filteredClasses = classes.filter((cls) => {

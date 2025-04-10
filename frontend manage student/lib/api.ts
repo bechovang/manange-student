@@ -4,7 +4,7 @@
  * Hiện tại, chúng sử dụng dữ liệu mẫu để mô phỏng các cuộc gọi API.
  */
 
-import type { Student, Class, Payment, TuitionRecord, Attendance, ScheduleEvent, Notification } from "./types"
+import type { Student, Class, Payment, TuitionRecord, Attendance, ScheduleEvent, Notification, Teacher } from "./types"
 import { students, classes, payments, tuitionRecords, attendanceData, scheduleEvents, notifications } from "./mockData"
 import axios from "axios"
 import Cookies from "js-cookie"
@@ -192,7 +192,12 @@ const FAKE_DELAY = 500
 // Hàm trợ giúp để tạo độ trễ giả lập
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
-// 7. API STUDENTS
+// 7. API
+
+//----------------------------------------------
+//  API STUDENTS -------------------------------
+//----------------------------------------------
+
 export const fetchStudents = async (): Promise<Student[]> => {
   try {
     const accessToken = Cookies.get(process.env.NEXT_PUBLIC_JWT_COOKIE_NAME || "accessToken")
@@ -368,7 +373,50 @@ export const deleteStudent = async (id: string): Promise<boolean> => {
   }
 }
 
-// API CLASSES
+//----------------------------------------------
+//  API TEACHERS -------------------------------
+//----------------------------------------------
+
+export const fetchTeachers = async (): Promise<Teacher[]> => {
+  try {
+    const response = await apiClient.get('/api/teachers');
+    return response.data;
+  } catch (error) {
+    logErrorDetails(error);
+    if (axios.isAxiosError(error)) {
+      if (error.response) {
+        throw new Error(`Failed to fetch teachers: ${error.response.status} ${error.response.statusText}`);
+      } else if (error.request) {
+        throw new Error("Cannot connect to server. Please check your network connection.");
+      }
+    }
+    throw new Error("Failed to fetch teachers: " + (error instanceof Error ? error.message : String(error)));
+  }
+};
+
+export const fetchTeacherById = async (id: string): Promise<Teacher> => {
+  try {
+    const response = await apiClient.get(`/api/teachers/${id}`);
+    return response.data;
+  } catch (error) {
+    logErrorDetails(error);
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 404) {
+        throw new Error("Teacher not found");
+      }
+      throw new Error(`Failed to fetch teacher: ${error.response?.status || 'Unknown error'}`);
+    }
+    throw new Error("Failed to fetch teacher: " + (error instanceof Error ? error.message : String(error)));
+  }
+};
+
+
+
+//----------------------------------------------
+//  API CLASSES -------------------------------
+//----------------------------------------------
+
+
 export const fetchClasses = async (filterStatus?: string): Promise<Class[]> => {
   try {
     const accessToken = Cookies.get(process.env.NEXT_PUBLIC_JWT_COOKIE_NAME || "accessToken")
@@ -422,7 +470,10 @@ export const fetchClassById = async (id: string): Promise<Class | undefined> => 
   }
 }
 
-// API PAYMENTS
+//----------------------------------------------
+//  API PAYMENTS -------------------------------
+//----------------------------------------------
+
 export const fetchPayments = async (): Promise<Payment[]> => {
   try {
     const accessToken = Cookies.get(process.env.NEXT_PUBLIC_JWT_COOKIE_NAME || "accessToken")
@@ -476,7 +527,10 @@ export const createPayment = async (paymentData: Omit<Payment, "id">): Promise<P
   }
 }
 
-// API TUITION
+//----------------------------------------------
+//  API TUITION -------------------------------
+//----------------------------------------------
+
 export const fetchTuition = async (filterStatus?: string): Promise<TuitionRecord[]> => {
   try {
     const accessToken = Cookies.get(process.env.NEXT_PUBLIC_JWT_COOKIE_NAME || "accessToken")
@@ -504,7 +558,10 @@ export const fetchTuition = async (filterStatus?: string): Promise<TuitionRecord
   }
 }
 
-// API ATTENDANCE
+//----------------------------------------------
+//  API ATTENDANCE -------------------------------
+//----------------------------------------------
+
 export const fetchAttendance = async (classId?: string, date?: string): Promise<Attendance[]> => {
   try {
     const accessToken = Cookies.get(process.env.NEXT_PUBLIC_JWT_COOKIE_NAME || "accessToken")
@@ -567,7 +624,10 @@ export const saveAttendance = async (
   }
 }
 
-// API SCHEDULE
+//----------------------------------------------
+//  API SCHEDULE -------------------------------
+//----------------------------------------------
+
 export const fetchSchedule = async (view: "day" | "week" | "month"): Promise<ScheduleEvent[]> => {
   try {
     const accessToken = Cookies.get(process.env.NEXT_PUBLIC_JWT_COOKIE_NAME || "accessToken")
@@ -675,7 +735,10 @@ export const deleteScheduleEvent = async (id: number): Promise<boolean> => {
   }
 }
 
-// API NOTIFICATIONS
+//----------------------------------------------
+//  API NOTIFICATIONS -------------------------------
+//----------------------------------------------
+
 export const fetchNotifications = async (): Promise<Notification[]> => {
   try {
     const accessToken = Cookies.get(process.env.NEXT_PUBLIC_JWT_COOKIE_NAME || "accessToken")
