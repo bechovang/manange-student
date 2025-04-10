@@ -1,15 +1,16 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Calendar, Search, Users } from "lucide-react"
+import { AlertCircle, Calendar, Search, Users } from "lucide-react"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 // Mảng màu cho các giáo viên
 const teacherColors = [
@@ -23,47 +24,58 @@ const teacherColors = [
   "bg-orange-100 text-orange-800 border-orange-200",
 ]
 
-// Dữ liệu giáo viên mẫu
-const teachers = [
+// Định nghĩa interface cho dữ liệu
+interface Teacher {
+  id: number
+  name: string
+  subject: string
+  colorIndex?: number
+}
+
+interface Class {
+  id: string
+  name: string
+  teacherId: number
+  students: number
+  schedule: string
+  status: string
+}
+
+// Dữ liệu fallback khi API không hoạt động
+const fallbackTeachers: Teacher[] = [
   {
     id: 1,
     name: "Nguyễn Văn A",
     subject: "Toán",
-    avatar: "/placeholder.svg?height=40&width=40",
     colorIndex: 0,
   },
   {
     id: 2,
     name: "Trần Thị B",
     subject: "Anh Văn",
-    avatar: "/placeholder.svg?height=40&width=40",
     colorIndex: 1,
   },
   {
     id: 3,
     name: "Lê Văn C",
     subject: "Lý",
-    avatar: "/placeholder.svg?height=40&width=40",
     colorIndex: 2,
   },
   {
     id: 4,
     name: "Phạm Thị D",
     subject: "Hóa",
-    avatar: "/placeholder.svg?height=40&width=40",
     colorIndex: 3,
   },
   {
     id: 5,
     name: "Hoàng Văn E",
     subject: "Sinh",
-    avatar: "/placeholder.svg?height=40&width=40",
     colorIndex: 4,
   },
 ]
 
-// Dữ liệu lớp học mẫu
-const classes = [
+const fallbackClasses: Class[] = [
   {
     id: "CLASS001",
     name: "Toán 10A",
@@ -104,36 +116,59 @@ const classes = [
     schedule: "Thứ 2, 4, 6 (17:00 - 18:30)",
     status: "active",
   },
-  {
-    id: "CLASS006",
-    name: "Toán 11C",
-    teacherId: 1,
-    students: 16,
-    schedule: "Thứ 3, 5, 7 (17:00 - 18:30)",
-    status: "active",
-  },
-  {
-    id: "CLASS007",
-    name: "Anh Văn 10C",
-    teacherId: 2,
-    students: 18,
-    schedule: "Thứ 2, 4, 6 (15:30 - 17:00)",
-    status: "completed",
-  },
-  {
-    id: "CLASS008",
-    name: "Lý 11D",
-    teacherId: 3,
-    students: 9,
-    schedule: "Thứ 3, 5, 7 (15:30 - 17:00)",
-    status: "upcoming",
-  },
 ]
 
 export function ClassList({ filterStatus }: { filterStatus?: string }) {
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedTeacher, setSelectedTeacher] = useState("all")
   const [viewMode, setViewMode] = useState("grid")
+  const [teachers, setTeachers] = useState<Teacher[]>([])
+  const [classes, setClasses] = useState<Class[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  // Fetch data from backend
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true)
+        setError(null)
+        
+        // Fetch teachers
+        const teachersResponse = await fetch('/api/teachers')
+        if (!teachersResponse.ok) {
+          throw new Error(`Không thể tải dữ liệu giáo viên: ${teachersResponse.statusText}`)
+        }
+        const teachersData = await teachersResponse.json()
+        
+        // Assign random color indices to teachers
+        const teachersWithColors = teachersData.map((teacher: Teacher, index: number) => ({
+          ...teacher,
+          colorIndex: index % teacherColors.length // Ensure color index is within bounds
+        }))
+        
+        setTeachers(teachersWithColors)
+        
+        // Fetch classes
+        const classesResponse = await fetch('/api/classes')
+        if (!classesResponse.ok) {
+          throw new Error(`Không thể tải dữ liệu lớp học: ${classesResponse.statusText}`)
+        }
+        const classesData = await classesResponse.json()
+        setClasses(classesData)
+      } catch (error) {
+        console.error("Error fetching data:", error)
+        setError("Không thể kết nối tới API. Hiển thị dữ liệu mẫu.")
+        // Use fallback data
+        setTeachers(fallbackTeachers)
+        setClasses(fallbackClasses)
+      } finally {
+        setLoading(false)
+      }
+    }
+    
+    fetchData()
+  }, [])
 
   // Lọc lớp học theo trạng thái và tìm kiếm
   const filteredClasses = classes.filter((cls) => {
@@ -165,8 +200,20 @@ export function ClassList({ filterStatus }: { filterStatus?: string }) {
     })
     .filter((group) => group.classes.length > 0)
 
+  if (loading) {
+    return <div className="flex justify-center items-center h-40">Đang tải dữ liệu...</div>
+  }
+
   return (
     <div className="space-y-4">
+      {error && (
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertTitle>Lỗi</AlertTitle>
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
+
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div className="flex flex-1 items-center gap-2">
           <div className="relative flex-1 max-w-sm">
@@ -246,7 +293,6 @@ export function ClassList({ filterStatus }: { filterStatus?: string }) {
             <div key={group.teacher.id} className="space-y-4">
               <div className="flex items-center gap-2">
                 <Avatar>
-                  <AvatarImage src={group.teacher.avatar} alt={group.teacher.name} />
                   <AvatarFallback>
                     {group.teacher.name
                       .split(" ")
@@ -262,7 +308,7 @@ export function ClassList({ filterStatus }: { filterStatus?: string }) {
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {group.classes.map((cls) => {
                   const teacher = teachers.find((t) => t.id === cls.teacherId)!
-                  const colorClass = teacherColors[teacher.colorIndex]
+                  const colorClass = teacherColors[teacher.colorIndex || 0]
 
                   return (
                     <Link href={`/classes/${cls.id}`} key={cls.id}>
@@ -335,7 +381,6 @@ export function ClassList({ filterStatus }: { filterStatus?: string }) {
                     <td className="py-3 px-4">
                       <div className="flex items-center gap-2">
                         <Avatar className="h-8 w-8">
-                          <AvatarImage src={teacher.avatar} alt={teacher.name} />
                           <AvatarFallback>
                             {teacher.name
                               .split(" ")
