@@ -29,8 +29,8 @@ public interface StudentClassRepository extends JpaRepository<StudentClass, Long
     boolean existsByStudentAndClassEntityId(Student student, Long classId);
 
     // Lấy số lượng học sinh đang học trong một lớp
-    @Query("SELECT COUNT(sc) FROM StudentClass sc WHERE sc.classEntity.id = :classId AND sc.status = 'ACTIVE'")
-    long countActiveStudentsInClass(@Param("classId") Long classId);
+    @Query("SELECT COUNT(sc) FROM StudentClass sc WHERE sc.classEntity.id = :classId")
+    Integer countStudentsByClassId(@Param("classId") Long classId);
 
     // Lấy danh sách học sinh đăng ký trong khoảng thời gian
     @Query("SELECT sc FROM StudentClass sc WHERE sc.enrollmentDate BETWEEN :startDate AND :endDate")
