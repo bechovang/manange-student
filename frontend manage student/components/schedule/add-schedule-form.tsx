@@ -20,12 +20,21 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/components/ui/use-toast"
 import { Loader2, PlusCircle } from "lucide-react"
 
+// Danh sách giáo viên và môn học tương ứng
+const TEACHERS = [
+  { id: "teacher1", name: "Nguyễn Văn A", subject: "Toán" },
+  { id: "teacher2", name: "Trần Thị B", subject: "Lý" },
+  { id: "teacher3", name: "Lê Văn C", subject: "Hóa" },
+  { id: "teacher4", name: "Phạm Thị D", subject: "Sinh" },
+  { id: "teacher5", name: "Hoàng Văn E", subject: "Anh Văn" },
+]
+
 // Định nghĩa schema cho biểu mẫu thêm lịch học sử dụng Zod
 const scheduleFormSchema = z.object({
   className: z.string().min(1, { message: "Vui lòng nhập tên lớp học" }),
   teacherWithSubject: z.string().min(1, { message: "Vui lòng chọn giáo viên" }),
   room: z.string().min(1, { message: "Vui lòng nhập phòng học" }),
-  dayOfWeek: z.string().min(1, { message: "Vui lòng chọn ngày trong tuần" }),
+  dayOfWeek: z.array(z.string()).min(1, { message: "Vui lòng chọn ít nhất một ngày trong tuần" }),
   startTime: z.string().min(1, { message: "Vui lòng nhập giờ bắt đầu" }),
   endTime: z.string().min(1, { message: "Vui lòng nhập giờ kết thúc" }),
   startDate: z.string().min(1, { message: "Vui lòng nhập ngày bắt đầu" }),
@@ -34,15 +43,6 @@ const scheduleFormSchema = z.object({
 
 // Loại dữ liệu cho biểu mẫu
 type ScheduleFormValues = z.infer<typeof scheduleFormSchema>
-
-// Danh sách giáo viên và môn học kèm theo
-const teachersWithSubjects = [
-  { id: "teacher1", name: "Nguyễn Văn A", subject: "Toán" },
-  { id: "teacher2", name: "Trần Thị B", subject: "Lý" },
-  { id: "teacher3", name: "Lê Văn C", subject: "Hóa" },
-  { id: "teacher4", name: "Phạm Thị D", subject: "Sinh" },
-  { id: "teacher5", name: "Hoàng Văn E", subject: "Anh Văn" },
-]
 
 // Component thêm lịch học
 export function AddScheduleForm() {
@@ -56,14 +56,14 @@ export function AddScheduleForm() {
       className: "",
       teacherWithSubject: "",
       room: "",
-      dayOfWeek: "",
+      dayOfWeek: [],
       startTime: "",
       endTime: "",
       startDate: "",
       endDate: "",
     },
   })
-  
+
   async function onSubmit(values: ScheduleFormValues) {
     setIsSubmitting(true)
 
@@ -119,24 +119,24 @@ export function AddScheduleForm() {
               )}
             />
 
-            {/* Chọn giáo viên và môn học */}
+            {/* Chọn giáo viên và môn học (gộp chung) */}
             <FormField
               control={form.control}
               name="teacherWithSubject"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Giáo viên</FormLabel>
+                  <FormLabel>Giáo viên - Môn học</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Chọn giáo viên" />
+                        <SelectValue placeholder="Chọn giáo viên và môn học" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {teachersWithSubjects.map((teacher) => (
+                      {TEACHERS.map((teacher) => (
                         <SelectItem 
                           key={teacher.id} 
-                          value={`${teacher.id}`}
+                          value={`${teacher.id}-${teacher.subject}`}
                         >
                           {teacher.name} - {teacher.subject}
                         </SelectItem>
@@ -163,29 +163,40 @@ export function AddScheduleForm() {
               )}
             />
 
-            {/* Chọn ngày học trong tuần (chỉ chọn 1) */}
+            {/* Chọn ngày học trong tuần (vẫn giữ nguyên chọn nhiều ngày) */}
             <FormField
               control={form.control}
               name="dayOfWeek"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Ngày học trong tuần</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Chọn ngày học" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="2">Thứ 2</SelectItem>
-                      <SelectItem value="3">Thứ 3</SelectItem>
-                      <SelectItem value="4">Thứ 4</SelectItem>
-                      <SelectItem value="5">Thứ 5</SelectItem>
-                      <SelectItem value="6">Thứ 6</SelectItem>
-                      <SelectItem value="7">Thứ 7</SelectItem>
-                      <SelectItem value="cn">Chủ nhật</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <FormDescription>Chọn các ngày học trong tuần</FormDescription>
+                  <div className="grid grid-cols-7 gap-2">
+                    {[
+                      { value: "2", label: "Thứ 2" },
+                      { value: "3", label: "Thứ 3" },
+                      { value: "4", label: "Thứ 4" },
+                      { value: "5", label: "Thứ 5" },
+                      { value: "6", label: "Thứ 6" },
+                      { value: "7", label: "Thứ 7" },
+                      { value: "cn", label: "CN" },
+                    ].map((day) => (
+                      <Button
+                        key={day.value}
+                        type="button"
+                        variant={field.value.includes(day.value) ? "default" : "outline"}
+                        className={field.value.includes(day.value) ? "bg-red-700 hover:bg-red-800" : ""}
+                        onClick={() => {
+                          const updatedValue = field.value.includes(day.value)
+                            ? field.value.filter((val) => val !== day.value)
+                            : [...field.value, day.value]
+                          field.onChange(updatedValue)
+                        }}
+                      >
+                        {day.label}
+                      </Button>
+                    ))}
+                  </div>
                   <FormMessage />
                 </FormItem>
               )}
