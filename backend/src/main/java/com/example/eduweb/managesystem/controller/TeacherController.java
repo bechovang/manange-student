@@ -27,30 +27,5 @@ public class TeacherController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    public Teacher createTeacher(@RequestBody Teacher teacher) {
-        return teacherRepository.save(teacher);
-    }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Teacher> updateTeacher(@PathVariable Long id, @RequestBody Teacher teacherDetails) {
-        return teacherRepository.findById(id)
-                .map(teacher -> {
-                    teacher.setName(teacherDetails.getName());
-                    teacher.setSubject(teacherDetails.getSubject());
-                    Teacher updatedTeacher = teacherRepository.save(teacher);
-                    return ResponseEntity.ok(updatedTeacher);
-                })
-                .orElse(ResponseEntity.notFound().build());
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteTeacher(@PathVariable Long id) {
-        return teacherRepository.findById(id)
-                .map(teacher -> {
-                    teacherRepository.delete(teacher);
-                    return ResponseEntity.noContent().build();
-                })
-                .orElse(ResponseEntity.notFound().build());
-    }
 }

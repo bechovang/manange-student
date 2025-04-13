@@ -7,7 +7,6 @@ import com.example.eduweb.managesystem.repository.ScheduleRepository;
 import com.example.eduweb.managesystem.repository.StudentClassRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -38,32 +37,6 @@ public class ClassService {
     public Optional<ClassResponse> getClassById(Long id) {
         return classRepository.findById(id)
                 .map(this::convertToClassResponse);
-    }
-
-    public Class createClass(Class classEntity) {
-        return classRepository.save(classEntity);
-    }
-
-    public Optional<Class> updateClass(Long id, Class classDetails) {
-        return classRepository.findById(id)
-                .map(classEntity -> {
-                    classEntity.setName(classDetails.getName());
-                    classEntity.setTeacher_id(classDetails.getTeacher_id());
-                    classEntity.setSubject(classDetails.getSubject());
-                    classEntity.setRoom(classDetails.getRoom());
-                    classEntity.setStartDate(classDetails.getStartDate());
-                    classEntity.setEndDate(classDetails.getEndDate());
-                    return classRepository.save(classEntity);
-                });
-    }
-
-    public boolean deleteClass(Long id) {
-        return classRepository.findById(id)
-                .map(classEntity -> {
-                    classRepository.delete(classEntity);
-                    return true;
-                })
-                .orElse(false);
     }
 
     private ClassResponse convertToClassResponse(Class classEntity) {
