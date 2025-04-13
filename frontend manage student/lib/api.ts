@@ -628,7 +628,7 @@ export const saveAttendance = async (
 //  API SCHEDULE -------------------------------
 //----------------------------------------------
 
-export const fetchSchedule = async (view: "day" | "week" | "month"): Promise<ScheduleEvent[]> => {
+export const fetchSchedule = async (): Promise<ScheduleEvent[]> => {
   try {
     const accessToken = Cookies.get(process.env.NEXT_PUBLIC_JWT_COOKIE_NAME || "accessToken")
     if (!accessToken) {
@@ -636,7 +636,6 @@ export const fetchSchedule = async (view: "day" | "week" | "month"): Promise<Sch
     }
 
     const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/schedule`, {
-      params: { view },
       headers: {
         'Authorization': `Bearer ${accessToken}`
       }
