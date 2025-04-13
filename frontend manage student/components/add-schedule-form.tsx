@@ -23,10 +23,9 @@ import { Loader2, PlusCircle } from "lucide-react"
 // Định nghĩa schema cho biểu mẫu thêm lịch học sử dụng Zod
 const scheduleFormSchema = z.object({
   className: z.string().min(1, { message: "Vui lòng nhập tên lớp học" }),
-  teacher: z.string().min(1, { message: "Vui lòng chọn giáo viên" }),
-  subject: z.string().min(1, { message: "Vui lòng chọn môn học" }),
+  teacherWithSubject: z.string().min(1, { message: "Vui lòng chọn giáo viên" }),
   room: z.string().min(1, { message: "Vui lòng nhập phòng học" }),
-  dayOfWeek: z.array(z.string()).min(1, { message: "Vui lòng chọn ít nhất một ngày trong tuần" }),
+  dayOfWeek: z.string().min(1, { message: "Vui lòng chọn ngày trong tuần" }),
   startTime: z.string().min(1, { message: "Vui lòng nhập giờ bắt đầu" }),
   endTime: z.string().min(1, { message: "Vui lòng nhập giờ kết thúc" }),
   startDate: z.string().min(1, { message: "Vui lòng nhập ngày bắt đầu" }),
@@ -36,21 +35,28 @@ const scheduleFormSchema = z.object({
 // Loại dữ liệu cho biểu mẫu
 type ScheduleFormValues = z.infer<typeof scheduleFormSchema>
 
+// Danh sách giáo viên và môn học kèm theo
+const teachersWithSubjects = [
+  { id: "teacher1", name: "Nguyễn Văn A", subject: "Toán" },
+  { id: "teacher2", name: "Trần Thị B", subject: "Lý" },
+  { id: "teacher3", name: "Lê Văn C", subject: "Hóa" },
+  { id: "teacher4", name: "Phạm Thị D", subject: "Sinh" },
+  { id: "teacher5", name: "Hoàng Văn E", subject: "Anh Văn" },
+]
+
 // Component thêm lịch học
 export function AddScheduleForm() {
-  const [open, setOpen] = useState(false) // Quản lý trạng thái mở/đóng dialog
-  const [isSubmitting, setIsSubmitting] = useState(false) // Trạng thái đang gửi dữ liệu
-  const { toast } = useToast() // Toast thông báo
+  const [open, setOpen] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const { toast } = useToast()
 
-  // Khởi tạo form với react-hook-form và Zod để kiểm tra hợp lệ
   const form = useForm<ScheduleFormValues>({
     resolver: zodResolver(scheduleFormSchema),
     defaultValues: {
       className: "",
-      teacher: "",
-      subject: "",
+      teacherWithSubject: "",
       room: "",
-      dayOfWeek: [],
+      dayOfWeek: "",
       startTime: "",
       endTime: "",
       startDate: "",
@@ -58,14 +64,11 @@ export function AddScheduleForm() {
     },
   })
 
-  // Hàm xử lý khi người dùng submit form
   async function onSubmit(values: ScheduleFormValues) {
     setIsSubmitting(true)
 
     try {
-      // Mô phỏng gọi API
       await new Promise((resolve) => setTimeout(resolve, 1500))
-
       console.log(values)
 
       toast({
@@ -73,8 +76,8 @@ export function AddScheduleForm() {
         description: `Đã thêm lịch học lớp ${values.className} vào hệ thống.`,
       })
 
-      form.reset() // Reset lại form sau khi thêm
-      setOpen(false) // Đóng dialog
+      form.reset()
+      setOpen(false)
     } catch (error) {
       toast({
         variant: "destructive",
@@ -82,13 +85,12 @@ export function AddScheduleForm() {
         description: "Không thể thêm lịch học. Vui lòng thử lại sau.",
       })
     } finally {
-      setIsSubmitting(false) // Kết thúc trạng thái gửi dữ liệu
+      setIsSubmitting(false)
     }
   }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      {/* Nút kích hoạt dialog */}
       <DialogTrigger asChild>
         <Button className="bg-red-700 hover:bg-red-800">
           <PlusCircle className="mr-2 h-4 w-4" />
@@ -117,60 +119,34 @@ export function AddScheduleForm() {
               )}
             />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Chọn giáo viên */}
-              <FormField
-                control={form.control}
-                name="teacher"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Giáo viên</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Chọn giáo viên" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="teacher1">Nguyễn Văn A</SelectItem>
-                        <SelectItem value="teacher2">Trần Thị B</SelectItem>
-                        <SelectItem value="teacher3">Lê Văn C</SelectItem>
-                        <SelectItem value="teacher4">Phạm Thị D</SelectItem>
-                        <SelectItem value="teacher5">Hoàng Văn E</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              {/* Chọn môn học */}
-              <FormField
-                control={form.control}
-                name="subject"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Môn học</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Chọn môn học" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="math">Toán</SelectItem>
-                        <SelectItem value="physics">Lý</SelectItem>
-                        <SelectItem value="chemistry">Hóa</SelectItem>
-                        <SelectItem value="biology">Sinh</SelectItem>
-                        <SelectItem value="english">Anh Văn</SelectItem>
-                        <SelectItem value="literature">Văn</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+            {/* Chọn giáo viên và môn học */}
+            <FormField
+              control={form.control}
+              name="teacherWithSubject"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Giáo viên</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Chọn giáo viên" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {teachersWithSubjects.map((teacher) => (
+                        <SelectItem 
+                          key={teacher.id} 
+                          value={`${teacher.id}`}
+                        >
+                          {teacher.name} - {teacher.subject}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
             {/* Nhập phòng học */}
             <FormField
@@ -187,40 +163,29 @@ export function AddScheduleForm() {
               )}
             />
 
-            {/* Chọn ngày học trong tuần */}
+            {/* Chọn ngày học trong tuần (chỉ chọn 1) */}
             <FormField
               control={form.control}
               name="dayOfWeek"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Ngày học trong tuần</FormLabel>
-                  <FormDescription>Chọn các ngày học trong tuần</FormDescription>
-                  <div className="grid grid-cols-7 gap-2">
-                    {[
-                      { value: "2", label: "Thứ 2" },
-                      { value: "3", label: "Thứ 3" },
-                      { value: "4", label: "Thứ 4" },
-                      { value: "5", label: "Thứ 5" },
-                      { value: "6", label: "Thứ 6" },
-                      { value: "7", label: "Thứ 7" },
-                      { value: "cn", label: "CN" },
-                    ].map((day) => (
-                      <Button
-                        key={day.value}
-                        type="button"
-                        variant={field.value.includes(day.value) ? "default" : "outline"}
-                        className={field.value.includes(day.value) ? "bg-red-700 hover:bg-red-800" : ""}
-                        onClick={() => {
-                          const updatedValue = field.value.includes(day.value)
-                            ? field.value.filter((val) => val !== day.value)
-                            : [...field.value, day.value]
-                          field.onChange(updatedValue)
-                        }}
-                      >
-                        {day.label}
-                      </Button>
-                    ))}
-                  </div>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Chọn ngày học" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="2">Thứ 2</SelectItem>
+                      <SelectItem value="3">Thứ 3</SelectItem>
+                      <SelectItem value="4">Thứ 4</SelectItem>
+                      <SelectItem value="5">Thứ 5</SelectItem>
+                      <SelectItem value="6">Thứ 6</SelectItem>
+                      <SelectItem value="7">Thứ 7</SelectItem>
+                      <SelectItem value="cn">Chủ nhật</SelectItem>
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
