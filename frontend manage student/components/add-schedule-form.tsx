@@ -20,6 +20,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/components/ui/use-toast"
 import { Loader2, PlusCircle } from "lucide-react"
 
+// Định nghĩa schema cho biểu mẫu thêm lịch học sử dụng Zod
 const scheduleFormSchema = z.object({
   className: z.string().min(1, { message: "Vui lòng nhập tên lớp học" }),
   teacher: z.string().min(1, { message: "Vui lòng chọn giáo viên" }),
@@ -32,13 +33,16 @@ const scheduleFormSchema = z.object({
   endDate: z.string().min(1, { message: "Vui lòng nhập ngày kết thúc" }),
 })
 
+// Loại dữ liệu cho biểu mẫu
 type ScheduleFormValues = z.infer<typeof scheduleFormSchema>
 
+// Component thêm lịch học
 export function AddScheduleForm() {
-  const [open, setOpen] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const { toast } = useToast()
+  const [open, setOpen] = useState(false) // Quản lý trạng thái mở/đóng dialog
+  const [isSubmitting, setIsSubmitting] = useState(false) // Trạng thái đang gửi dữ liệu
+  const { toast } = useToast() // Toast thông báo
 
+  // Khởi tạo form với react-hook-form và Zod để kiểm tra hợp lệ
   const form = useForm<ScheduleFormValues>({
     resolver: zodResolver(scheduleFormSchema),
     defaultValues: {
@@ -54,6 +58,7 @@ export function AddScheduleForm() {
     },
   })
 
+  // Hàm xử lý khi người dùng submit form
   async function onSubmit(values: ScheduleFormValues) {
     setIsSubmitting(true)
 
@@ -68,8 +73,8 @@ export function AddScheduleForm() {
         description: `Đã thêm lịch học lớp ${values.className} vào hệ thống.`,
       })
 
-      form.reset()
-      setOpen(false)
+      form.reset() // Reset lại form sau khi thêm
+      setOpen(false) // Đóng dialog
     } catch (error) {
       toast({
         variant: "destructive",
@@ -77,12 +82,13 @@ export function AddScheduleForm() {
         description: "Không thể thêm lịch học. Vui lòng thử lại sau.",
       })
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false) // Kết thúc trạng thái gửi dữ liệu
     }
   }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
+      {/* Nút kích hoạt dialog */}
       <DialogTrigger asChild>
         <Button className="bg-red-700 hover:bg-red-800">
           <PlusCircle className="mr-2 h-4 w-4" />
@@ -96,6 +102,7 @@ export function AddScheduleForm() {
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            {/* Input cho tên lớp học */}
             <FormField
               control={form.control}
               name="className"
@@ -111,6 +118,7 @@ export function AddScheduleForm() {
             />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Chọn giáo viên */}
               <FormField
                 control={form.control}
                 name="teacher"
@@ -136,6 +144,7 @@ export function AddScheduleForm() {
                 )}
               />
 
+              {/* Chọn môn học */}
               <FormField
                 control={form.control}
                 name="subject"
@@ -163,6 +172,7 @@ export function AddScheduleForm() {
               />
             </div>
 
+            {/* Nhập phòng học */}
             <FormField
               control={form.control}
               name="room"
@@ -177,6 +187,7 @@ export function AddScheduleForm() {
               )}
             />
 
+            {/* Chọn ngày học trong tuần */}
             <FormField
               control={form.control}
               name="dayOfWeek"
@@ -215,6 +226,7 @@ export function AddScheduleForm() {
               )}
             />
 
+            {/* Nhập giờ bắt đầu và kết thúc */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
@@ -245,6 +257,7 @@ export function AddScheduleForm() {
               />
             </div>
 
+            {/* Nhập ngày bắt đầu và kết thúc */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
@@ -275,6 +288,7 @@ export function AddScheduleForm() {
               />
             </div>
 
+            {/* Nút xác nhận và hủy */}
             <DialogFooter>
               <Button type="button" variant="outline" onClick={() => setOpen(false)}>
                 Hủy
@@ -296,4 +310,3 @@ export function AddScheduleForm() {
     </Dialog>
   )
 }
-

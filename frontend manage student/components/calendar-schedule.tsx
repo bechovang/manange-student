@@ -209,9 +209,8 @@ export function CalendarSchedule({ view }: { view: "day" | "week" | "month" | "a
                       onValueChange={(value) =>
                         setSelectedEvent({ ...selectedEvent, teacherId: Number.parseInt(value) })
                       }
-                      className="col-span-3"
                     >
-                      <SelectTrigger id="teacher">
+                      <SelectTrigger id="teacher" className="col-span-3">
                         <SelectValue placeholder="Chọn giáo viên" />
                       </SelectTrigger>
                       <SelectContent>
@@ -241,9 +240,8 @@ export function CalendarSchedule({ view }: { view: "day" | "week" | "month" | "a
                     <Select
                       defaultValue={selectedEvent.day.toString()}
                       onValueChange={(value) => setSelectedEvent({ ...selectedEvent, day: Number.parseInt(value) })}
-                      className="col-span-3"
                     >
-                      <SelectTrigger id="day">
+                      <SelectTrigger id="day" className="col-span-3">
                         <SelectValue placeholder="Chọn ngày học" />
                       </SelectTrigger>
                       <SelectContent>
