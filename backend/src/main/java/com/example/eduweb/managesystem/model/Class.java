@@ -18,7 +18,7 @@ public class Class {
     private String name;
 
     @Column(nullable = false)
-    private String teacher;
+    private Long teacher_id;
 
     @Column(nullable = false)
     private String subject;

@@ -3,14 +3,15 @@ package com.example.eduweb.managesystem.controller;
 import com.example.eduweb.managesystem.model.Student;
 import com.example.eduweb.managesystem.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/students")
-@CrossOrigin(origins = "*")
 public class StudentController {
 
     @Autowired
@@ -32,7 +33,14 @@ public class StudentController {
 
     @PostMapping
     public ResponseEntity<Student> createStudent(@RequestBody Student student) {
-        return ResponseEntity.ok(studentService.createStudent(student));
+        
+        // Xử lý createdAt từ request
+        if (student.getCreatedAt() == null) {
+            student.setCreatedAt(LocalDate.now());
+        }
+        
+        Student newStudent = studentService.createStudent(student);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newStudent);
     }
 
     @PutMapping("/{id}")

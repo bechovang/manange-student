@@ -1,19 +1,30 @@
-import { AddStudentDialog } from "@/components/student-crud/add-student-dialog"
+"use client"
+
 import { EnhancedStudentTable } from "@/components/enhanced-student-table"
+import { AddStudentDialog } from "@/components/student-crud/add-student-dialog"
+import React, { useRef } from "react"
 
 export default function StudentsPage() {
-  return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">Quản lý học sinh</h1>
-          <p className="text-muted-foreground">Quản lý thông tin học sinh của trung tâm</p>
-        </div>
-        <AddStudentDialog />
-      </div>
+  // Tạo một ref để lưu hàm refreshStudents từ EnhancedStudentTable
+  const tableRef = useRef<{refreshStudents: () => void}>({
+    refreshStudents: () => {}
+  });
 
-      <EnhancedStudentTable />
+  // Hàm setter cho refreshStudents
+  const setRefreshFunction = (refreshFn: () => void) => {
+    tableRef.current.refreshStudents = refreshFn;
+  };
+
+  return (
+    <div className="container mx-auto py-6">
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-3xl font-bold mb-1">Học sinh</h1>
+          <p className="text-muted-foreground">Quản lý danh sách học sinh trong hệ thống.</p>
+        </div>
+        <AddStudentDialog onSuccess={tableRef.current.refreshStudents} />
+      </div>
+      <EnhancedStudentTable setRefreshFunction={setRefreshFunction} />
     </div>
   )
-}
-
+} 

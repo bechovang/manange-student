@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import * as z from "zod"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -18,14 +17,12 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Checkbox } from "@/components/ui/checkbox"
 import { useToast } from "@/components/ui/use-toast"
 import { Loader2, PlusCircle } from "lucide-react"
-import { subjects } from "@/lib/mockData"
 import { createStudent } from "@/lib/api"
 import { StudentFormValues, studentFormSchema } from "./types"
 
-export function AddStudentDialog() {
+export function AddStudentDialog({ onSuccess }: { onSuccess?: () => void }) {
   const [open, setOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { toast } = useToast()
@@ -34,35 +31,43 @@ export function AddStudentDialog() {
     resolver: zodResolver(studentFormSchema) as any,
     defaultValues: {
       name: "",
+      dateOfBirth: new Date().toISOString().split('T')[0],
+      gender: "male",
+      school: "",
+      grade: "",
       phoneStudent: "",
       phoneParent: "",
       facebookLink: "",
-      school: "",
-      subjects: [],
-      grade: "",
-      teacher: "",
-      classTime: "",
-      status: "active",
-      note: "",
-      dateOfBirth: "",
-      gender: "male",
+      note: ""
     },
   })
 
   const onSubmit: SubmitHandler<StudentFormValues> = async (values) => {
     try {
       setIsSubmitting(true)
-      await createStudent(values)
+      console.log("Submitting form with values:", values)
+      
+      const result = await createStudent(values)
+      console.log("Student created successfully:", result)
+      
       toast({
         title: "Thành công",
         description: "Đã thêm học sinh mới",
       })
       setOpen(false)
       form.reset()
-    } catch (error) {
+      
+      // Gọi callback để cập nhật danh sách
+      if (onSuccess) {
+        onSuccess()
+      }
+    } catch (error: any) {
+      console.error("Error in onSubmit:", error)
+      
+      // Hiển thị thông báo lỗi chi tiết hơn
       toast({
         title: "Lỗi",
-        description: "Không thể thêm học sinh",
+        description: error?.message || "Không thể thêm học sinh. Vui lòng thử lại sau.",
         variant: "destructive",
       })
     } finally {
@@ -98,6 +103,44 @@ export function AddStudentDialog() {
                 </FormItem>
               )}
             />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="dateOfBirth"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Ngày sinh</FormLabel>
+                    <FormControl>
+                      <Input type="date" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="gender"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Giới tính</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Chọn giới tính" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="male">Nam</SelectItem>
+                        <SelectItem value="female">Nữ</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <FormField
@@ -161,136 +204,13 @@ export function AddStudentDialog() {
 
             <FormField
               control={form.control}
-              name="subjects"
-              render={() => (
-                <FormItem>
-                  <div className="mb-4">
-                    <FormLabel>Môn học</FormLabel>
-                    <FormDescription>Chọn các môn học sinh đăng ký</FormDescription>
-                  </div>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                    {subjects.map((subject) => (
-                      <FormField
-                        key={subject.id}
-                        control={form.control}
-                        name="subjects"
-                        render={({ field }) => {
-                          return (
-                            <FormItem key={subject.id} className="flex flex-row items-start space-x-3 space-y-0">
-                              <FormControl>
-                                <Checkbox
-                                  checked={field.value?.includes(subject.id)}
-                                  onCheckedChange={(checked) => {
-                                    return checked
-                                      ? field.onChange([...field.value, subject.id])
-                                      : field.onChange(field.value?.filter((value) => value !== subject.id))
-                                  }}
-                                />
-                              </FormControl>
-                              <FormLabel className="font-normal">{subject.label}</FormLabel>
-                            </FormItem>
-                          )
-                        }}
-                      />
-                    ))}
-                  </div>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <FormField
-                control={form.control}
-                name="grade"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Khối lớp</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Chọn khối lớp" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="grade10">Lớp 10</SelectItem>
-                        <SelectItem value="grade11">Lớp 11</SelectItem>
-                        <SelectItem value="grade12">Lớp 12</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="teacher"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Giáo viên</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Chọn giáo viên" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="teacher1">Nguyễn Văn A</SelectItem>
-                        <SelectItem value="teacher2">Trần Thị B</SelectItem>
-                        <SelectItem value="teacher3">Lê Văn C</SelectItem>
-                        <SelectItem value="teacher4">Phạm Thị D</SelectItem>
-                        <SelectItem value="teacher5">Hoàng Văn E</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="classTime"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Ca học</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Chọn ca học" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="morning">Sáng 7-CN</SelectItem>
-                        <SelectItem value="afternoon246">Chiều 2-4-6</SelectItem>
-                        <SelectItem value="afternoon357">Chiều 3-5-7</SelectItem>
-                        <SelectItem value="evening246">Tối 2-4-6</SelectItem>
-                        <SelectItem value="evening357">Tối 3-5-7</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <FormField
-              control={form.control}
-              name="status"
+              name="grade"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Trạng thái</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Chọn trạng thái" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="active">Đang học</SelectItem>
-                      <SelectItem value="inactive">Nghỉ học</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <FormLabel>Khối lớp</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Nhập khối lớp (ví dụ: 10, 11, 12)" {...field} />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}

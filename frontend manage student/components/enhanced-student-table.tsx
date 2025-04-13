@@ -30,6 +30,7 @@ import { type Student } from "@/components/student-crud/types"
 import axios from "axios"
 import { useRouter } from "next/navigation"
 import Cookies from "js-cookie"
+import { toast } from "react-hot-toast"
 
 // Dữ liệu mẫu fallback - chỉ sử dụng khi API lỗi
 const fallbackData: Student[] = [
@@ -44,11 +45,11 @@ const fallbackData: Student[] = [
     grade: "Lớp 10",
     teacher: "Nguyễn Văn X",
     classTime: "Tối 2-4-6",
-    status: "active",
+    status: "present", 
     note: "Học sinh chăm chỉ",
     dateOfBirth: "01/06/2023",
     gender: "male",
-    createdAt: "2023-06-05",
+    enrollDate: "2023-06-05",
     balance: 1500000,
     balanceMonths: 1
   },
@@ -63,17 +64,21 @@ const fallbackData: Student[] = [
     grade: "Lớp 11",
     teacher: "Trần Văn Y",
     classTime: "Tối 3-5-7",
-    status: "active",
+    status: "present",
     note: "Học sinh năng động",
     dateOfBirth: "15/05/2023",
     gender: "female",
-    createdAt: "2023-06-05",
+    enrollDate: "2023-06-05",
     balance: -1800000,
     balanceMonths: -1
   },
 ]
 
-export function EnhancedStudentTable() {
+export function EnhancedStudentTable({ 
+  setRefreshFunction 
+}: { 
+  setRefreshFunction?: (refreshFn: () => void) => void 
+}) {
   const router = useRouter()
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
@@ -99,16 +104,15 @@ export function EnhancedStudentTable() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    // Fetch data from API
-    const fetchStudents = async () => {
-      try {
-        setLoading(true)
-        const accessToken = Cookies.get('accessToken')
-        if (!accessToken) {
-          router.push('/login')
-          return
-        }
+  // Hàm để lấy danh sách học sinh từ API
+  const fetchStudents = async () => {
+    try {
+      setLoading(true)
+      const accessToken = Cookies.get('accessToken')
+      if (!accessToken) {
+        router.push('/login')
+        return
+      }
 
         const response = await axios.get('http://localhost:8080/api/students', {
           headers: {
@@ -131,8 +135,28 @@ export function EnhancedStudentTable() {
       }
     }
 
+  // Hàm làm mới danh sách học sinh (dùng để callback khi thêm, sửa, xóa)
+  const refreshStudents = () => {
     fetchStudents()
-  }, [router])
+    toast.success("Đã cập nhật danh sách học sinh", {
+      icon: '✅',
+      style: {
+        background: '#f0fdf4',
+        color: '#166534',
+        border: '1px solid #bbf7d0'
+      }
+    })
+  }
+
+  useEffect(() => {
+    // Fetch data from API when component mounts
+    fetchStudents()
+    
+    // Truyền hàm refreshStudents lên component cha thông qua setRefreshFunction
+    if (setRefreshFunction) {
+      setRefreshFunction(refreshStudents);
+    }
+  }, [router, setRefreshFunction])
 
   const columns: ColumnDef<Student>[] = [
     {
@@ -318,18 +342,18 @@ export function EnhancedStudentTable() {
           <Badge
             variant="outline"
             className={
-              status === "active"
+              status === "present"
                 ? "bg-green-100 text-green-800 hover:bg-green-100"
-                : status === "inactive"
+                : status === "absent"
                 ? "bg-red-100 text-red-800 hover:bg-red-100"
                 : "bg-yellow-100 text-yellow-800 hover:bg-yellow-100"
             }
           >
-            {status === "active"
+            {status === "present"
               ? "Đang học"
-              : status === "inactive"
-              ? "Đã nghỉ"
-              : "Chưa có lớp"}
+              : status === "absent"
+              ? "Vắng"
+              : "Không có lớp"}
           </Badge>
         )
       },
@@ -389,10 +413,15 @@ export function EnhancedStudentTable() {
       },
     },
     {
-      id: "actions",
+      accessorKey: "actions",
+      header: "Thao tác",
       cell: ({ row }) => {
-        const student = row.original
-        return <StudentActions student={student} />
+        return (
+          <StudentActions 
+            student={row.original} 
+            onSuccess={refreshStudents}
+          />
+        )
       },
     },
   ]
@@ -429,28 +458,81 @@ export function EnhancedStudentTable() {
               className="pl-8"
             />
           </div>
-          <Button variant="outline" onClick={() => table.getColumn("status")?.setFilterValue("active")}>
+          <Button 
+            variant="outline" 
+            onClick={() => {
+              table.getColumn("status")?.setFilterValue("active")
+              toast.success("Đã lọc học sinh đang học", {
+                icon: '✅',
+                style: {
+                  background: '#f0fdf4',
+                  color: '#166534',
+                  border: '1px solid #bbf7d0'
+                }
+              })
+            }}
+            className="bg-green-100 hover:bg-green-200 text-green-800 border-green-300 transition-colors duration-200"
+          >
             Đang học
           </Button>
           <Button
             variant="outline"
-            onClick={() => table.getColumn("status")?.setFilterValue("inactive")}
+            onClick={() => {
+              table.getColumn("status")?.setFilterValue("inactive")
+              toast.success("Đã lọc học sinh nghỉ học", {
+                icon: '✅',
+                style: {
+                  background: '#fef2f2',
+                  color: '#991b1b',
+                  border: '1px solid #fecaca'
+                }
+              })
+            }}
+            className="bg-red-100 hover:bg-red-200 text-red-800 border-red-300 transition-colors duration-200"
           >
-            Đã nghỉ
+            Nghỉ học
           </Button>
-          <Button variant="outline" onClick={() => table.getColumn("status")?.setFilterValue("")}>
+          <Button 
+            variant="outline" 
+            onClick={() => {
+              table.getColumn("status")?.setFilterValue("")
+              toast.success("Đã hiển thị tất cả học sinh", {
+                icon: '✅',
+                style: {
+                  background: '#eff6ff',
+                  color: '#1e40af',
+                  border: '1px solid #bfdbfe'
+                }
+              })
+            }}
+            className="bg-blue-100 hover:bg-blue-200 text-blue-800 border-blue-300 transition-colors duration-200"
+          >
             Tất cả
           </Button>
         </div>
         <div className="flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="ml-auto">
+              <Button variant="outline" className="ml-auto bg-purple-100 hover:bg-purple-200 text-purple-800 border-purple-300 transition-colors duration-200">
                 <Settings className="mr-2 h-4 w-4" />
                 <span>Cột hiển thị</span>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent align="end" className="min-w-[200px]" onClick={(e) => e.stopPropagation()}>
+              <DropdownMenuCheckboxItem
+                className="font-bold border-b pb-2 mb-1"
+                checked={table.getAllColumns().every((col) => col.getIsVisible())}
+                onCheckedChange={(value) => {
+                  table.getAllColumns().forEach((column) => {
+                    if (column.getCanHide()) {
+                      column.toggleVisibility(!!value);
+                    }
+                  });
+                }}
+                onSelect={(e) => e.preventDefault()}
+              >
+                Hiển thị tất cả
+              </DropdownMenuCheckboxItem>
               {table
                 .getAllColumns()
                 .filter((column) => column.getCanHide())
@@ -460,7 +542,10 @@ export function EnhancedStudentTable() {
                       key={column.id}
                       className="capitalize"
                       checked={column.getIsVisible()}
-                      onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                      onCheckedChange={(value) => {
+                        column.toggleVisibility(!!value);
+                      }}
+                      onSelect={(e) => e.preventDefault()}
                     >
                       {column.id === "name"
                         ? "Học sinh"
@@ -496,7 +581,6 @@ export function EnhancedStudentTable() {
                 })}
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button>Thêm học sinh mới</Button>
         </div>
       </div>
       

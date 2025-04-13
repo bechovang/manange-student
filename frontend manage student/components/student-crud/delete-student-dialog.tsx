@@ -16,7 +16,7 @@ import { Loader2 } from "lucide-react"
 import { deleteStudent } from "@/lib/api"
 import { Student } from "./types"
 
-export function DeleteStudentDialog({ student }: { student: Student }) {
+export function DeleteStudentDialog({ student, onSuccess }: { student: Student, onSuccess?: () => void }) {
   const [open, setOpen] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
   const { toast } = useToast()
@@ -29,23 +29,27 @@ export function DeleteStudentDialog({ student }: { student: Student }) {
       .join("")
   }
 
-  async function handleDelete() {
-    setIsDeleting(true)
-
+  const handleDelete = async () => {
     try {
-      await deleteStudent(student.id)
-
+      setIsDeleting(true)
+      const result = await deleteStudent(String(student.id))
+      console.log("Delete result:", result)
       toast({
-        title: "Xóa học sinh thành công",
-        description: `Đã xóa học sinh ${student.name || "Không có tên"} khỏi hệ thống.`,
+        title: "Đã xóa học sinh",
+        description: "Thông tin học sinh đã được xóa thành công."
       })
-
       setOpen(false)
-    } catch (error) {
+      
+      // Gọi callback nếu có
+      if (onSuccess) {
+        onSuccess()
+      }
+    } catch (error: any) {
+      console.error("Error deleting student:", error)
       toast({
         variant: "destructive",
-        title: "Có lỗi xảy ra",
-        description: "Không thể xóa học sinh. Vui lòng thử lại sau.",
+        title: "Lỗi khi xóa",
+        description: error?.message || "Không thể xóa học sinh. Vui lòng thử lại sau."
       })
     } finally {
       setIsDeleting(false)

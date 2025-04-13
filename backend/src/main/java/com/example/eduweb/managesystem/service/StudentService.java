@@ -6,6 +6,7 @@ import com.example.eduweb.managesystem.model.TuitionPlan;
 import com.example.eduweb.managesystem.model.Class;
 import com.example.eduweb.managesystem.model.Schedule;
 import com.example.eduweb.managesystem.repository.StudentRepository;
+import com.example.eduweb.managesystem.repository.TeacherRepository;
 import com.example.eduweb.managesystem.repository.StudentClassRepository;
 import com.example.eduweb.managesystem.repository.TuitionPlanRepository;
 import com.example.eduweb.managesystem.repository.ScheduleRepository;
@@ -41,6 +42,9 @@ public class StudentService {
     @Autowired
     private ScheduleRepository scheduleRepository;
 
+    @Autowired
+    private TeacherRepository teacherRepository;
+
     private final Random random = new Random();
 
     /**
@@ -70,21 +74,25 @@ public class StudentService {
     /**
      * Gets the teacher name for a student based on their enrolled classes
      * @param student The student to get teacher for
-     * @return Teacher name or null if not found
+     * @return Teacher name or "Chưa có giáo viên" if not found
      */
     private String getTeacherForStudent(Student student) {
         try {
             logger.debug("Getting teacher for student: {}", student.getId());
+            
+            // 1. Tìm các lớp học của sinh viên
             List<StudentClass> studentClasses = studentClassRepository.findByStudent(student);
             
             if (!studentClasses.isEmpty()) {
+                // 2. Lấy lớp học đầu tiên
                 Class classEntity = studentClasses.get(0).getClassEntity();
-                if (classEntity != null && classEntity.getTeacher() != null) {
-                    logger.debug("Found teacher {} for student {}", classEntity.getTeacher(), student.getId());
-                    return classEntity.getTeacher();
+                
+                if (classEntity != null && classEntity.getTeacher_id() != null) {
+                    // 3. Truy vấn trực tiếp từ bảng teachers (không dùng bảng teacher trống)
+                    return teacherRepository.findNameById(classEntity.getTeacher_id())
+                        .orElse("Chưa có giáo viên");
                 }
             }
-            logger.debug("No teacher found for student: {}", student.getId());
             return "Chưa có giáo viên";
         } catch (Exception e) {
             logger.error("Error getting teacher for student {}: {}", student.getId(), e.getMessage());
@@ -201,6 +209,10 @@ public class StudentService {
     public Student createStudent(Student student) {
         try {
             logger.info("Creating new student");
+            // Đặt ngày tạo là ngày hiện tại
+            if (student.getCreatedAt() == null) {
+                student.setCreatedAt(LocalDate.now());
+            }
             Student savedStudent = studentRepository.save(student);
             logger.info("Successfully created student with ID: {}", savedStudent.getId());
             return savedStudent;
@@ -297,6 +309,13 @@ public class StudentService {
     private double calculateBalance(Student student) {
         double monthlyTuition = calculateMonthlyTuition(student);
         LocalDate enrollmentDate = student.getCreatedAt();
+        
+        // Kiểm tra nếu enrollmentDate là null, gán giá trị mặc định là ngày hiện tại
+        if (enrollmentDate == null) {
+            logger.warn("Student {} has null createdAt date, using current date instead", student.getId());
+            enrollmentDate = LocalDate.now();
+        }
+        
         //LocalDate currentDate = LocalDate.now();
         LocalDate currentDate = getCurrentDateForTesting(); // Use testing date instead of now()
 
@@ -307,9 +326,10 @@ public class StudentService {
         double totalAmount = monthlyTuition * months;
 
         // Lấy tổng số tiền đã đóng từ các payment
-        double totalPaid = student.getPayments().stream()
+        double totalPaid = student.getPayments() != null ? 
+            student.getPayments().stream()
                 .mapToDouble(payment -> payment.getAmount().doubleValue())
-                .sum();
+                .sum() : 0.0;
 
         // Balance = Tổng đã đóng - Tổng phải đóng
         return totalPaid - totalAmount;

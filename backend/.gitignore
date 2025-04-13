@@ -35,3 +35,7 @@ build/
 
 ### Java builds ###
 backend/target/
+
+
+### log ###
+backend/logs/

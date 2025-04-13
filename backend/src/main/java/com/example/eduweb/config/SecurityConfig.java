@@ -55,7 +55,7 @@ public class SecurityConfig {
                     ,"/api/setup/**"  //cái này ko bảo mật
                 ).permitAll()
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                .requestMatchers("/api/teacher/**").hasAnyRole("TEACHER", "ADMIN")
+                .requestMatchers("/api/teacher/**").hasAnyRole("TEACHER", "ADMIN") // teachers là bảng 
                 .requestMatchers("/api/staff/**").hasAnyRole("STAFF", "ADMIN")
                 .anyRequest().authenticated()
             )

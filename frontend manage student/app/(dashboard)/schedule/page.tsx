@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { CalendarSchedule } from "@/components/calendar-schedule"
-import { AddScheduleForm } from "@/components/add-schedule-form"
+import { CalendarSchedule } from "@/components/schedule/calendar-schedule"
+import { AddScheduleForm } from "@/components/schedule/add-schedule-form"
 
 export default function SchedulePage() {
   return (

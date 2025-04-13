@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster"
 import { AuthProvider } from "@/components/auth-provider"
 import "@/app/globals.css"
 import { Inter } from "next/font/google"
+import { Toaster as HotToaster } from 'react-hot-toast'
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -30,6 +31,7 @@ export default function RootLayout({
             </SidebarProvider>
           </AuthProvider>
         </ThemeProvider>
+        <HotToaster position="top-right" />
       </body>
     </html>
   )
