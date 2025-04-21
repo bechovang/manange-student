@@ -96,3 +96,576 @@
 2025-04-22T00:28:36.284+07:00 DEBUG 6804 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Getting subjects for student: 1
 2025-04-22T00:28:36.286+07:00 DEBUG 6804 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Found 2 subjects for student 1
 2025-04-22T00:28:36.330+07:00  INFO 6804 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Successfully fetched 5 students
+2025-04-22T00:54:29.048+07:00  INFO 6804 --- [pool-2-thread-1] c.e.e.a.service.TokenBlacklistService    : Starting blacklist cleanup, current size: 0
+2025-04-22T00:54:29.050+07:00  INFO 6804 --- [pool-2-thread-1] c.e.e.a.service.TokenBlacklistService    : Blacklist cleanup completed
+2025-04-22T02:09:12.781+07:00  INFO 3440 --- [main] com.example.eduweb.EduwebApplication     : Starting EduwebApplication using Java 17.0.12 with PID 3440 (C:\Users\Admin\Desktop\manage student\backend\target\classes started by Admin in C:\Users\Admin\Desktop\manage student\backend)
+2025-04-22T02:09:12.784+07:00 DEBUG 3440 --- [main] com.example.eduweb.EduwebApplication     : Running with Spring Boot v3.1.5, Spring v6.0.13
+2025-04-22T02:09:12.788+07:00  INFO 3440 --- [main] com.example.eduweb.EduwebApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-04-22T02:09:14.374+07:00  INFO 3440 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-22T02:09:14.515+07:00  INFO 3440 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 125 ms. Found 9 JPA repository interfaces.
+2025-04-22T02:09:15.737+07:00  INFO 3440 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2025-04-22T02:09:15.758+07:00  INFO 3440 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-22T02:09:15.758+07:00  INFO 3440 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2025-04-22T02:09:15.961+07:00  INFO 3440 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-22T02:09:15.961+07:00  INFO 3440 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3100 ms
+2025-04-22T02:09:16.166+07:00  INFO 3440 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-22T02:09:16.276+07:00  INFO 3440 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.13.Final
+2025-04-22T02:09:16.281+07:00  INFO 3440 --- [main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2025-04-22T02:09:16.744+07:00  INFO 3440 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-22T02:09:16.786+07:00  INFO 3440 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-04-22T02:09:17.194+07:00  INFO 3440 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4e3283f6
+2025-04-22T02:09:17.196+07:00  INFO 3440 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-04-22T02:09:19.338+07:00  INFO 3440 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-22T02:09:19.595+07:00  INFO 3440 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-22T02:09:20.076+07:00  INFO 3440 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-22T02:09:20.576+07:00 DEBUG 3440 --- [main] c.e.eduweb.auth.config.JwtAuthFilter     : JwtAuthFilter initialized
+2025-04-22T02:09:20.693+07:00 DEBUG 3440 --- [main] c.e.eduweb.auth.config.JwtAuthFilter     : Filter 'jwtAuthFilter' configured for use
+2025-04-22T02:09:20.839+07:00  INFO 3440 --- [main] c.e.e.a.service.TokenBlacklistService    : TokenBlacklistService initialized
+2025-04-22T02:09:20.840+07:00  INFO 3440 --- [main] c.e.e.a.service.TokenBlacklistService    : Scheduled blacklist cleanup task every 1 hour
+2025-04-22T02:09:21.390+07:00  WARN 3440 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-22T02:09:21.849+07:00  INFO 3440 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@ebcf6c0, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@438fcca3, org.springframework.security.web.context.SecurityContextHolderFilter@10522dfd, org.springframework.security.web.header.HeaderWriterFilter@2296ed0d, org.springframework.web.filter.CorsFilter@41c7ef69, org.springframework.security.web.authentication.logout.LogoutFilter@4eef8498, com.example.eduweb.auth.config.JwtAuthFilter@2fda92e0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5c452e69, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5d6d6533, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@15e86d24, org.springframework.security.web.session.SessionManagementFilter@5ea9f2f3, org.springframework.security.web.access.ExceptionTranslationFilter@1368e451, org.springframework.security.web.access.intercept.AuthorizationFilter@67954d71]
+2025-04-22T02:09:22.232+07:00  INFO 3440 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2025-04-22T02:09:22.244+07:00  INFO 3440 --- [main] com.example.eduweb.EduwebApplication     : Started EduwebApplication in 10.126 seconds (process running for 10.931)
+2025-04-22T02:10:40.444+07:00  INFO 3440 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-22T02:10:40.448+07:00  INFO 3440 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-22T02:10:40.453+07:00  INFO 3440 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2025-04-22T02:10:40.519+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Skipping JWT filter for auth endpoint: /api/auth/logout
+2025-04-22T02:10:40.541+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Skipping JWT filter for auth endpoint: /api/auth/logout
+2025-04-22T02:10:40.604+07:00  INFO 3440 --- [http-nio-8080-exec-2] c.e.e.auth.controller.AuthController     : Logout attempt
+2025-04-22T02:10:40.605+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.auth.controller.AuthController     : Bearer token extracted from header
+2025-04-22T02:10:40.606+07:00  INFO 3440 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.AuthService      : Logout token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0NTI0NDM0NywiZXhwIjoxNzQ1MzMwNzQ3fQ.KIn7vn-pNP035OeE0QrtsOKhr6awNSHTkkmGBOlSDh8
+2025-04-22T02:10:40.606+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.a.service.TokenBlacklistService    : Token added to blacklist: eyJhbGciOi...
+2025-04-22T02:10:40.607+07:00  INFO 3440 --- [http-nio-8080-exec-2] c.e.e.auth.controller.AuthController     : Logout successful
+2025-04-22T02:11:12.786+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : Skipping JWT filter for auth endpoint: /api/auth/login
+2025-04-22T02:11:12.789+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : Skipping JWT filter for auth endpoint: /api/auth/login
+2025-04-22T02:11:12.845+07:00  INFO 3440 --- [http-nio-8080-exec-4] c.e.e.auth.controller.AuthController     : Login attempt for user: admin
+2025-04-22T02:11:12.990+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.AuthService      : User role: admin
+2025-04-22T02:11:12.990+07:00  INFO 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.AuthService      : B?t ??u quá trình xác th?c cho user: admin
+2025-04-22T02:11:12.991+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.AuthService      : Thông tin yêu c?u: username=admin
+2025-04-22T02:11:12.992+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.AuthService      : ?ang xác th?c thông tin ??ng nh?p...
+2025-04-22T02:11:13.108+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-04-22T02:11:13.113+07:00  INFO 3440 --- [http-nio-8080-exec-4] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-04-22T02:11:13.113+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-04-22T02:11:13.115+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-04-22T02:11:13.228+07:00  INFO 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.AuthService      : Xác th?c thành công cho user: admin
+2025-04-22T02:11:13.229+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.AuthService      : ?ang t?i thông tin user details...
+2025-04-22T02:11:13.229+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-04-22T02:11:13.233+07:00  INFO 3440 --- [http-nio-8080-exec-4] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-04-22T02:11:13.233+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-04-22T02:11:13.233+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-04-22T02:11:13.234+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.AuthService      : ?ã t?i thông tin user details thành công
+2025-04-22T02:11:13.235+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.AuthService      : ?ang t?o access token...
+2025-04-22T02:11:13.235+07:00  INFO 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.JwtService       : B?t ??u t?o ACCESS token cho user: admin
+2025-04-22T02:11:13.275+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.JwtService       : ?ã t?o thành công ACCESS token cho user: admin
+2025-04-22T02:11:13.276+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.AuthService      : ?ã t?o access token thành công
+2025-04-22T02:11:13.277+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.AuthService      : ?ang t?o refresh token...
+2025-04-22T02:11:13.277+07:00  INFO 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.JwtService       : T?o refresh token cho user: admin
+2025-04-22T02:11:13.277+07:00  INFO 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.JwtService       : B?t ??u t?o REFRESH token cho user: admin
+2025-04-22T02:11:13.279+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.JwtService       : ?ã t?o thành công REFRESH token cho user: admin
+2025-04-22T02:11:13.279+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.AuthService      : ?ã t?o refresh token thành công
+2025-04-22T02:11:13.280+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.AuthService      : ?ang t?o UserDto...
+2025-04-22T02:11:13.281+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.AuthService      : ?ã t?o UserDto v?i username: admin
+2025-04-22T02:11:13.281+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.JwtService       : L?y th?i gian h?t h?n cho ACCESS token (tính b?ng giây)
+2025-04-22T02:11:13.281+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.AuthService      : Access token s? h?t h?n sau: 86400 giây
+2025-04-22T02:11:13.282+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.JwtService       : L?y th?i gian h?t h?n cho REFRESH token (tính b?ng giây)
+2025-04-22T02:11:13.282+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.AuthService      : Refresh token s? h?t h?n sau: 604800 giây
+2025-04-22T02:11:13.282+07:00  INFO 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.AuthService      : Hoàn t?t quá trình xác th?c cho user: admin
+2025-04-22T02:11:13.283+07:00 DEBUG 3440 --- [http-nio-8080-exec-4] c.e.eduweb.auth.service.JwtService       : L?y th?i gian h?t h?n cho ACCESS token (tính b?ng giây)
+2025-04-22T02:11:13.283+07:00  INFO 3440 --- [http-nio-8080-exec-4] c.e.e.auth.controller.AuthController     : Login successful for user: admin
+2025-04-22T03:09:21.380+07:00  INFO 3440 --- [pool-2-thread-1] c.e.e.a.service.TokenBlacklistService    : Starting blacklist cleanup, current size: 1
+2025-04-22T03:09:21.759+07:00  INFO 3440 --- [pool-2-thread-1] c.e.e.a.service.TokenBlacklistService    : Blacklist cleanup completed
+2025-04-22T03:15:18.188+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/students
+2025-04-22T03:15:18.195+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-04-22T03:15:18.198+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:15:18.356+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:15:19.240+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-04-22T03:15:19.241+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-04-22T03:15:19.243+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-04-22T03:15:19.845+07:00  INFO 3440 --- [http-nio-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-04-22T03:15:19.846+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-04-22T03:15:19.848+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-04-22T03:15:19.849+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-04-22T03:15:19.850+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:15:19.850+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:15:19.857+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:15:19.861+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-04-22T03:15:19.861+07:00  INFO 3440 --- [http-nio-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-04-22T03:15:19.864+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-04-22T03:15:19.942+07:00  INFO 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Fetching all students
+2025-04-22T03:15:20.274+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting teacher for student: 2
+2025-04-22T03:15:20.481+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting class time for student: 2
+2025-04-22T03:15:20.501+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Found class time 08:00 - 10:00 for student 2
+2025-04-22T03:15:20.501+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Generated random status: absent
+2025-04-22T03:15:20.502+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting subjects for student: 2
+2025-04-22T03:15:20.508+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Found 2 subjects for student 2
+2025-04-22T03:15:20.630+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting teacher for student: 3
+2025-04-22T03:15:20.645+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting class time for student: 3
+2025-04-22T03:15:20.651+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Found class time 15:00 - 17:00 for student 3
+2025-04-22T03:15:20.651+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Generated random status: absent
+2025-04-22T03:15:20.652+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting subjects for student: 3
+2025-04-22T03:15:20.658+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Found 1 subjects for student 3
+2025-04-22T03:15:20.681+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting teacher for student: 4
+2025-04-22T03:15:20.690+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting class time for student: 4
+2025-04-22T03:15:20.698+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Found class time 08:00 - 10:00 for student 4
+2025-04-22T03:15:20.698+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Generated random status: no class
+2025-04-22T03:15:20.699+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting subjects for student: 4
+2025-04-22T03:15:20.701+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Found 2 subjects for student 4
+2025-04-22T03:15:20.753+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting teacher for student: 5
+2025-04-22T03:15:20.761+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting class time for student: 5
+2025-04-22T03:15:20.766+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Found class time 15:00 - 17:00 for student 5
+2025-04-22T03:15:20.767+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Generated random status: absent
+2025-04-22T03:15:20.769+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting subjects for student: 5
+2025-04-22T03:15:20.772+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Found 1 subjects for student 5
+2025-04-22T03:15:20.793+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting teacher for student: 1
+2025-04-22T03:15:20.800+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting class time for student: 1
+2025-04-22T03:15:20.809+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Found class time 08:00 - 10:00 for student 1
+2025-04-22T03:15:20.810+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Generated random status: absent
+2025-04-22T03:15:20.810+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting subjects for student: 1
+2025-04-22T03:15:20.813+07:00 DEBUG 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Found 2 subjects for student 1
+2025-04-22T03:15:20.846+07:00  INFO 3440 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Successfully fetched 5 students
+2025-04-22T03:15:20.897+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/students
+2025-04-22T03:15:20.898+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-04-22T03:15:20.898+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:15:20.898+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:15:20.906+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-04-22T03:15:20.907+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-04-22T03:15:20.908+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-04-22T03:15:20.913+07:00  INFO 3440 --- [http-nio-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-04-22T03:15:20.913+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-04-22T03:15:20.914+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-04-22T03:15:20.914+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-04-22T03:15:20.915+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:15:20.915+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:15:20.920+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:15:20.924+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-04-22T03:15:20.924+07:00  INFO 3440 --- [http-nio-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-04-22T03:15:20.924+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-04-22T03:15:20.931+07:00  INFO 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Fetching all students
+2025-04-22T03:15:20.938+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting teacher for student: 2
+2025-04-22T03:15:20.948+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting class time for student: 2
+2025-04-22T03:15:20.999+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Found class time 08:00 - 10:00 for student 2
+2025-04-22T03:15:21.000+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Generated random status: absent
+2025-04-22T03:15:21.023+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting subjects for student: 2
+2025-04-22T03:15:21.069+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Found 2 subjects for student 2
+2025-04-22T03:15:21.463+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting teacher for student: 3
+2025-04-22T03:15:21.510+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting class time for student: 3
+2025-04-22T03:15:21.608+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Found class time 15:00 - 17:00 for student 3
+2025-04-22T03:15:21.629+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Generated random status: no class
+2025-04-22T03:15:21.630+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting subjects for student: 3
+2025-04-22T03:15:21.633+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Found 1 subjects for student 3
+2025-04-22T03:15:21.721+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting teacher for student: 4
+2025-04-22T03:15:21.736+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting class time for student: 4
+2025-04-22T03:15:21.744+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Found class time 08:00 - 10:00 for student 4
+2025-04-22T03:15:21.744+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Generated random status: absent
+2025-04-22T03:15:21.744+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting subjects for student: 4
+2025-04-22T03:15:21.749+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Found 2 subjects for student 4
+2025-04-22T03:15:21.780+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting teacher for student: 5
+2025-04-22T03:15:21.791+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting class time for student: 5
+2025-04-22T03:15:21.796+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Found class time 15:00 - 17:00 for student 5
+2025-04-22T03:15:21.797+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Generated random status: no class
+2025-04-22T03:15:21.797+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting subjects for student: 5
+2025-04-22T03:15:21.800+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Found 1 subjects for student 5
+2025-04-22T03:15:21.819+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting teacher for student: 1
+2025-04-22T03:15:21.826+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting class time for student: 1
+2025-04-22T03:15:21.831+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Found class time 08:00 - 10:00 for student 1
+2025-04-22T03:15:21.831+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Generated random status: absent
+2025-04-22T03:15:21.832+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting subjects for student: 1
+2025-04-22T03:15:21.834+07:00 DEBUG 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Found 2 subjects for student 1
+2025-04-22T03:15:21.865+07:00  INFO 3440 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Successfully fetched 5 students
+2025-04-22T03:16:21.762+07:00  INFO 2184 --- [main] com.example.eduweb.EduwebApplication     : Starting EduwebApplication using Java 17.0.12 with PID 2184 (C:\Users\Admin\Desktop\manage student\backend\target\classes started by Admin in C:\Users\Admin\Desktop\manage student\backend)
+2025-04-22T03:16:21.764+07:00 DEBUG 2184 --- [main] com.example.eduweb.EduwebApplication     : Running with Spring Boot v3.1.5, Spring v6.0.13
+2025-04-22T03:16:21.766+07:00  INFO 2184 --- [main] com.example.eduweb.EduwebApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-04-22T03:16:23.191+07:00  INFO 2184 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-22T03:16:23.417+07:00  INFO 2184 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 199 ms. Found 9 JPA repository interfaces.
+2025-04-22T03:16:25.034+07:00  INFO 2184 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2025-04-22T03:16:25.065+07:00  INFO 2184 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-22T03:16:25.065+07:00  INFO 2184 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2025-04-22T03:16:25.304+07:00  INFO 2184 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-22T03:16:25.309+07:00  INFO 2184 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3475 ms
+2025-04-22T03:16:25.579+07:00  INFO 2184 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-22T03:16:25.689+07:00  INFO 2184 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.13.Final
+2025-04-22T03:16:25.693+07:00  INFO 2184 --- [main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2025-04-22T03:16:26.122+07:00  INFO 2184 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-22T03:16:26.160+07:00  INFO 2184 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-04-22T03:16:26.420+07:00  INFO 2184 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5d1a859c
+2025-04-22T03:16:26.422+07:00  INFO 2184 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-04-22T03:16:28.129+07:00  INFO 2184 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-22T03:16:28.322+07:00  INFO 2184 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-22T03:16:28.732+07:00  INFO 2184 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-22T03:16:29.098+07:00 DEBUG 2184 --- [main] c.e.eduweb.auth.config.JwtAuthFilter     : JwtAuthFilter initialized
+2025-04-22T03:16:29.168+07:00 DEBUG 2184 --- [main] c.e.eduweb.auth.config.JwtAuthFilter     : Filter 'jwtAuthFilter' configured for use
+2025-04-22T03:16:29.281+07:00  INFO 2184 --- [main] c.e.e.a.service.TokenBlacklistService    : TokenBlacklistService initialized
+2025-04-22T03:16:29.282+07:00  INFO 2184 --- [main] c.e.e.a.service.TokenBlacklistService    : Scheduled blacklist cleanup task every 1 hour
+2025-04-22T03:16:29.775+07:00  WARN 2184 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-22T03:16:30.190+07:00  INFO 2184 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@438fcca3, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@41c7ef69, org.springframework.security.web.context.SecurityContextHolderFilter@17d6b6e, org.springframework.security.web.header.HeaderWriterFilter@6b174aa3, org.springframework.web.filter.CorsFilter@15e86d24, org.springframework.security.web.authentication.logout.LogoutFilter@4b158e16, com.example.eduweb.auth.config.JwtAuthFilter@4ea4290f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5c519681, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@372153eb, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7c0b83af, org.springframework.security.web.session.SessionManagementFilter@72e5f018, org.springframework.security.web.access.ExceptionTranslationFilter@6ce365b7, org.springframework.security.web.access.intercept.AuthorizationFilter@234421ca]
+2025-04-22T03:16:30.513+07:00  INFO 2184 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2025-04-22T03:16:30.523+07:00  INFO 2184 --- [main] com.example.eduweb.EduwebApplication     : Started EduwebApplication in 9.403 seconds (process running for 9.947)
+2025-04-22T03:22:59.194+07:00  INFO 2184 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-22T03:22:59.226+07:00  INFO 2184 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-22T03:22:59.888+07:00  INFO 2184 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 641 ms
+2025-04-22T03:23:00.282+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/students
+2025-04-22T03:23:00.298+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-04-22T03:23:00.299+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:23:00.302+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:23:00.576+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-04-22T03:23:00.577+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-04-22T03:23:00.578+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-04-22T03:23:02.873+07:00  INFO 2184 --- [http-nio-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-04-22T03:23:02.873+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-04-22T03:23:02.876+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-04-22T03:23:02.880+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-04-22T03:23:02.882+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:23:02.882+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:23:02.886+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:23:02.890+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-04-22T03:23:02.891+07:00  INFO 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-04-22T03:23:02.894+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-04-22T03:23:03.190+07:00  INFO 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Fetching all students
+2025-04-22T03:23:03.246+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting teacher for student: 2
+2025-04-22T03:23:03.297+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting class time for student: 2
+2025-04-22T03:23:03.308+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Found class time 08:00 - 10:00 for student 2
+2025-04-22T03:23:03.309+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Generated random status: present
+2025-04-22T03:23:03.311+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting subjects for student: 2
+2025-04-22T03:23:03.319+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Found 2 subjects for student 2
+2025-04-22T03:23:03.489+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting teacher for student: 3
+2025-04-22T03:23:03.499+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting class time for student: 3
+2025-04-22T03:23:03.506+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Found class time 15:00 - 17:00 for student 3
+2025-04-22T03:23:03.506+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Generated random status: absent
+2025-04-22T03:23:03.506+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting subjects for student: 3
+2025-04-22T03:23:03.509+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Found 1 subjects for student 3
+2025-04-22T03:23:03.607+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting teacher for student: 4
+2025-04-22T03:23:03.614+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting class time for student: 4
+2025-04-22T03:23:03.622+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Found class time 08:00 - 10:00 for student 4
+2025-04-22T03:23:03.622+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Generated random status: no class
+2025-04-22T03:23:03.623+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting subjects for student: 4
+2025-04-22T03:23:03.625+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Found 2 subjects for student 4
+2025-04-22T03:23:03.655+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting teacher for student: 5
+2025-04-22T03:23:03.662+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting class time for student: 5
+2025-04-22T03:23:03.672+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Found class time 15:00 - 17:00 for student 5
+2025-04-22T03:23:03.673+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Generated random status: present
+2025-04-22T03:23:03.673+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting subjects for student: 5
+2025-04-22T03:23:03.676+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Found 1 subjects for student 5
+2025-04-22T03:23:03.698+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting teacher for student: 1
+2025-04-22T03:23:03.703+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting class time for student: 1
+2025-04-22T03:23:03.708+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Found class time 08:00 - 10:00 for student 1
+2025-04-22T03:23:03.709+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Generated random status: present
+2025-04-22T03:23:03.709+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Getting subjects for student: 1
+2025-04-22T03:23:03.711+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Found 2 subjects for student 1
+2025-04-22T03:23:03.735+07:00  INFO 2184 --- [http-nio-8080-exec-1] c.e.e.m.service.StudentService           : Successfully fetched 5 students
+2025-04-22T03:23:03.827+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/students
+2025-04-22T03:23:03.827+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-04-22T03:23:03.828+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:23:03.828+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:23:03.832+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-04-22T03:23:03.832+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-04-22T03:23:03.833+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-04-22T03:23:03.836+07:00  INFO 2184 --- [http-nio-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-04-22T03:23:03.837+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-04-22T03:23:03.837+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-04-22T03:23:03.837+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-04-22T03:23:03.838+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:23:03.840+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:23:03.842+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:23:03.844+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-04-22T03:23:03.845+07:00  INFO 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-04-22T03:23:03.845+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-04-22T03:23:03.847+07:00  INFO 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Fetching all students
+2025-04-22T03:23:03.852+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting teacher for student: 2
+2025-04-22T03:23:03.860+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting class time for student: 2
+2025-04-22T03:23:03.867+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Found class time 08:00 - 10:00 for student 2
+2025-04-22T03:23:03.867+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Generated random status: no class
+2025-04-22T03:23:03.867+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting subjects for student: 2
+2025-04-22T03:23:03.873+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Found 2 subjects for student 2
+2025-04-22T03:23:03.898+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting teacher for student: 3
+2025-04-22T03:23:03.906+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting class time for student: 3
+2025-04-22T03:23:03.910+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Found class time 15:00 - 17:00 for student 3
+2025-04-22T03:23:03.911+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Generated random status: present
+2025-04-22T03:23:03.911+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting subjects for student: 3
+2025-04-22T03:23:03.913+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Found 1 subjects for student 3
+2025-04-22T03:23:03.929+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting teacher for student: 4
+2025-04-22T03:23:03.936+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting class time for student: 4
+2025-04-22T03:23:03.940+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Found class time 08:00 - 10:00 for student 4
+2025-04-22T03:23:03.941+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Generated random status: no class
+2025-04-22T03:23:03.941+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting subjects for student: 4
+2025-04-22T03:23:03.943+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Found 2 subjects for student 4
+2025-04-22T03:23:04.046+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting teacher for student: 5
+2025-04-22T03:23:04.053+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting class time for student: 5
+2025-04-22T03:23:04.059+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Found class time 15:00 - 17:00 for student 5
+2025-04-22T03:23:04.059+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Generated random status: no class
+2025-04-22T03:23:04.060+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting subjects for student: 5
+2025-04-22T03:23:04.063+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Found 1 subjects for student 5
+2025-04-22T03:23:04.284+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting teacher for student: 1
+2025-04-22T03:23:04.289+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting class time for student: 1
+2025-04-22T03:23:04.292+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Found class time 08:00 - 10:00 for student 1
+2025-04-22T03:23:04.293+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Generated random status: no class
+2025-04-22T03:23:04.294+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Getting subjects for student: 1
+2025-04-22T03:23:04.295+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Found 2 subjects for student 1
+2025-04-22T03:23:04.318+07:00  INFO 2184 --- [http-nio-8080-exec-2] c.e.e.m.service.StudentService           : Successfully fetched 5 students
+2025-04-22T03:23:52.085+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/students
+2025-04-22T03:23:52.086+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-04-22T03:23:52.088+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:23:52.088+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:23:52.133+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-04-22T03:23:52.133+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-04-22T03:23:52.135+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-04-22T03:23:52.140+07:00  INFO 2184 --- [http-nio-8080-exec-5] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-04-22T03:23:52.140+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-04-22T03:23:52.141+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-04-22T03:23:52.141+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-04-22T03:23:52.141+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:23:52.141+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:23:52.145+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:23:52.458+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-04-22T03:23:52.461+07:00  INFO 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-04-22T03:23:52.462+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-04-22T03:23:52.555+07:00  INFO 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Fetching all students
+2025-04-22T03:23:52.639+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Getting teacher for student: 2
+2025-04-22T03:23:52.725+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Getting class time for student: 2
+2025-04-22T03:23:52.938+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Found class time 08:00 - 10:00 for student 2
+2025-04-22T03:23:52.938+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Generated random status: no class
+2025-04-22T03:23:52.939+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Getting subjects for student: 2
+2025-04-22T03:23:53.048+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Found 2 subjects for student 2
+2025-04-22T03:23:53.339+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Getting teacher for student: 3
+2025-04-22T03:23:53.421+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Getting class time for student: 3
+2025-04-22T03:23:53.530+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Found class time 15:00 - 17:00 for student 3
+2025-04-22T03:23:53.531+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Generated random status: present
+2025-04-22T03:23:53.531+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Getting subjects for student: 3
+2025-04-22T03:23:53.627+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Found 1 subjects for student 3
+2025-04-22T03:23:53.705+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Getting teacher for student: 4
+2025-04-22T03:23:53.712+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Getting class time for student: 4
+2025-04-22T03:23:53.720+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Found class time 08:00 - 10:00 for student 4
+2025-04-22T03:23:53.720+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Generated random status: absent
+2025-04-22T03:23:53.721+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Getting subjects for student: 4
+2025-04-22T03:23:53.724+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Found 2 subjects for student 4
+2025-04-22T03:23:53.756+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Getting teacher for student: 5
+2025-04-22T03:23:53.765+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Getting class time for student: 5
+2025-04-22T03:23:53.772+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Found class time 15:00 - 17:00 for student 5
+2025-04-22T03:23:53.772+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Generated random status: absent
+2025-04-22T03:23:53.773+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Getting subjects for student: 5
+2025-04-22T03:23:53.780+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Found 1 subjects for student 5
+2025-04-22T03:23:53.813+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Getting teacher for student: 1
+2025-04-22T03:23:53.816+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Getting class time for student: 1
+2025-04-22T03:23:53.822+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Found class time 08:00 - 10:00 for student 1
+2025-04-22T03:23:53.823+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Generated random status: absent
+2025-04-22T03:23:53.826+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Getting subjects for student: 1
+2025-04-22T03:23:53.829+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Found 2 subjects for student 1
+2025-04-22T03:23:55.087+07:00  INFO 2184 --- [http-nio-8080-exec-5] c.e.e.m.service.StudentService           : Successfully fetched 5 students
+2025-04-22T03:23:55.284+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/students
+2025-04-22T03:23:55.284+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-04-22T03:23:55.286+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:23:55.286+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:23:55.290+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-04-22T03:23:55.290+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-04-22T03:23:55.290+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-04-22T03:23:55.294+07:00  INFO 2184 --- [http-nio-8080-exec-6] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-04-22T03:23:55.294+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-04-22T03:23:55.295+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-04-22T03:23:55.295+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-04-22T03:23:55.295+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:23:55.295+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:23:55.298+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:23:55.300+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-04-22T03:23:55.300+07:00  INFO 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-04-22T03:23:55.301+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-04-22T03:23:55.304+07:00  INFO 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Fetching all students
+2025-04-22T03:23:55.309+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Getting teacher for student: 2
+2025-04-22T03:23:55.317+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Getting class time for student: 2
+2025-04-22T03:23:55.326+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Found class time 08:00 - 10:00 for student 2
+2025-04-22T03:23:55.326+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Generated random status: present
+2025-04-22T03:23:55.327+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Getting subjects for student: 2
+2025-04-22T03:23:55.330+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Found 2 subjects for student 2
+2025-04-22T03:23:55.359+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Getting teacher for student: 3
+2025-04-22T03:23:55.364+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Getting class time for student: 3
+2025-04-22T03:23:55.368+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Found class time 15:00 - 17:00 for student 3
+2025-04-22T03:23:55.371+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Generated random status: no class
+2025-04-22T03:23:55.372+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Getting subjects for student: 3
+2025-04-22T03:23:55.374+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Found 1 subjects for student 3
+2025-04-22T03:23:55.386+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Getting teacher for student: 4
+2025-04-22T03:23:55.394+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Getting class time for student: 4
+2025-04-22T03:23:55.398+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Found class time 08:00 - 10:00 for student 4
+2025-04-22T03:23:55.399+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Generated random status: present
+2025-04-22T03:23:55.399+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Getting subjects for student: 4
+2025-04-22T03:23:55.405+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Found 2 subjects for student 4
+2025-04-22T03:23:55.427+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Getting teacher for student: 5
+2025-04-22T03:23:55.431+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Getting class time for student: 5
+2025-04-22T03:23:55.439+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Found class time 15:00 - 17:00 for student 5
+2025-04-22T03:23:55.440+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Generated random status: absent
+2025-04-22T03:23:55.440+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Getting subjects for student: 5
+2025-04-22T03:23:55.442+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Found 1 subjects for student 5
+2025-04-22T03:23:55.459+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Getting teacher for student: 1
+2025-04-22T03:23:55.464+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Getting class time for student: 1
+2025-04-22T03:23:55.475+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Found class time 08:00 - 10:00 for student 1
+2025-04-22T03:23:55.475+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Generated random status: no class
+2025-04-22T03:23:55.475+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Getting subjects for student: 1
+2025-04-22T03:23:55.477+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Found 2 subjects for student 1
+2025-04-22T03:23:55.514+07:00  INFO 2184 --- [http-nio-8080-exec-6] c.e.e.m.service.StudentService           : Successfully fetched 5 students
+2025-04-22T03:26:38.220+07:00 DEBUG 2184 --- [http-nio-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/schedule
+2025-04-22T03:26:38.226+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/teachers
+2025-04-22T03:26:38.356+07:00 DEBUG 2184 --- [http-nio-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-04-22T03:26:38.391+07:00 DEBUG 2184 --- [http-nio-8080-exec-10] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:26:38.392+07:00 DEBUG 2184 --- [http-nio-8080-exec-10] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:26:38.390+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-04-22T03:26:38.392+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:26:38.393+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:26:38.394+07:00 DEBUG 2184 --- [http-nio-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-04-22T03:26:38.395+07:00 DEBUG 2184 --- [http-nio-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-04-22T03:26:38.395+07:00 DEBUG 2184 --- [http-nio-8080-exec-10] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-04-22T03:26:38.396+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-04-22T03:26:38.398+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-04-22T03:26:38.399+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-04-22T03:26:38.402+07:00  INFO 2184 --- [http-nio-8080-exec-10] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-04-22T03:26:38.404+07:00 DEBUG 2184 --- [http-nio-8080-exec-10] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-04-22T03:26:38.406+07:00 DEBUG 2184 --- [http-nio-8080-exec-10] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-04-22T03:26:38.411+07:00 DEBUG 2184 --- [http-nio-8080-exec-10] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-04-22T03:26:38.416+07:00 DEBUG 2184 --- [http-nio-8080-exec-10] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:26:38.419+07:00 DEBUG 2184 --- [http-nio-8080-exec-10] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:26:38.423+07:00 DEBUG 2184 --- [http-nio-8080-exec-10] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:26:38.430+07:00 DEBUG 2184 --- [http-nio-8080-exec-10] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-04-22T03:26:38.430+07:00  INFO 2184 --- [http-nio-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-04-22T03:26:38.431+07:00  INFO 2184 --- [http-nio-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-04-22T03:26:38.431+07:00 DEBUG 2184 --- [http-nio-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-04-22T03:26:38.431+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-04-22T03:26:38.432+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-04-22T03:26:38.432+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-04-22T03:26:38.434+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:26:38.436+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:26:38.441+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:26:38.452+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-04-22T03:26:38.454+07:00  INFO 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-04-22T03:26:38.454+07:00 DEBUG 2184 --- [http-nio-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-04-22T03:26:38.500+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/teachers
+2025-04-22T03:26:38.509+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-04-22T03:26:38.510+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:26:38.504+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/schedule
+2025-04-22T03:26:38.511+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:26:38.512+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-04-22T03:26:38.527+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:26:38.527+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:26:38.518+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-04-22T03:26:38.530+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-04-22T03:26:38.536+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-04-22T03:26:38.531+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-04-22T03:26:38.538+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-04-22T03:26:38.538+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-04-22T03:26:38.540+07:00  INFO 2184 --- [http-nio-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-04-22T03:26:38.540+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-04-22T03:26:38.541+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-04-22T03:26:38.542+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-04-22T03:26:38.542+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:26:38.543+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:26:38.545+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:26:38.546+07:00  INFO 2184 --- [http-nio-8080-exec-3] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-04-22T03:26:38.625+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-04-22T03:26:38.631+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-04-22T03:26:38.713+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-04-22T03:26:38.726+07:00  INFO 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-04-22T03:26:38.729+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-04-22T03:26:38.729+07:00 DEBUG 2184 --- [http-nio-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-04-22T03:26:38.729+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:26:38.729+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:26:38.732+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:26:38.737+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-04-22T03:26:38.737+07:00  INFO 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-04-22T03:26:38.740+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-04-22T03:33:28.383+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/teachers
+2025-04-22T03:33:28.383+07:00 DEBUG 2184 --- [http-nio-8080-exec-7] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/schedule
+2025-04-22T03:33:28.625+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-04-22T03:33:28.625+07:00 DEBUG 2184 --- [http-nio-8080-exec-7] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-04-22T03:33:28.626+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:33:28.626+07:00 DEBUG 2184 --- [http-nio-8080-exec-7] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:33:28.626+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:33:28.626+07:00 DEBUG 2184 --- [http-nio-8080-exec-7] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:33:28.759+07:00 DEBUG 2184 --- [http-nio-8080-exec-7] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-04-22T03:33:28.761+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-04-22T03:33:28.761+07:00 DEBUG 2184 --- [http-nio-8080-exec-7] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-04-22T03:33:28.762+07:00 DEBUG 2184 --- [http-nio-8080-exec-7] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-04-22T03:33:28.761+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-04-22T03:33:28.762+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-04-22T03:33:28.852+07:00  INFO 2184 --- [http-nio-8080-exec-7] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-04-22T03:33:28.856+07:00 DEBUG 2184 --- [http-nio-8080-exec-7] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-04-22T03:33:28.857+07:00 DEBUG 2184 --- [http-nio-8080-exec-7] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-04-22T03:33:28.858+07:00 DEBUG 2184 --- [http-nio-8080-exec-7] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-04-22T03:33:28.858+07:00 DEBUG 2184 --- [http-nio-8080-exec-7] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:33:28.858+07:00 DEBUG 2184 --- [http-nio-8080-exec-7] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:33:28.861+07:00 DEBUG 2184 --- [http-nio-8080-exec-7] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:33:28.863+07:00 DEBUG 2184 --- [http-nio-8080-exec-7] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-04-22T03:33:28.863+07:00  INFO 2184 --- [http-nio-8080-exec-7] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-04-22T03:33:28.863+07:00 DEBUG 2184 --- [http-nio-8080-exec-7] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-04-22T03:33:28.998+07:00  INFO 2184 --- [http-nio-8080-exec-6] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-04-22T03:33:28.999+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-04-22T03:33:29.000+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-04-22T03:33:29.001+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-04-22T03:33:29.001+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:33:29.002+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:33:29.004+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:33:29.008+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-04-22T03:33:29.008+07:00  INFO 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-04-22T03:33:29.009+07:00 DEBUG 2184 --- [http-nio-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-04-22T03:33:30.515+07:00 DEBUG 2184 --- [http-nio-8080-exec-9] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/teachers
+2025-04-22T03:33:30.515+07:00 DEBUG 2184 --- [http-nio-8080-exec-9] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-04-22T03:33:30.517+07:00 DEBUG 2184 --- [http-nio-8080-exec-9] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:33:30.519+07:00 DEBUG 2184 --- [http-nio-8080-exec-9] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:33:30.526+07:00 DEBUG 2184 --- [http-nio-8080-exec-9] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-04-22T03:33:30.527+07:00 DEBUG 2184 --- [http-nio-8080-exec-9] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-04-22T03:33:30.527+07:00 DEBUG 2184 --- [http-nio-8080-exec-9] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-04-22T03:33:30.530+07:00  INFO 2184 --- [http-nio-8080-exec-9] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-04-22T03:33:30.531+07:00 DEBUG 2184 --- [http-nio-8080-exec-9] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-04-22T03:33:30.531+07:00 DEBUG 2184 --- [http-nio-8080-exec-9] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-04-22T03:33:30.532+07:00 DEBUG 2184 --- [http-nio-8080-exec-9] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-04-22T03:33:30.532+07:00 DEBUG 2184 --- [http-nio-8080-exec-9] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:33:30.536+07:00 DEBUG 2184 --- [http-nio-8080-exec-9] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:33:30.540+07:00 DEBUG 2184 --- [http-nio-8080-exec-9] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:33:30.543+07:00 DEBUG 2184 --- [http-nio-8080-exec-9] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-04-22T03:33:30.543+07:00  INFO 2184 --- [http-nio-8080-exec-9] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-04-22T03:33:30.543+07:00 DEBUG 2184 --- [http-nio-8080-exec-9] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-04-22T03:33:31.441+07:00 DEBUG 2184 --- [http-nio-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/schedule
+2025-04-22T03:33:31.441+07:00 DEBUG 2184 --- [http-nio-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-04-22T03:33:31.443+07:00 DEBUG 2184 --- [http-nio-8080-exec-8] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:33:31.443+07:00 DEBUG 2184 --- [http-nio-8080-exec-8] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:33:31.447+07:00 DEBUG 2184 --- [http-nio-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-04-22T03:33:31.448+07:00 DEBUG 2184 --- [http-nio-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-04-22T03:33:31.449+07:00 DEBUG 2184 --- [http-nio-8080-exec-8] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-04-22T03:33:31.460+07:00  INFO 2184 --- [http-nio-8080-exec-8] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-04-22T03:33:31.461+07:00 DEBUG 2184 --- [http-nio-8080-exec-8] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-04-22T03:33:31.461+07:00 DEBUG 2184 --- [http-nio-8080-exec-8] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-04-22T03:33:31.462+07:00 DEBUG 2184 --- [http-nio-8080-exec-8] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-04-22T03:33:31.462+07:00 DEBUG 2184 --- [http-nio-8080-exec-8] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:33:31.462+07:00 DEBUG 2184 --- [http-nio-8080-exec-8] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:33:31.466+07:00 DEBUG 2184 --- [http-nio-8080-exec-8] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:33:31.470+07:00 DEBUG 2184 --- [http-nio-8080-exec-8] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-04-22T03:33:31.470+07:00  INFO 2184 --- [http-nio-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-04-22T03:33:31.470+07:00 DEBUG 2184 --- [http-nio-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-04-22T03:36:19.697+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/teachers
+2025-04-22T03:36:19.698+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-04-22T03:36:19.698+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:36:19.698+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:36:19.700+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-04-22T03:36:19.701+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-04-22T03:36:19.701+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-04-22T03:36:19.819+07:00  INFO 2184 --- [http-nio-8080-exec-3] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-04-22T03:36:19.819+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-04-22T03:36:19.819+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-04-22T03:36:19.820+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-04-22T03:36:19.820+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:36:19.821+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:36:19.822+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:36:19.824+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-04-22T03:36:19.824+07:00  INFO 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-04-22T03:36:19.824+07:00 DEBUG 2184 --- [http-nio-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-04-22T03:36:19.981+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/teachers
+2025-04-22T03:36:19.984+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-04-22T03:36:19.984+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:36:19.985+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:36:19.987+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-04-22T03:36:19.987+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-04-22T03:36:19.988+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-04-22T03:36:19.991+07:00  INFO 2184 --- [http-nio-8080-exec-5] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-04-22T03:36:19.991+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-04-22T03:36:19.991+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-04-22T03:36:19.991+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-04-22T03:36:19.992+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-04-22T03:36:19.992+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:36:19.994+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-04-22T03:36:19.996+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-04-22T03:36:19.996+07:00  INFO 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-04-22T03:36:19.997+07:00 DEBUG 2184 --- [http-nio-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext

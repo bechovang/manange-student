@@ -22,9 +22,12 @@ import { weekDays, timeSlots } from "./const"  // ------------------------------
 import {fallBackTeachers, fallBackSchedules } from "./fall-back-data"  // ------------------------------------------------
 import {teacher, scheduleEvent } from "./types"  // ------------------------------------------------
 import { getWeekNumber, getDateForDay, getCurrentDay } from "@/lib/utils" // -----------------------------------------------
-import { updateScheduleEvent, deleteScheduleEvent, fetchSchedule, fetchTeachers } from "./api" // -----------------------------------------------
+import { updateScheduleEvent, deleteScheduleEvent } from "./api" // -----------------------------------------------
 
-import toast from "react-hot-toast" // Thay đổi từ useToast sang react-hot-toast //---------------------------------------------------
+import { toast } from "react-hot-toast" // Thay đổi từ useToast sang react-hot-toast //---------------------------------------------------
+import Cookies from "js-cookie" 
+import { useRouter } from "next/navigation"
+import axios from "axios"
 
 export function CalendarSchedule({ view }: { view: "day" | "week" | "month" | "agenda" }) {
 
@@ -32,6 +35,87 @@ export function CalendarSchedule({ view }: { view: "day" | "week" | "month" | "a
   const [scheduleEvents, setScheduleEvents] = useState<scheduleEvent[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true)
+  
+  // Hàm để lấy danh sách gv từ API 
+  const fetchTeachers = async () => {
+    try {
+      setLoading(true)
+      const accessToken = Cookies.get('accessToken')
+      console.log('Access Token:', accessToken); // Kiểm tra trong console
+      if (!accessToken) {
+        console.error('No access token found');
+        // router.push('/login'); // Bỏ comment nếu muốn chuyển hướng
+        return;
+      }
+
+        const response = await axios.get('http://localhost:8080/api/teachers', {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json' // Thêm header này nếu cần
+          }
+        })
+        setTeachers(response.data)
+        setError(null)
+      } catch (error: any) {
+        console.error('Error fetching Teachers:', error);
+  
+        if (error.response) {
+          // Lỗi từ phía server
+          console.error('Status:', error.response.status);
+          console.error('Data:', error.response.data);
+          
+          if (error.response.status === 403) {
+            toast.error('Bạn không có quyền truy cập. Vui lòng đăng nhập lại.');
+            // router.push('/login'); // Bỏ comment nếu muốn chuyển hướng
+          }
+        }
+        
+        setError('Không thể tải dữ liệu. Đang sử dụng dữ liệu mẫu.');
+        setTeachers(fallBackTeachers);
+      } finally {
+        setLoading(false)
+      }
+  }
+  const fetchSchedule = async () => {
+    try {
+      setLoading(true)
+      const accessToken = Cookies.get('accessToken')
+      console.log('Access Token:', accessToken); // Kiểm tra trong console
+      if (!accessToken) {
+        console.error('No access token found');
+        // router.push('/login'); // Bỏ comment nếu muốn chuyển hướng
+        return;
+      }
+
+        const response = await axios.get('http://localhost:8080/api/schedule', {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json' // Thêm header này nếu cần
+          }
+        })
+        setScheduleEvents(response.data)
+        setError(null)
+      } catch (error: any) {
+        console.error('Error fetching schedule:', error);
+        
+        if (error.response) {
+          // Lỗi từ phía server
+          console.error('Status:', error.response.status);
+          console.error('Data:', error.response.data);
+          
+          if (error.response.status === 403) {
+            toast.error('Bạn không có quyền truy cập. Vui lòng đăng nhập lại.');
+            // router.push('/login'); // Bỏ comment nếu muốn chuyển hướng
+          }
+        }
+        
+        setError('Không thể tải dữ liệu. Đang sử dụng dữ liệu mẫu.');
+        setScheduleEvents(fallBackSchedules);
+      } finally {
+        setLoading(false)
+      }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,8 +129,8 @@ export function CalendarSchedule({ view }: { view: "day" | "week" | "month" | "a
           fetchSchedule()
         ]);
   
-        setTeachers(teachersData);
-        setScheduleEvents(schedulesData);
+        //setTeachers(teachersData);
+        //setScheduleEvents(schedulesData);
       } catch (err) {
         const errorMessage = 
           err instanceof Error 
