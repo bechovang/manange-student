@@ -49,7 +49,7 @@ export function CalendarSchedule({ view }: { view: "day" | "week" | "month" | "a
         return;
       }
 
-        const response = await axios.get('http://localhost:8080/api/teachers', {
+        const response = await axios.get('http://localhost:8080/api/schedule/teachers', {
           headers: {
             'Authorization': `Bearer ${accessToken}`,
             'Content-Type': 'application/json' // Thêm header này nếu cần

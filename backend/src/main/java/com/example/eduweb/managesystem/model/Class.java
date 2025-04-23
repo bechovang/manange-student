@@ -1,49 +1,75 @@
+// src/main/java/com/example/eduweb/managesystem/model/Class.java
 package com.example.eduweb.managesystem.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import lombok.Data;
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.*;
+
 @Entity
-@Data
-@Table(name = "classes")
+@Table(name = "classes") // Đảm bảo tên bảng đúng với database
 public class Class {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @OneToMany(mappedBy = "classEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Schedule> schedules = new ArrayList<>();
+    
+    // Thêm quan hệ Many-to-One với Teacher
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teacher_id") // Tên cột khóa ngoại trong bảng classes
+    private Teacher teacher;
 
-    @Column(nullable = false)
     private String name;
-
-    @Column(nullable = false)
-    private Long teacher_id;
-
-    @Column(nullable = false)
-    private String subject;
-
-    @Column(nullable = false)
     private String room;
+    
+    
 
-    @Column(name = "start_date")
-    private LocalDate startDate;
+    
+    
+    // Các getter và setter
+    public Long getId() {
+        return id;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public String getRoom() {
+        return room;
+    }
+    
+    public void setRoom(String room) {
+        this.room = room;
+    }
+    
+    public Teacher getTeacher() {
+        return teacher;
+    }
+    
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
 
-    @Column(name = "end_date")
-    private LocalDate endDate;
 
-    @Column(name = "created_at")
-    private LocalDate createdAt;
+    // Thêm phương thức quản lý quan hệ hai chiều
+    public void addSchedule(Schedule schedule) {
+        schedules.add(schedule);
+        schedule.setClassEntity(this);
+    }
 
-    @OneToMany(mappedBy = "classEntity")
-    @JsonIgnore
-    private List<StudentClass> studentClasses;
-
-    @OneToMany(mappedBy = "classEntity")
-    @JsonIgnore
-    private List<Schedule> schedules;
-
-    @OneToMany(mappedBy = "classEntity")
-    @JsonIgnore
-    private List<TuitionPlan> tuitionPlans;
-} 
+    public void removeSchedule(Schedule schedule) {
+        schedules.remove(schedule);
+        schedule.setClassEntity(null);
+    }
+}

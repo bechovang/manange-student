@@ -1,5 +1,6 @@
 package com.example.eduweb.managesystem.service;
 
+import com.example.eduweb.managesystem.exception.ResourceNotFoundException;
 import com.example.eduweb.managesystem.model.Class;
 import com.example.eduweb.managesystem.model.Schedule;
 import com.example.eduweb.managesystem.repository.ClassRepository;
@@ -19,6 +20,11 @@ public class ClassService {
     private final ClassRepository classRepository;
     private final StudentClassRepository studentClassRepository;
     private final ScheduleRepository scheduleRepository;
+
+    public Class getClassWithSchedules(Long classId) {
+        return classRepository.findWithSchedulesById(classId)
+                .orElseThrow(() -> new ResourceNotFoundException("Class not found"));
+    }
 
     public ClassService(ClassRepository classRepository,
                        StudentClassRepository studentClassRepository,
@@ -43,7 +49,7 @@ public class ClassService {
         ClassResponse response = new ClassResponse();
         response.setId(classEntity.getId().toString());
         response.setName(classEntity.getName());
-        response.setTeacherId(classEntity.getTeacher_id());
+        response.setTeacherId(classEntity.getTeacher().getId());
         response.setStudents(getStudentCountByClassId(classEntity.getId()));
         response.setSchedule(getScheduleByClassId(classEntity.getId()));
         response.setStatus(determineClassStatus(classEntity));

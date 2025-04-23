@@ -58,8 +58,8 @@ public class StudentService {
             
             for (StudentClass studentClass : studentClasses) {
                 Class classEntity = studentClass.getClassEntity();
-                if (classEntity != null && classEntity.getSubject() != null) {
-                    subjects.add(classEntity.getSubject());
+                if (classEntity != null && classEntity.getTeacher().getSubject() != null) {
+                    subjects.add(classEntity.getTeacher().getSubject());
                 }
             }
             
@@ -87,9 +87,9 @@ public class StudentService {
                 // 2. Lấy lớp học đầu tiên
                 Class classEntity = studentClasses.get(0).getClassEntity();
                 
-                if (classEntity != null && classEntity.getTeacher_id() != null) {
+                if (classEntity != null && classEntity.getTeacher().getId() != null) {
                     // 3. Truy vấn trực tiếp từ bảng teachers (không dùng bảng teacher trống)
-                    return teacherRepository.findNameById(classEntity.getTeacher_id())
+                    return teacherRepository.findNameById(classEntity.getTeacher().getId())
                         .orElse("Chưa có giáo viên");
                 }
             }
@@ -113,7 +113,7 @@ public class StudentService {
             if (!studentClasses.isEmpty()) {
                 Class classEntity = studentClasses.get(0).getClassEntity();
                 if (classEntity != null) {
-                    List<Schedule> schedules = scheduleRepository.findByClassEntity(classEntity);
+                    List<Schedule> schedules = scheduleRepository.findByClassEntity_Id(classEntity.getId());
                     if (!schedules.isEmpty()) {
                         Schedule schedule = schedules.get(0);
                         String classTime = schedule.getTimeStart() + " - " + schedule.getTimeEnd();

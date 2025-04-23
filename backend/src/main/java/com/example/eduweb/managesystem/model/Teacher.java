@@ -1,10 +1,15 @@
 package com.example.eduweb.managesystem.model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+
 
 @Entity
 @Table(name = "teachers") // Quan trọng
@@ -12,11 +17,15 @@ public class Teacher {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     private String name;
 
     private String subject;
+
+    // Quan hệ One-to-Many (tùy chọn)
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
+    private List<Class> classes;
 
     // Constructor mặc định
     public Teacher() {}
@@ -28,11 +37,11 @@ public class Teacher {
     }
 
     // Getter và Setter
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
