@@ -156,25 +156,48 @@ export function AddScheduleForm() {
       console.log("DEBUG - Form Values:", values);
       console.log("DEBUG - Create Requests to be sent:", createRequests);
       
-      // Gửi các yêu cầu tạo lịch học lên server
-      const createPromises = createRequests.map(request => createScheduleEvent({
-        ...request,
-        teacherId: parseInt(teacherId) // Convert teacherId from string to number
-      }))
-      await Promise.all(createPromises)
+      // Xử lý tuần tự từng yêu cầu một thay vì đồng thời tất cả
+      let successCount = 0;
+      for (const request of createRequests) {
+        try {
+          // Gửi yêu cầu tạo lịch học lên server
+          await createScheduleEvent({
+            ...request,
+            teacherId: parseInt(teacherId) // Convert teacherId from string to number
+          });
+          successCount++;
+          
+          // Thêm delay 1 giây giữa các request để tránh xung đột
+          if (createRequests.length > 1 && successCount < createRequests.length) {
+            await new Promise(resolve => setTimeout(resolve, 200));
+          }
+        } catch (error) {
+          console.error(`Lỗi khi thêm lịch học cho ngày ${request.weekday}:`, error);
+          // Tiếp tục với ngày tiếp theo thay vì dừng lại
+        }
+      }
 
-      toast({
-        title: "Thêm lịch học thành công",
-        description: `Đã thêm lịch học lớp ${values.className} vào hệ thống.`,
-      })
-
-      // Xóa debug data sau 10 giây
-      setTimeout(() => {
-        setDebugData({})
-      }, 10000)
-      
-      form.reset()
-      setOpen(false)
+      // Thông báo thành công nếu ít nhất một lịch học được tạo
+      if (successCount > 0) {
+        toast({
+          title: "Thêm lịch học thành công",
+          description: `Đã thêm ${successCount}/${createRequests.length} lịch học lớp ${values.className} vào hệ thống.`,
+        });
+        
+        // Xóa debug data sau 10 giây
+        setTimeout(() => {
+          setDebugData({})
+        }, 10000)
+        
+        form.reset();
+        setOpen(false);
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Có lỗi xảy ra",
+          description: "Không thể thêm lịch học. Vui lòng thử lại sau.",
+        });
+      }
     } catch (error) {
       console.error("Lỗi khi thêm lịch học:", error)
       toast({
