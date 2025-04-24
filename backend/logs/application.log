@@ -5385,3 +5385,31 @@
 2025-04-25T01:39:10.185+07:00 DEBUG 16532 --- [http-nio-8080-exec-6] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
 2025-04-25T01:39:10.185+07:00  INFO 16532 --- [http-nio-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
 2025-04-25T01:39:10.185+07:00 DEBUG 16532 --- [http-nio-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-04-25T01:45:32.282+07:00  INFO 17280 --- [main] com.example.eduweb.EduwebApplication     : Starting EduwebApplication using Java 17.0.12 with PID 17280 (C:\Users\Admin\Desktop\manage student\backend\target\classes started by Admin in C:\Users\Admin\Desktop\manage student\backend)
+2025-04-25T01:45:32.286+07:00 DEBUG 17280 --- [main] com.example.eduweb.EduwebApplication     : Running with Spring Boot v3.1.5, Spring v6.0.13
+2025-04-25T01:45:32.289+07:00  INFO 17280 --- [main] com.example.eduweb.EduwebApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-04-25T01:45:33.430+07:00  INFO 17280 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-25T01:45:33.552+07:00  INFO 17280 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 110 ms. Found 9 JPA repository interfaces.
+2025-04-25T01:45:34.694+07:00  INFO 17280 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2025-04-25T01:45:34.728+07:00  INFO 17280 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-25T01:45:34.730+07:00  INFO 17280 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2025-04-25T01:45:34.895+07:00  INFO 17280 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-25T01:45:34.896+07:00  INFO 17280 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2515 ms
+2025-04-25T01:45:35.084+07:00  INFO 17280 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-25T01:45:35.178+07:00  INFO 17280 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.13.Final
+2025-04-25T01:45:35.184+07:00  INFO 17280 --- [main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2025-04-25T01:45:36.280+07:00  INFO 17280 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-25T01:45:36.521+07:00  INFO 17280 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-04-25T01:45:37.682+07:00  INFO 17280 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1de5cc88
+2025-04-25T01:45:37.699+07:00  INFO 17280 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-04-25T01:45:44.070+07:00  INFO 17280 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-25T01:45:44.435+07:00  INFO 17280 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-25T01:45:44.998+07:00  INFO 17280 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-25T01:45:45.423+07:00 DEBUG 17280 --- [main] c.e.eduweb.auth.config.JwtAuthFilter     : JwtAuthFilter initialized
+2025-04-25T01:45:45.490+07:00 DEBUG 17280 --- [main] c.e.eduweb.auth.config.JwtAuthFilter     : Filter 'jwtAuthFilter' configured for use
+2025-04-25T01:45:45.593+07:00  INFO 17280 --- [main] c.e.e.a.service.TokenBlacklistService    : TokenBlacklistService initialized
+2025-04-25T01:45:45.594+07:00  INFO 17280 --- [main] c.e.e.a.service.TokenBlacklistService    : Scheduled blacklist cleanup task every 1 hour
+2025-04-25T01:45:46.166+07:00  WARN 17280 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-25T01:45:46.578+07:00  INFO 17280 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4873c645, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7e7e34ef, org.springframework.security.web.context.SecurityContextHolderFilter@2d28114b, org.springframework.security.web.header.HeaderWriterFilter@179af25f, org.springframework.web.filter.CorsFilter@e7c3ba2, org.springframework.security.web.authentication.logout.LogoutFilter@6bb2b8d4, com.example.eduweb.auth.config.JwtAuthFilter@5dfb078, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7edb2a4b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@355e1080, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@35c646b5, org.springframework.security.web.session.SessionManagementFilter@57f076bd, org.springframework.security.web.access.ExceptionTranslationFilter@762261fd, org.springframework.security.web.access.intercept.AuthorizationFilter@7138e064]
+2025-04-25T01:45:46.954+07:00  INFO 17280 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2025-04-25T01:45:46.966+07:00  INFO 17280 --- [main] com.example.eduweb.EduwebApplication     : Started EduwebApplication in 15.386 seconds (process running for 16.144)

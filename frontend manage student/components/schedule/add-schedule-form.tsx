@@ -157,7 +157,10 @@ export function AddScheduleForm() {
       console.log("DEBUG - Create Requests to be sent:", createRequests);
       
       // Gửi các yêu cầu tạo lịch học lên server
-      const createPromises = createRequests.map(request => createScheduleEvent(request))
+      const createPromises = createRequests.map(request => createScheduleEvent({
+        ...request,
+        teacherId: parseInt(teacherId) // Convert teacherId from string to number
+      }))
       await Promise.all(createPromises)
 
       toast({
