@@ -7,6 +7,7 @@ import com.example.eduweb.managesystem.repository.ClassRepository;
 import com.example.eduweb.managesystem.repository.ScheduleRepository;
 import com.example.eduweb.managesystem.repository.StudentClassRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -21,9 +22,40 @@ public class ClassService {
     private final StudentClassRepository studentClassRepository;
     private final ScheduleRepository scheduleRepository;
 
+    @Transactional
     public Class getClassWithSchedules(Long classId) {
-        return classRepository.findWithSchedulesById(classId)
+        Class classEntity = classRepository.findWithSchedulesById(classId)
                 .orElseThrow(() -> new ResourceNotFoundException("Class not found"));
+                
+        // Check if the class has any schedules and delete it if not
+        if (classEntity.getSchedules() == null || classEntity.getSchedules().isEmpty()) {
+            classRepository.delete(classEntity);
+            throw new ResourceNotFoundException("Class has no schedules and has been deleted");
+        }
+        
+        return classEntity;
+    }
+
+    /**
+     * Cleans up all classes that don't have any schedules.
+     * @return The number of classes deleted
+     */
+    @Transactional
+    public int cleanupClassesWithNoSchedules() {
+        int deletedCount = 0;
+        List<Class> allClasses = classRepository.findAll();
+        
+        for (Class classEntity : allClasses) {
+            // Force loading of schedules if they're lazily loaded
+            List<Schedule> schedules = scheduleRepository.findByClassEntityId(classEntity.getId());
+            
+            if (schedules == null || schedules.isEmpty()) {
+                classRepository.delete(classEntity);
+                deletedCount++;
+            }
+        }
+        
+        return deletedCount;
     }
 
     public ClassService(ClassRepository classRepository,
@@ -35,6 +67,7 @@ public class ClassService {
     }
 
     public List<ClassResponse> getAllClasses() {
+        cleanupClassesWithNoSchedules();
         return classRepository.findAll().stream()
                 .map(this::convertToClassResponse)
                 .collect(Collectors.toList());

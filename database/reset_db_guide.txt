@@ -61,3 +61,7 @@ TROUBLESHOOTING:
 - Lỗi kết nối: Đảm bảo PostgreSQL service đang chạy
 - Lỗi permission: Thêm -h localhost nếu dùng auth method password
 - Lỗi encoding: Thêm LC_COLLATE và LC_CTYPE như trên
+
+
+* lỗi xem tiếng việt
+=> SET client_encoding TO 'UTF8';

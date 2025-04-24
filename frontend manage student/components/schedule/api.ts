@@ -79,6 +79,36 @@ export const fetchSchedule = async (): Promise<scheduleEvent[]> => {
   }
 };
 
+export const createScheduleEvent = async (eventData: Partial<scheduleEvent>): Promise<scheduleEvent> => {
+  try {
+    console.group("DEBUG - Create Schedule Event");
+    console.log("Request URL:", `${apiClient.defaults.baseURL}/api/schedule`);
+    console.log("Request Method: POST");
+    console.log("Request Headers:", {
+      'Content-Type': 'application/json',
+      'Authorization': Cookies.get(process.env.NEXT_PUBLIC_JWT_COOKIE_NAME || "accessToken") ? 
+                       `Bearer ${Cookies.get(process.env.NEXT_PUBLIC_JWT_COOKIE_NAME || "accessToken")}` : 'None'
+    });
+    console.log("Request Payload:", JSON.stringify(eventData, null, 2));
+    
+    const response = await apiClient.post("/api/schedule", eventData);
+    
+    console.log("Response Status:", response.status);
+    console.log("Response Data:", response.data);
+    console.groupEnd();
+    
+    return response.data;
+  } catch (error) {
+    console.group("DEBUG - Create Schedule Event Error");
+    logErrorDetails(error);
+    if (axios.isAxiosError(error) && error.response) {
+      console.log("Error Response Data:", error.response.data);
+    }
+    console.groupEnd();
+    throw new Error("Failed to create schedule event");
+  }
+};
+
 export const updateScheduleEvent = async (id: number, eventData: Partial<scheduleEvent>): Promise<scheduleEvent> => {
   try {
     const response = await apiClient.put(`/api/schedule/${id}`, eventData);
@@ -102,6 +132,7 @@ export const deleteScheduleEvent = async (id: number): Promise<void> => {
 export default {
   fetchTeachers,
   fetchSchedule,
+  createScheduleEvent,
   updateScheduleEvent,
   deleteScheduleEvent,
   apiClient,

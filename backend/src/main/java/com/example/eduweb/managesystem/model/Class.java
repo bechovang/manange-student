@@ -24,9 +24,8 @@ public class Class {
     private String name;
     private String room;
     
-    
-
-    
+    @Column(nullable = false)
+    private String subject;
     
     // Các getter và setter
     public Long getId() {
@@ -61,6 +60,21 @@ public class Class {
         this.teacher = teacher;
     }
 
+    public String getSubject() {
+        return subject;
+    }
+    
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public List<Schedule> getSchedules() {
+        return schedules;
+    }
+    
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules = schedules;
+    }
 
     // Thêm phương thức quản lý quan hệ hai chiều
     public void addSchedule(Schedule schedule) {

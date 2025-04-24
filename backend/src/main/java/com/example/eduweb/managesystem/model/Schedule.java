@@ -3,6 +3,7 @@ package com.example.eduweb.managesystem.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalTime;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -24,6 +25,11 @@ public class Schedule {
 
     @Column(name = "time_end", nullable = false)
     private LocalTime timeEnd;
-
+    
+    @Column(name = "start_date")
+    private LocalDate startDate;
+    
+    @Column(name = "end_date")
+    private LocalDate endDate;
 } 
 

@@ -30,4 +30,10 @@ public interface ClassRepository extends JpaRepository<Class, Long> {
 
     // Tìm lớp theo giáo viên
     List<Class> findByTeacherId(Long teacherId);
+    
+    // Tìm lớp theo tên
+    Optional<Class> findByName(String name);
+    
+    // Kiểm tra xem lớp với tên đã tồn tại chưa
+    boolean existsByName(String name);
 }

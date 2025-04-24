@@ -1,5 +1,4 @@
-
-// src/main/java/com/example/eduweb/dto/ScheduleEventDTO.java
+// src/main/java/com/example/eduweb/managesystem/dto/ScheduleEventDTO.java
 package com.example.eduweb.managesystem.dto;
 
 import jakarta.validation.constraints.NotNull;
@@ -18,10 +17,11 @@ public class ScheduleEventDTO {
     private String title; // Mapped from Class.name
     private Long teacherId; // Mapped from Class.teacher.id
     private String room; // Mapped from Class.room
+    private String subject; // Mapped from Class.subject
 
     // Fields from the Schedule entity
-    @NotNull(message = "Class ID is required for schedule entry")
-    private Long classId; // Need classId to create/update a schedule entry
+    // Made optional for creation scenario
+    private Long classId; // Optional when creating a new Class
 
     @NotNull(message = "Weekday is required")
     @Pattern(regexp = "^(mon|tue|wed|thu|fri|sat|sun)$", message = "Weekday must be one of: mon, tue, wed, thu, fri, sat, sun")
@@ -37,4 +37,11 @@ public class ScheduleEventDTO {
 
     // --- Frontend specific fields (for GET responses) ---
     private Integer day; // 0-6 - This will be calculated in the service layer for GET requests
+    
+    // String day format used by frontend ("2", "3", "cn")
+    private String stringDay;
+    
+    // New fields for date range
+    private String startDate;
+    private String endDate;
 }

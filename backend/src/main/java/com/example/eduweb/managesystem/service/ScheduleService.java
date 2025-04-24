@@ -7,6 +7,8 @@ import com.example.eduweb.managesystem.model.Class; // Import Class
 import com.example.eduweb.managesystem.model.Schedule;
 import com.example.eduweb.managesystem.repository.ClassRepository; // Import ClassRepository
 import com.example.eduweb.managesystem.repository.ScheduleRepository;
+import com.example.eduweb.managesystem.model.Teacher;
+import com.example.eduweb.managesystem.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 public class ScheduleService {
@@ -26,6 +29,9 @@ public class ScheduleService {
 
     @Autowired
     private ClassRepository classRepository; // Need ClassRepository
+
+    @Autowired
+    private TeacherRepository teacherRepository;
 
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
@@ -40,6 +46,11 @@ public class ScheduleService {
         WEEKDAY_TO_DAY_INT.forEach((key, value) -> DAY_INT_TO_WEEKDAY.put(value, key));
     }
 
+    // New mapping for frontend string day format to weekday string
+    private static final Map<String, String> DAY_STRING_TO_WEEKDAY = Map.of(
+            "2", "mon", "3", "tue", "4", "wed", "5", "thu", 
+            "6", "fri", "7", "sat", "cn", "sun"
+    );
 
     @Transactional(readOnly = true)
     public List<ScheduleEventDTO> getAllScheduleEvents() {
@@ -61,21 +72,61 @@ public class ScheduleService {
 
     @Transactional
     public ScheduleEventDTO createScheduleEvent(ScheduleEventDTO scheduleEventDTO) {
-        // 1. Find the associated Class
-        Class classEntity = classRepository.findById(scheduleEventDTO.getClassId())
+        Schedule schedule;
+        Class classEntity;
+        
+        // Check if we should use an existing class or create a new one
+        if (scheduleEventDTO.getClassId() != null) {
+            // Use existing class
+            classEntity = classRepository.findById(scheduleEventDTO.getClassId())
                 .orElseThrow(() -> new ResourceNotFoundException("Class", "id", scheduleEventDTO.getClassId()));
+        } else {
+            // Check if a class with the same name already exists
+            String className = scheduleEventDTO.getTitle();
+            Optional<Class> existingClass = classRepository.findByName(className);
+            
+            if (existingClass.isPresent()) {
+                // Use the existing class
+                classEntity = existingClass.get();
+            } else {
+                // Find the teacher first to get the subject
+                Teacher teacher = teacherRepository.findById(scheduleEventDTO.getTeacherId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Teacher", "id", scheduleEventDTO.getTeacherId()));
+                    
+                // Create a new Class entity from DTO data
+                classEntity = new Class();
+                classEntity.setName(scheduleEventDTO.getTitle());
+                classEntity.setRoom(scheduleEventDTO.getRoom());
+                classEntity.setTeacher(teacher);
+                
+                // Get subject from the teacher
+                classEntity.setSubject(teacher.getSubject());
+                
+                // Save the new Class entity
+                classEntity = classRepository.save(classEntity);
+            }
+        }
 
-        // 2. Create new Schedule entity
-        Schedule schedule = new Schedule();
+        // Create new Schedule entity
+        schedule = new Schedule();
         schedule.setClassEntity(classEntity);
         schedule.setWeekday(scheduleEventDTO.getWeekday());
         schedule.setTimeStart(LocalTime.parse(scheduleEventDTO.getStartTime(), TIME_FORMATTER));
         schedule.setTimeEnd(LocalTime.parse(scheduleEventDTO.getEndTime(), TIME_FORMATTER));
+        
+        // Handle date range if provided
+        if (scheduleEventDTO.getStartDate() != null) {
+            schedule.setStartDate(java.time.LocalDate.parse(scheduleEventDTO.getStartDate()));
+        }
+        
+        if (scheduleEventDTO.getEndDate() != null) {
+            schedule.setEndDate(java.time.LocalDate.parse(scheduleEventDTO.getEndDate()));
+        }
 
-        // 3. Save the new Schedule entity
+        // Save the new Schedule entity
         Schedule savedSchedule = scheduleRepository.save(schedule);
 
-        // 4. Map back to DTO for the response
+        // Map back to DTO for the response
         return mapToDTO(savedSchedule);
     }
 
@@ -85,25 +136,112 @@ public class ScheduleService {
         Schedule existingSchedule = scheduleRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Schedule", "id", id));
 
-        // 2. Validate if the class needs to be changed (optional, depends on requirements)
-        // If classId in DTO is different, you might need to find the new class
-        // or throw an error if changing class is not allowed.
-        // For simplicity, let's assume class doesn't change in an update here.
-        // If it can change, add:
-        // Class classEntity = classRepository.findById(scheduleEventDTO.getClassId())
-        //     .orElseThrow(() -> new ResourceNotFoundException("Class", "id", scheduleEventDTO.getClassId()));
-        // existingSchedule.setClassEntity(classEntity);
+        // 2. Get the current class entity
+        Class currentClassEntity = existingSchedule.getClassEntity();
+        
+        // 3. Check if we need to update the class or create a new one
+        if (scheduleEventDTO.getClassId() != null && !scheduleEventDTO.getClassId().equals(currentClassEntity.getId())) {
+            // Different class ID - use the specified class
+            Class newClassEntity = classRepository.findById(scheduleEventDTO.getClassId())
+                .orElseThrow(() -> new ResourceNotFoundException("Class", "id", scheduleEventDTO.getClassId()));
+            existingSchedule.setClassEntity(newClassEntity);
+        } else if (scheduleEventDTO.getTitle() != null && !scheduleEventDTO.getTitle().equals(currentClassEntity.getName())) {
+            // Title changed but no explicit class ID - check if we need to update or find existing class
+            Optional<Class> existingClass = classRepository.findByName(scheduleEventDTO.getTitle());
+            
+            if (existingClass.isPresent()) {
+                // Use existing class with this name
+                existingSchedule.setClassEntity(existingClass.get());
+            } else {
+                // Update the current class name
+                currentClassEntity.setName(scheduleEventDTO.getTitle());
+                
+                // Update room if provided
+                if (scheduleEventDTO.getRoom() != null) {
+                    currentClassEntity.setRoom(scheduleEventDTO.getRoom());
+                }
+                
+                // Update teacher if teacherId is provided and different
+                if (scheduleEventDTO.getTeacherId() != null && 
+                    (currentClassEntity.getTeacher() == null || 
+                     !scheduleEventDTO.getTeacherId().equals(currentClassEntity.getTeacher().getId()))) {
+                    
+                    Teacher newTeacher = teacherRepository.findById(scheduleEventDTO.getTeacherId())
+                        .orElseThrow(() -> new ResourceNotFoundException("Teacher", "id", scheduleEventDTO.getTeacherId()));
+                    
+                    currentClassEntity.setTeacher(newTeacher);
+                    
+                    // Update the subject based on the new teacher
+                    currentClassEntity.setSubject(newTeacher.getSubject());
+                }
+                
+                // Save the updated class
+                classRepository.save(currentClassEntity);
+            }
+        } else {
+            // Same class, but check if we need to update teacher or room
+            if (scheduleEventDTO.getTeacherId() != null && 
+                (currentClassEntity.getTeacher() == null || 
+                 !scheduleEventDTO.getTeacherId().equals(currentClassEntity.getTeacher().getId()))) {
+                
+                Teacher newTeacher = teacherRepository.findById(scheduleEventDTO.getTeacherId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Teacher", "id", scheduleEventDTO.getTeacherId()));
+                
+                currentClassEntity.setTeacher(newTeacher);
+                currentClassEntity.setSubject(newTeacher.getSubject());
+                classRepository.save(currentClassEntity);
+            }
+            
+            if (scheduleEventDTO.getRoom() != null && !scheduleEventDTO.getRoom().equals(currentClassEntity.getRoom())) {
+                currentClassEntity.setRoom(scheduleEventDTO.getRoom());
+                classRepository.save(currentClassEntity);
+            }
+        }
 
+        // 4. Update schedule fields
+        if (scheduleEventDTO.getWeekday() != null) {
+            // If weekday is provided directly, use it
+            existingSchedule.setWeekday(scheduleEventDTO.getWeekday());
+        } else if (scheduleEventDTO.getStringDay() != null) {
+            // Handle string day format from frontend ("2", "3", "cn")
+            String weekday = DAY_STRING_TO_WEEKDAY.get(scheduleEventDTO.getStringDay());
+            if (weekday != null) {
+                existingSchedule.setWeekday(weekday);
+                System.out.println("Converting stringDay " + scheduleEventDTO.getStringDay() + " to weekday " + weekday);
+            }
+        } else if (scheduleEventDTO.getDay() != null) {
+            // If day is provided as integer (0-6), convert to weekday string
+            String weekday = DAY_INT_TO_WEEKDAY.get(scheduleEventDTO.getDay());
+            if (weekday != null) {
+                existingSchedule.setWeekday(weekday);
+                System.out.println("Converting day " + scheduleEventDTO.getDay() + " to weekday " + weekday);
+            } else {
+                System.out.println("Failed to convert day: " + scheduleEventDTO.getDay());
+            }
+        }
+        
+        // Update time fields if provided
+        if (scheduleEventDTO.getStartTime() != null) {
+            existingSchedule.setTimeStart(LocalTime.parse(scheduleEventDTO.getStartTime(), TIME_FORMATTER));
+        }
+        
+        if (scheduleEventDTO.getEndTime() != null) {
+            existingSchedule.setTimeEnd(LocalTime.parse(scheduleEventDTO.getEndTime(), TIME_FORMATTER));
+        }
+        
+        // Update date range if provided
+        if (scheduleEventDTO.getStartDate() != null) {
+            existingSchedule.setStartDate(java.time.LocalDate.parse(scheduleEventDTO.getStartDate()));
+        }
+        
+        if (scheduleEventDTO.getEndDate() != null) {
+            existingSchedule.setEndDate(java.time.LocalDate.parse(scheduleEventDTO.getEndDate()));
+        }
 
-        // 3. Update fields
-        existingSchedule.setWeekday(scheduleEventDTO.getWeekday());
-        existingSchedule.setTimeStart(LocalTime.parse(scheduleEventDTO.getStartTime(), TIME_FORMATTER));
-        existingSchedule.setTimeEnd(LocalTime.parse(scheduleEventDTO.getEndTime(), TIME_FORMATTER));
-
-        // 4. Save the updated entity
+        // 5. Save the updated schedule entity
         Schedule updatedSchedule = scheduleRepository.save(existingSchedule);
 
-        // 5. Map back to DTO
+        // 6. Map back to DTO
         return mapToDTO(updatedSchedule);
     }
 
@@ -140,6 +278,15 @@ public class ScheduleService {
         dto.setStartTime(schedule.getTimeStart().format(TIME_FORMATTER));
         dto.setEndTime(schedule.getTimeEnd().format(TIME_FORMATTER));
         dto.setDay(WEEKDAY_TO_DAY_INT.getOrDefault(schedule.getWeekday().toLowerCase(), -1));
+        
+        // Map date range fields
+        if (schedule.getStartDate() != null) {
+            dto.setStartDate(schedule.getStartDate().toString());
+        }
+        
+        if (schedule.getEndDate() != null) {
+            dto.setEndDate(schedule.getEndDate().toString());
+        }
     
         return dto;
     }
