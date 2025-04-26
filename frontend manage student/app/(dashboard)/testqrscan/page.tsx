@@ -1,3 +1,4 @@
+// page test điểm danh bằng mã QR
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { QrCodeGenerator } from "@/components/qr-code-generator"
