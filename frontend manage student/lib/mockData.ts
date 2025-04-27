@@ -539,16 +539,16 @@ export const notificationTemplates = {
   fee_reminder: {
     title: "Nhắc đóng học phí tháng 6/2023",
     content:
-      "Kính gửi Quý phụ huynh,\n\nTrung tâm Ánh Bình Minh xin thông báo học phí tháng 6/2023 của học sinh [Tên học sinh] là [Số tiền]đ.\n\nVui lòng đóng học phí trước ngày 05/06/2023.\n\nTrân trọng,\nTrung tâm Ánh Bình Minh",
+      "Kính gửi Quý phụ huynh,\n\nBechovang xin thông báo học phí tháng 6/2023 của học sinh [Tên học sinh] là [Số tiền]đ.\n\nVui lòng đóng học phí trước ngày 05/06/2023.\n\nTrân trọng,\nBechovang",
     preview:
-      "Kính gửi Quý phụ huynh,\n\nTrung tâm Ánh Bình Minh xin thông báo học phí tháng 6/2023 của học sinh Nguyễn Văn A là 1,500,000đ.\n\nVui lòng đóng học phí trước ngày 05/06/2023.\n\nTrân trọng,\nTrung tâm Ánh Bình Minh",
+      "Kính gửi Quý phụ huynh,\n\nBechovang xin thông báo học phí tháng 6/2023 của học sinh Nguyễn Văn A là 1,500,000đ.\n\nVui lòng đóng học phí trước ngày 05/06/2023.\n\nTrân trọng,\nBechovang",
   },
   exam_schedule: {
     title: "Lịch thi cuối kỳ",
     content:
-      "Kính gửi Quý phụ huynh,\n\nTrung tâm Ánh Bình Minh xin thông báo lịch thi cuối kỳ của học sinh [Tên học sinh] như sau:\n\n- Môn Toán: 15/06/2023 (8:00 - 9:30)\n- Môn Văn: 16/06/2023 (8:00 - 9:30)\n- Môn Anh: 17/06/2023 (8:00 - 9:30)\n\nVui lòng cho học sinh đi học đầy đủ và đúng giờ.\n\nTrân trọng,\nTrung tâm Ánh Bình Minh",
+      "Kính gửi Quý phụ huynh,\n\nBechovang xin thông báo lịch thi cuối kỳ của học sinh [Tên học sinh] như sau:\n\n- Môn Toán: 15/06/2023 (8:00 - 9:30)\n- Môn Văn: 16/06/2023 (8:00 - 9:30)\n- Môn Anh: 17/06/2023 (8:00 - 9:30)\n\nVui lòng cho học sinh đi học đầy đủ và đúng giờ.\n\nTrân trọng,\nBechovang",
     preview:
-      "Kính gửi Quý phụ huynh,\n\nTrung tâm Ánh Bình Minh xin thông báo lịch thi cuối kỳ của học sinh Nguyễn Văn A như sau:\n\n- Môn Toán: 15/06/2023 (8:00 - 9:30)\n- Môn Văn: 16/06/2023 (8:00 - 9:30)\n- Môn Anh: 17/06/2023 (8:00 - 9:30)\n\nVui lòng cho học sinh đi học đầy đủ và đúng giờ.\n\nTrân trọng,\nTrung tâm Ánh Bình Minh",
+      "Kính gửi Quý phụ huynh,\n\nBechovang xin thông báo lịch thi cuối kỳ của học sinh Nguyễn Văn A như sau:\n\n- Môn Toán: 15/06/2023 (8:00 - 9:30)\n- Môn Văn: 16/06/2023 (8:00 - 9:30)\n- Môn Anh: 17/06/2023 (8:00 - 9:30)\n\nVui lòng cho học sinh đi học đầy đủ và đúng giờ.\n\nTrân trọng,\nBechovang",
   },
   custom: {
     title: "",

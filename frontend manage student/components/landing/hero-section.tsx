@@ -11,7 +11,7 @@ export function HeroSection() {
           <div className="flex flex-col justify-center space-y-4">
             <div className="space-y-2">
               <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none text-red-700">
-                Trung tâm Ánh Bình Minh
+                Bechovang
               </h1>
               <p className="max-w-[600px] text-gray-500 md:text-xl">
                 Hệ thống quản lý học sinh hiện đại, giúp tối ưu hóa quy trình quản lý và nâng cao chất lượng giáo dục.
@@ -33,7 +33,7 @@ export function HeroSection() {
             <div className="relative h-[350px] w-[350px] md:h-[450px] md:w-[450px]">
               <Image
                 src="/placeholder.svg?height=450&width=450"
-                alt="Trung tâm Ánh Bình Minh"
+                alt="Bechovang"
                 fill
                 className="object-cover rounded-lg shadow-xl"
               />
