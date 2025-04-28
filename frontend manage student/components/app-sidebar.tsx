@@ -85,7 +85,7 @@ export function AppSidebar() {
       <div className="flex h-16 items-center border-b px-4">
         <Link href="/dashboard" className="flex items-center gap-2">
           <div className="h-8 w-8 rounded-full bg-red-700"></div>
-          <span className="text-lg font-bold text-red-700">Ánh Bình Minh</span>
+          <span className="text-lg font-bold text-red-700">Bechovang</span>
         </Link>
       </div>
       <nav className="flex-1 overflow-auto p-2">

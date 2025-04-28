@@ -10,8 +10,8 @@ import { Toaster as HotToaster } from 'react-hot-toast'
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
-  title: "Trung tâm Ánh Bình Minh - Quản lý học sinh",
-  description: "Hệ thống quản lý học sinh Trung tâm Ánh Bình Minh",
+  title: "Bechovang - Quản lý học sinh",
+  description: "Hệ thống quản lý học sinh Bechovang",
     generator: 'v0.dev'
 }
 

@@ -8,7 +8,7 @@ export function Footer() {
             <span className="text-sm font-bold text-red-700">Ánh Bình Minh</span>
           </div>
           <p className="text-center text-sm text-gray-500 md:text-left">
-            © 2023 Trung tâm Ánh Bình Minh. Tất cả các quyền được bảo lưu.
+            © 2023 Bechovang. Tất cả các quyền được bảo lưu.
           </p>
           <div className="flex gap-4">
             <a href="#" className="text-gray-500 hover:text-gray-900">

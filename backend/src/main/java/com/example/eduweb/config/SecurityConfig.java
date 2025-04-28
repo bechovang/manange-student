@@ -33,6 +33,8 @@ public class SecurityConfig {
     // Danh sách domain được phép (có thể đưa vào application.properties)
     private static final List<String> ALLOWED_ORIGINS = Arrays.asList(
         "http://localhost:3000",
+        "http://192.168.1.8:3000", // 👈 Thêm dòng này để mở cho frontend trên điện thoại
+        "https://cb30-2001-ee0-50cd-b0b0-41a6-e508-8f89-b63.ngrok-free.app", // ngrok
         "https://edu-web-frontend.vercel.app",
         "https://trungtamanhbinhminh-*.vercel.app",
         "https://*.vercel.app"

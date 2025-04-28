@@ -57,17 +57,17 @@ INSERT INTO student_classes (student_id, class_id, status) VALUES
 (5, 4, 'active'),
 (2, 2, 'active');
 
--- 8. Schedule (phụ thuộc vào classes)
+-- 8. Schedule (phụ thuộc vào classes) - Updated with new time slots
 INSERT INTO schedule (class_id, weekday, time_start, time_end) VALUES
-(1, 'mon', '08:00:00', '10:00:00'),
-(1, 'wed', '08:00:00', '10:00:00'),
-(2, 'tue', '13:00:00', '15:00:00'),
-(2, 'thu', '13:00:00', '15:00:00'),
-(3, 'fri', '15:00:00', '17:00:00'),
-(4, 'mon', '15:00:00', '17:00:00'),
-(4, 'thu', '15:00:00', '17:00:00'),
-(5, 'tue', '08:00:00', '10:00:00'),
-(5, 'fri', '08:00:00', '10:00:00');
+(1, 'mon', '08:30:00', '10:00:00'),  -- Toan 10 NC: Mon 8:30-10:00
+(1, 'wed', '08:30:00', '10:00:00'),  -- Toan 10 NC: Wed 8:30-10:00
+(2, 'tue', '13:30:00', '15:00:00'),  -- Ly 11 CB: Tue 13:30-15:00
+(2, 'thu', '13:30:00', '15:00:00'),  -- Ly 11 CB: Thu 13:30-15:00
+(3, 'fri', '15:30:00', '17:00:00'),  -- Hoa 12: Fri 15:30-17:00
+(4, 'mon', '15:30:00', '17:00:00'),  -- Toan 9 CB: Mon 15:30-17:00
+(4, 'thu', '15:30:00', '17:00:00'),  -- Toan 9 CB: Thu 15:30-17:00
+(5, 'tue', '07:00:00', '08:30:00'),  -- Anh 10 NC: Tue 7:00-8:30
+(5, 'fri', '07:00:00', '08:30:00');   -- Anh 10 NC: Fri 7:00-8:30
 
 -- 9. Invoices (phụ thuộc vào students)
 INSERT INTO invoices (student_id, invoice_number, issue_date, due_date, total_amount, paid_amount, status) VALUES

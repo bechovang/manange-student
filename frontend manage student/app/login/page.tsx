@@ -9,13 +9,13 @@ export default function LoginPage() {
           <div className="relative h-20 w-20 overflow-hidden rounded-full">
             <Image
               src="/placeholder.svg?height=80&width=80"
-              alt="Logo Trung tâm Ánh Bình Minh"
+              alt="Logo Bechovang"
               width={80}
               height={80}
               className="object-cover"
             />
           </div>
-          <h1 className="mt-4 text-2xl font-bold text-red-700">Trung tâm Ánh Bình Minh</h1>
+          <h1 className="mt-4 text-2xl font-bold text-red-700">Bechovang</h1>
           <p className="text-sm text-gray-500">Hệ thống quản lý học sinh</p>
         </div>
         <LoginForm />

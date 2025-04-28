@@ -1,15 +1,18 @@
 package com.example.eduweb.managesystem.service;
 
+import com.example.eduweb.managesystem.exception.ResourceNotFoundException;
 import com.example.eduweb.managesystem.model.Class;
 import com.example.eduweb.managesystem.model.Schedule;
 import com.example.eduweb.managesystem.repository.ClassRepository;
 import com.example.eduweb.managesystem.repository.ScheduleRepository;
 import com.example.eduweb.managesystem.repository.StudentClassRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -20,6 +23,94 @@ public class ClassService {
     private final StudentClassRepository studentClassRepository;
     private final ScheduleRepository scheduleRepository;
 
+    @Transactional
+    public Class getClassWithSchedules(Long classId) {
+        Class classEntity = classRepository.findWithSchedulesById(classId)
+                .orElseThrow(() -> new ResourceNotFoundException("Class not found"));
+                
+        // Check if the class has any schedules and delete it if not
+        if (classEntity.getSchedules() == null || classEntity.getSchedules().isEmpty()) {
+            classRepository.delete(classEntity);
+            throw new ResourceNotFoundException("Class has no schedules and has been deleted");
+        }
+        
+        return classEntity;
+    }
+
+    /**
+     * Cleans up all classes that don't have any schedules.
+     * @return The number of classes deleted
+     */
+    @Transactional
+    public int cleanupClassesWithNoSchedules() {
+        int deletedCount = 0;
+        List<Class> allClasses = classRepository.findAll();
+        
+        for (Class classEntity : allClasses) {
+            // Force loading of schedules if they're lazily loaded
+            List<Schedule> schedules = scheduleRepository.findByClassEntityId(classEntity.getId());
+            
+            if (schedules == null || schedules.isEmpty()) {
+                classRepository.delete(classEntity);
+                deletedCount++;
+            }
+        }
+        
+        return deletedCount;
+    }
+
+    /**
+     * Gộp tất cả các lớp có cùng tên vào một lớp và xóa các lớp còn lại.
+     * @return Số lượng lớp đã bị xóa sau khi gộp
+     */
+    @Transactional
+    public int mergeClassesWithSameName() {
+        int deletedCount = 0;
+        // Lấy danh sách tất cả các lớp
+        List<Class> allClasses = classRepository.findAll();
+        
+        // Tạo map để nhóm các lớp theo tên
+        Map<String, List<Class>> classesByName = allClasses.stream()
+                .collect(Collectors.groupingBy(Class::getName));
+        
+        // Xử lý từng nhóm lớp có cùng tên
+        for (Map.Entry<String, List<Class>> entry : classesByName.entrySet()) {
+            List<Class> classesWithSameName = entry.getValue();
+            
+            // Nếu chỉ có 1 lớp với tên này, không cần gộp
+            if (classesWithSameName.size() <= 1) {
+                continue;
+            }
+            
+            // Chọn lớp đầu tiên để giữ lại
+            Class primaryClass = classesWithSameName.get(0);
+            
+            // Lặp qua các lớp còn lại để chuyển lịch học và xóa lớp
+            for (int i = 1; i < classesWithSameName.size(); i++) {
+                Class duplicateClass = classesWithSameName.get(i);
+                
+                // Lấy tất cả lịch học của lớp trùng lặp
+                List<Schedule> schedules = scheduleRepository.findByClassEntityId(duplicateClass.getId());
+                
+                // Chuyển từng lịch học sang lớp chính
+                for (Schedule schedule : schedules) {
+                    schedule.setClassEntity(primaryClass);
+                    scheduleRepository.save(schedule);
+                }
+                
+                // Xóa lớp trùng lặp
+                classRepository.delete(duplicateClass);
+                deletedCount++;
+                
+                System.out.println("Đã gộp lớp ID " + duplicateClass.getId() + 
+                                  " vào lớp ID " + primaryClass.getId() + 
+                                  " (cùng tên: " + primaryClass.getName() + ")");
+            }
+        }
+        
+        return deletedCount;
+    }
+
     public ClassService(ClassRepository classRepository,
                        StudentClassRepository studentClassRepository,
                        ScheduleRepository scheduleRepository) {
@@ -28,7 +119,23 @@ public class ClassService {
         this.scheduleRepository = scheduleRepository;
     }
 
+    /**
+     * Chạy tự động khi lấy danh sách lớp học để làm sạch dữ liệu
+     */
     public List<ClassResponse> getAllClasses() {
+        // Gộp các lớp trùng tên trước
+        int mergedCount = mergeClassesWithSameName();
+        if (mergedCount > 0) {
+            System.out.println("Đã gộp " + mergedCount + " lớp trùng tên");
+        }
+        
+        // Xóa các lớp không có lịch học
+        int deletedCount = cleanupClassesWithNoSchedules();
+        if (deletedCount > 0) {
+            System.out.println("Đã xóa " + deletedCount + " lớp không có lịch học");
+        }
+        
+        // Lấy danh sách lớp đã được làm sạch
         return classRepository.findAll().stream()
                 .map(this::convertToClassResponse)
                 .collect(Collectors.toList());
@@ -43,7 +150,7 @@ public class ClassService {
         ClassResponse response = new ClassResponse();
         response.setId(classEntity.getId().toString());
         response.setName(classEntity.getName());
-        response.setTeacherId(classEntity.getTeacher_id());
+        response.setTeacherId(classEntity.getTeacher().getId());
         response.setStudents(getStudentCountByClassId(classEntity.getId()));
         response.setSchedule(getScheduleByClassId(classEntity.getId()));
         response.setStatus(determineClassStatus(classEntity));
