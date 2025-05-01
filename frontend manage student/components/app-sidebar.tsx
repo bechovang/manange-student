@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
 import {
@@ -9,17 +8,15 @@ import {
   Calendar,
   CheckSquare,
   CreditCard,
-  LogOut,
   MessageSquare,
   Settings,
   Users,
   Wallet,
+  Clock,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useSidebar } from "./sidebar-provider"
 import { Button } from "@/components/ui/button"
-import { useAuth } from "@/lib/auth"
-import { LogoutDialog } from "./logout-dialog"
 
 const sidebarLinks = [
   {
@@ -58,6 +55,11 @@ const sidebarLinks = [
     icon: Calendar,
   },
   {
+    title: "Quản lý ca",
+    href: "/shifts",
+    icon: Clock,
+  },
+  {
     title: "Thông báo Zalo",
     href: "/notifications",
     icon: MessageSquare,
@@ -72,7 +74,6 @@ const sidebarLinks = [
 export function AppSidebar() {
   const pathname = usePathname()
   const { isOpen } = useSidebar()
-  const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false)
 
   return (
     <aside
@@ -110,26 +111,14 @@ export function AppSidebar() {
         </ul>
       </nav>
       <div className="border-t p-4">
-        <div className="flex items-center gap-3 mb-3">
+        <div className="flex items-center gap-3">
           <div className="h-8 w-8 rounded-full bg-gray-200"></div>
           <div>
             <p className="text-sm font-medium">Admin</p>
             <p className="text-xs text-gray-500">admin@anhbinhminh.edu.vn</p>
           </div>
         </div>
-        <Button 
-          variant="outline" 
-          size="sm" 
-          className="w-full text-red-500 border-red-200 hover:bg-red-50 hover:text-red-600 hover:border-red-300"
-          onClick={() => setIsLogoutDialogOpen(true)}
-        >
-          <LogOut className="mr-2 h-4 w-4" />
-          Đăng xuất
-        </Button>
       </div>
-      
-      <LogoutDialog isOpen={isLogoutDialogOpen} onOpenChange={setIsLogoutDialogOpen} />
     </aside>
   )
 }
-

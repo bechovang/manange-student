@@ -113,7 +113,7 @@ public class ScheduleService {
         schedule.setWeekday(scheduleEventDTO.getWeekday());
         schedule.setTimeStart(LocalTime.parse(scheduleEventDTO.getStartTime(), TIME_FORMATTER));
         schedule.setTimeEnd(LocalTime.parse(scheduleEventDTO.getEndTime(), TIME_FORMATTER));
-        
+
         // Handle date range if provided
         if (scheduleEventDTO.getStartDate() != null) {
             schedule.setStartDate(java.time.LocalDate.parse(scheduleEventDTO.getStartDate()));
@@ -201,7 +201,7 @@ public class ScheduleService {
         // 4. Update schedule fields
         if (scheduleEventDTO.getWeekday() != null) {
             // If weekday is provided directly, use it
-            existingSchedule.setWeekday(scheduleEventDTO.getWeekday());
+        existingSchedule.setWeekday(scheduleEventDTO.getWeekday());
         } else if (scheduleEventDTO.getStringDay() != null) {
             // Handle string day format from frontend ("2", "3", "cn")
             String weekday = DAY_STRING_TO_WEEKDAY.get(scheduleEventDTO.getStringDay());
@@ -222,11 +222,11 @@ public class ScheduleService {
         
         // Update time fields if provided
         if (scheduleEventDTO.getStartTime() != null) {
-            existingSchedule.setTimeStart(LocalTime.parse(scheduleEventDTO.getStartTime(), TIME_FORMATTER));
+        existingSchedule.setTimeStart(LocalTime.parse(scheduleEventDTO.getStartTime(), TIME_FORMATTER));
         }
         
         if (scheduleEventDTO.getEndTime() != null) {
-            existingSchedule.setTimeEnd(LocalTime.parse(scheduleEventDTO.getEndTime(), TIME_FORMATTER));
+        existingSchedule.setTimeEnd(LocalTime.parse(scheduleEventDTO.getEndTime(), TIME_FORMATTER));
         }
         
         // Update date range if provided
