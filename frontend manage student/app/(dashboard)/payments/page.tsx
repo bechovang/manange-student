@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { EnhancedPaymentTable } from "@/components/enhanced-payment-table"
+import { EnhancedPaymentTable } from "@/components/payment/enhanced-payment-table"
 import { Download, CreditCard, Users, Wallet, Calendar } from "lucide-react"
-import { PaymentForm } from "@/components/payment-form"
+import { PaymentForm } from "@/components/payment/payment-form"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ShiftSummary } from "@/components/shift-summary"
+import { ShiftSummary } from "@/components/payment/shift-summary"
 
 export default function PaymentsPage() {
   return (
