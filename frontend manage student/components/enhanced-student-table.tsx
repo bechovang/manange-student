@@ -1,3 +1,4 @@
+// enhanced-student-table.tsx
 "use client"
 
 import { useState, useEffect } from "react"

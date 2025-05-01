@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Download, Printer, CreditCard, Wallet, Clock } from "lucide-react"
-import { useToast } from "@/components/ui/use-toast"
+import { toast } from "react-hot-toast"
 
 // Dữ liệu mẫu - sẽ được thay thế bằng API call
 const transactions = [
@@ -60,7 +60,6 @@ const transactions = [
 
 export function ShiftSummary() {
   const [activeTab, setActiveTab] = useState("today")
-  const { toast } = useToast()
 
   // Tính tổng số tiền
   const totalCash = transactions.filter((t) => t.paymentMethod === "cash").reduce((sum, t) => sum + t.amount, 0)
@@ -76,17 +75,26 @@ export function ShiftSummary() {
   const cashTransactions = transactions.filter((t) => t.paymentMethod === "cash").length
   const transferTransactions = transactions.filter((t) => t.paymentMethod === "transfer").length
 
+
   const handlePrintSummary = () => {
-    toast({
-      title: "Đang in tổng kết ca",
-      description: "Đang in báo cáo tổng kết ca làm việc",
+    toast.success("Đang in báo cáo tổng kết ca làm việc", {
+      icon: '✅',
+      style: {
+        background: '#f0fdf4',
+        color: '#166534',
+        border: '1px solid #bbf7d0'
+      }
     })
   }
 
   const handleExportExcel = () => {
-    toast({
-      title: "Đang xuất Excel",
-      description: "Đang xuất báo cáo tổng kết ca làm việc ra Excel",
+    toast.success("Đang xuất báo cáo tổng kết ca làm việc ra Excel", {
+      icon: '✅',
+      style: {
+        background: '#f0fdf4',
+        color: '#166534',
+        border: '1px solid #bbf7d0'
+      }
     })
   }
 

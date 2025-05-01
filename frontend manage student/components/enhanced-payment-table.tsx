@@ -1,3 +1,4 @@
+// enhanced-payment-table.tsx
 "use client"
 
 import { useState } from "react"
@@ -35,7 +36,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { useToast } from "@/components/ui/use-toast"
+import { toast } from "react-hot-toast"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 type Payment = {
@@ -105,7 +106,6 @@ const data: Payment[] = [
 
 function PaymentDetailDialog({ payment }: { payment: Payment }) {
   const [open, setOpen] = useState(false)
-  const { toast } = useToast()
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -211,10 +211,14 @@ function PaymentDetailDialog({ payment }: { payment: Payment }) {
           </Button>
           <Button
             onClick={() => {
-              toast({
-                title: "Đang in biên lai",
-                description: `Đang in biên lai ${payment.id} cho học sinh ${payment.student}`,
-              })
+              toast.success(`Đang in biên lai ${payment.id} cho học sinh ${payment.student}`, {
+                icon: '🖨️',
+                style: {
+                  background: '#f0fdf4',
+                  color: '#166534',
+                  border: '1px solid #bbf7d0'
+                }
+              });
               setOpen(false)
             }}
             className="bg-red-700 hover:bg-red-800"
@@ -229,17 +233,19 @@ function PaymentDetailDialog({ payment }: { payment: Payment }) {
 }
 
 function PrintReceiptButton({ payment }: { payment: Payment }) {
-  const { toast } = useToast()
-
   return (
     <Button
       variant="ghost"
       className="h-8 w-8 p-0"
       onClick={() => {
-        toast({
-          title: "Đang in biên lai",
-          description: `Đang in biên lai ${payment.id} cho học sinh ${payment.student}`,
-        })
+        toast.success(`Đang in biên lai ${payment.id} cho học sinh ${payment.student}`, {
+          icon: '🖨️',
+          style: {
+            background: '#f0fdf4',
+            color: '#166534',
+            border: '1px solid #bbf7d0'
+          }
+        });
       }}
     >
       <Printer className="h-4 w-4" />
@@ -363,26 +369,9 @@ export function EnhancedPaymentTable() {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
-  const [selectedClass, setSelectedClass] = useState<string>("all")
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string>("all")
-
-  // Lọc dữ liệu theo lớp và phương thức thanh toán
-  const filteredData = data.filter((item) => {
-    // Lọc theo lớp
-    if (selectedClass !== "all" && item.class !== selectedClass) {
-      return false
-    }
-
-    // Lọc theo phương thức thanh toán
-    if (selectedPaymentMethod !== "all" && item.paymentMethod !== selectedPaymentMethod) {
-      return false
-    }
-
-    return true
-  })
 
   const table = useReactTable({
-    data: filteredData,
+    data: data,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -398,8 +387,10 @@ export function EnhancedPaymentTable() {
     },
   })
 
-  // Lấy danh sách các lớp duy nhất từ dữ liệu
   const uniqueClasses = Array.from(new Set(data.map((item) => item.class)))
+
+  const classFilterValue = table.getColumn("class")?.getFilterValue() ?? "all"
+  const paymentMethodFilterValue = table.getColumn("paymentMethod")?.getFilterValue() ?? "all"
 
   return (
     <div className="space-y-4">
@@ -415,7 +406,12 @@ export function EnhancedPaymentTable() {
             />
           </div>
 
-          <Select value={selectedClass} onValueChange={setSelectedClass}>
+          <Select
+            value={classFilterValue as string}
+            onValueChange={(value) => {
+              table.getColumn("class")?.setFilterValue(value === 'all' ? undefined : value)
+            }}
+          >
             <SelectTrigger className="w-full md:w-[180px]">
               <SelectValue placeholder="Lọc theo lớp" />
             </SelectTrigger>
@@ -429,7 +425,12 @@ export function EnhancedPaymentTable() {
             </SelectContent>
           </Select>
 
-          <Select value={selectedPaymentMethod} onValueChange={setSelectedPaymentMethod}>
+          <Select
+            value={paymentMethodFilterValue as string}
+            onValueChange={(value) => {
+              table.getColumn("paymentMethod")?.setFilterValue(value === 'all' ? undefined : value)
+            }}
+          >
             <SelectTrigger className="w-full md:w-[180px]">
               <SelectValue placeholder="Phương thức thanh toán" />
             </SelectTrigger>
@@ -448,7 +449,23 @@ export function EnhancedPaymentTable() {
               Hiển thị cột
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent align="end" className="min-w-[200px]">
+            <DropdownMenuCheckboxItem
+              className="font-bold border-b pb-2 mb-1"
+              checked={table
+                .getAllColumns()
+                .filter((column) => column.getCanHide())
+                .every((column) => column.getIsVisible())}
+              onCheckedChange={(value) => {
+                table
+                  .getAllColumns()
+                  .filter((column) => column.getCanHide())
+                  .forEach((column) => column.toggleVisibility(!!value));
+              }}
+              onSelect={(e) => e.preventDefault()}
+            >
+              Hiển thị tất cả
+            </DropdownMenuCheckboxItem>
             {table
               .getAllColumns()
               .filter((column) => column.getCanHide())
@@ -459,6 +476,7 @@ export function EnhancedPaymentTable() {
                     className="capitalize"
                     checked={column.getIsVisible()}
                     onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                    onSelect={(e) => e.preventDefault()}
                   >
                     {column.id === "id"
                       ? "Mã hóa đơn"
