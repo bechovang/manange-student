@@ -2,7 +2,7 @@ export function TestimonialsSection() {
   const testimonials = [
     {
       content:
-        "Hệ thống quản lý học sinh Bechovang đã giúp trung tâm chúng tôi tiết kiệm rất nhiều thời gian và công sức trong việc quản lý học sinh và học phí.",
+        "Hệ thống quản lý học sinh Ánh Bình Minh đã giúp trung tâm chúng tôi tiết kiệm rất nhiều thời gian và công sức trong việc quản lý học sinh và học phí.",
       author: "Nguyễn Văn A",
       position: "Giám đốc Trung tâm XYZ",
     },

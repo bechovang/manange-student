@@ -1406,3 +1406,661 @@
 2025-04-27T23:15:17.718+07:00  INFO 7596 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.service.AuthService      : Hoàn t?t quá trình xác th?c cho user: admin
 2025-04-27T23:15:17.718+07:00 DEBUG 7596 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.service.JwtService       : L?y th?i gian h?t h?n cho ACCESS token (tính b?ng giây)
 2025-04-27T23:15:17.718+07:00  INFO 7596 --- [http-nio-0.0.0.0-8080-exec-7] c.e.e.auth.controller.AuthController     : Login successful for user: admin
+2025-05-01T20:21:54.871+07:00  INFO 9580 --- [main] com.example.eduweb.EduwebApplication     : Starting EduwebApplication using Java 17.0.12 with PID 9580 (C:\Users\Admin\Desktop\manage student\backend\target\classes started by Admin in C:\Users\Admin\Desktop\manage student\backend)
+2025-05-01T20:21:54.875+07:00 DEBUG 9580 --- [main] com.example.eduweb.EduwebApplication     : Running with Spring Boot v3.1.5, Spring v6.0.13
+2025-05-01T20:21:54.876+07:00  INFO 9580 --- [main] com.example.eduweb.EduwebApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-05-01T20:21:56.142+07:00  INFO 9580 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-01T20:21:56.277+07:00  INFO 9580 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 121 ms. Found 9 JPA repository interfaces.
+2025-05-01T20:21:57.331+07:00  INFO 9580 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2025-05-01T20:21:57.357+07:00  INFO 9580 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-01T20:21:57.358+07:00  INFO 9580 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2025-05-01T20:21:57.709+07:00  INFO 9580 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-01T20:21:57.709+07:00  INFO 9580 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2736 ms
+2025-05-01T20:21:57.978+07:00  INFO 9580 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-01T20:21:58.090+07:00  INFO 9580 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.13.Final
+2025-05-01T20:21:58.095+07:00  INFO 9580 --- [main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2025-05-01T20:21:58.624+07:00  INFO 9580 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-01T20:21:58.725+07:00  INFO 9580 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-01T20:22:00.368+07:00  INFO 9580 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@59262a90
+2025-05-01T20:22:00.371+07:00  INFO 9580 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-01T20:22:03.606+07:00  INFO 9580 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-01T20:22:03.908+07:00  INFO 9580 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-01T20:22:04.736+07:00  INFO 9580 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-05-01T20:22:05.871+07:00 DEBUG 9580 --- [main] c.e.eduweb.auth.config.JwtAuthFilter     : JwtAuthFilter initialized
+2025-05-01T20:22:05.987+07:00 DEBUG 9580 --- [main] c.e.eduweb.auth.config.JwtAuthFilter     : Filter 'jwtAuthFilter' configured for use
+2025-05-01T20:22:06.226+07:00  INFO 9580 --- [main] c.e.e.a.service.TokenBlacklistService    : TokenBlacklistService initialized
+2025-05-01T20:22:06.227+07:00  INFO 9580 --- [main] c.e.e.a.service.TokenBlacklistService    : Scheduled blacklist cleanup task every 1 hour
+2025-05-01T20:22:07.123+07:00  WARN 9580 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-01T20:22:07.754+07:00  INFO 9580 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@68fd0fba, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3f9e38d4, org.springframework.security.web.context.SecurityContextHolderFilter@37ddb835, org.springframework.security.web.header.HeaderWriterFilter@7e1f88e2, org.springframework.web.filter.CorsFilter@7310bc90, org.springframework.security.web.authentication.logout.LogoutFilter@6b3bcab7, com.example.eduweb.auth.config.JwtAuthFilter@671c71e8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@67f8586f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5c7a699b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@18a421ea, org.springframework.security.web.session.SessionManagementFilter@2aef651, org.springframework.security.web.access.ExceptionTranslationFilter@7e5b449c, org.springframework.security.web.access.intercept.AuthorizationFilter@6c07666f]
+2025-05-01T20:22:08.232+07:00  INFO 9580 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2025-05-01T20:22:08.243+07:00  INFO 9580 --- [main] com.example.eduweb.EduwebApplication     : Started EduwebApplication in 14.356 seconds (process running for 15.465)
+2025-05-01T20:22:18.787+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-01T20:22:18.788+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-05-01T20:22:18.790+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-05-01T20:22:18.822+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Skipping JWT filter for auth endpoint: /api/auth/login
+2025-05-01T20:22:18.837+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Skipping JWT filter for auth endpoint: /api/auth/login
+2025-05-01T20:22:18.934+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.auth.controller.AuthController     : Login attempt for user: admin
+2025-05-01T20:22:19.051+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.AuthService      : User role: admin
+2025-05-01T20:22:19.051+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.AuthService      : B?t ??u quá trình xác th?c cho user: admin
+2025-05-01T20:22:19.051+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.AuthService      : Thông tin yêu c?u: username=admin
+2025-05-01T20:22:19.052+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.AuthService      : ?ang xác th?c thông tin ??ng nh?p...
+2025-05-01T20:22:19.162+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:22:19.167+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:22:19.167+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:22:19.169+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:22:19.273+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.AuthService      : Xác th?c thành công cho user: admin
+2025-05-01T20:22:19.273+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.AuthService      : ?ang t?i thông tin user details...
+2025-05-01T20:22:19.274+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:22:19.277+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:22:19.278+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:22:19.278+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:22:19.279+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.AuthService      : ?ã t?i thông tin user details thành công
+2025-05-01T20:22:19.279+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.AuthService      : ?ang t?o access token...
+2025-05-01T20:22:19.280+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : B?t ??u t?o ACCESS token cho user: admin
+2025-05-01T20:22:19.325+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : ?ã t?o thành công ACCESS token cho user: admin
+2025-05-01T20:22:19.325+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.AuthService      : ?ã t?o access token thành công
+2025-05-01T20:22:19.326+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.AuthService      : ?ang t?o refresh token...
+2025-05-01T20:22:19.326+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : T?o refresh token cho user: admin
+2025-05-01T20:22:19.326+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : B?t ??u t?o REFRESH token cho user: admin
+2025-05-01T20:22:19.328+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : ?ã t?o thành công REFRESH token cho user: admin
+2025-05-01T20:22:19.328+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.AuthService      : ?ã t?o refresh token thành công
+2025-05-01T20:22:19.328+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.AuthService      : ?ang t?o UserDto...
+2025-05-01T20:22:19.330+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.AuthService      : ?ã t?o UserDto v?i username: admin
+2025-05-01T20:22:19.330+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : L?y th?i gian h?t h?n cho ACCESS token (tính b?ng giây)
+2025-05-01T20:22:19.330+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.AuthService      : Access token s? h?t h?n sau: 86400 giây
+2025-05-01T20:22:19.331+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : L?y th?i gian h?t h?n cho REFRESH token (tính b?ng giây)
+2025-05-01T20:22:19.331+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.AuthService      : Refresh token s? h?t h?n sau: 604800 giây
+2025-05-01T20:22:19.331+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.AuthService      : Hoàn t?t quá trình xác th?c cho user: admin
+2025-05-01T20:22:19.332+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : L?y th?i gian h?t h?n cho ACCESS token (tính b?ng giây)
+2025-05-01T20:22:19.332+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.auth.controller.AuthController     : Login successful for user: admin
+2025-05-01T20:22:30.035+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/students
+2025-05-01T20:22:30.038+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:22:30.044+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:30.049+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:30.110+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:22:30.111+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:22:30.115+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:22:30.180+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:22:30.181+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:22:30.182+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:22:30.184+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:22:30.184+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:30.184+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:30.187+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:30.190+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:22:30.191+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:22:30.192+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:22:30.203+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Fetching all students
+2025-05-01T20:22:30.670+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Getting teacher for student: 1
+2025-05-01T20:22:30.799+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Getting class time for student: 1
+2025-05-01T20:22:30.831+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Found class time 08:30 - 10:00 for student 1
+2025-05-01T20:22:30.831+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Generated random status: present
+2025-05-01T20:22:30.833+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Getting subjects for student: 1
+2025-05-01T20:22:30.839+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Found 2 subjects for student 1
+2025-05-01T20:22:30.891+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Getting teacher for student: 2
+2025-05-01T20:22:30.898+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Getting class time for student: 2
+2025-05-01T20:22:30.904+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Found class time 08:30 - 10:00 for student 2
+2025-05-01T20:22:30.904+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Generated random status: absent
+2025-05-01T20:22:30.904+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Getting subjects for student: 2
+2025-05-01T20:22:30.906+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Found 2 subjects for student 2
+2025-05-01T20:22:30.937+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Getting teacher for student: 3
+2025-05-01T20:22:30.944+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Getting class time for student: 3
+2025-05-01T20:22:30.950+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Found class time 15:30 - 17:00 for student 3
+2025-05-01T20:22:30.950+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Generated random status: absent
+2025-05-01T20:22:30.951+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Getting subjects for student: 3
+2025-05-01T20:22:30.955+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Found 1 subjects for student 3
+2025-05-01T20:22:30.973+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Getting teacher for student: 4
+2025-05-01T20:22:30.981+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Getting class time for student: 4
+2025-05-01T20:22:30.988+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Found class time 07:00 - 08:30 for student 4
+2025-05-01T20:22:30.988+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Generated random status: absent
+2025-05-01T20:22:30.988+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Getting subjects for student: 4
+2025-05-01T20:22:30.991+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Found 2 subjects for student 4
+2025-05-01T20:22:31.013+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Getting teacher for student: 5
+2025-05-01T20:22:31.019+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Getting class time for student: 5
+2025-05-01T20:22:31.024+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Found class time 15:30 - 17:00 for student 5
+2025-05-01T20:22:31.024+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Generated random status: absent
+2025-05-01T20:22:31.024+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Getting subjects for student: 5
+2025-05-01T20:22:31.027+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Found 1 subjects for student 5
+2025-05-01T20:22:31.041+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.m.service.StudentService           : Successfully fetched 5 students
+2025-05-01T20:22:31.053+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/students
+2025-05-01T20:22:31.054+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:22:31.054+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:31.054+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:31.056+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:22:31.057+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:22:31.057+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:22:31.060+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:22:31.060+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:22:31.060+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:22:31.061+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:22:31.064+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:31.064+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:31.066+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:31.068+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:22:31.068+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:22:31.069+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:22:31.071+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Fetching all students
+2025-05-01T20:22:31.075+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Getting teacher for student: 1
+2025-05-01T20:22:31.082+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Getting class time for student: 1
+2025-05-01T20:22:31.087+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Found class time 08:30 - 10:00 for student 1
+2025-05-01T20:22:31.087+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Generated random status: no class
+2025-05-01T20:22:31.087+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Getting subjects for student: 1
+2025-05-01T20:22:31.095+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Found 2 subjects for student 1
+2025-05-01T20:22:31.119+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Getting teacher for student: 2
+2025-05-01T20:22:31.123+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Getting class time for student: 2
+2025-05-01T20:22:31.130+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Found class time 08:30 - 10:00 for student 2
+2025-05-01T20:22:31.130+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Generated random status: present
+2025-05-01T20:22:31.130+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Getting subjects for student: 2
+2025-05-01T20:22:31.132+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Found 2 subjects for student 2
+2025-05-01T20:22:31.158+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Getting teacher for student: 3
+2025-05-01T20:22:31.163+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Getting class time for student: 3
+2025-05-01T20:22:31.169+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Found class time 15:30 - 17:00 for student 3
+2025-05-01T20:22:31.171+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Generated random status: present
+2025-05-01T20:22:31.172+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Getting subjects for student: 3
+2025-05-01T20:22:31.175+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Found 1 subjects for student 3
+2025-05-01T20:22:31.191+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Getting teacher for student: 4
+2025-05-01T20:22:31.197+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Getting class time for student: 4
+2025-05-01T20:22:31.203+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Found class time 07:00 - 08:30 for student 4
+2025-05-01T20:22:31.203+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Generated random status: no class
+2025-05-01T20:22:31.203+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Getting subjects for student: 4
+2025-05-01T20:22:31.208+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Found 2 subjects for student 4
+2025-05-01T20:22:31.237+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Getting teacher for student: 5
+2025-05-01T20:22:31.242+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Getting class time for student: 5
+2025-05-01T20:22:31.247+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Found class time 15:30 - 17:00 for student 5
+2025-05-01T20:22:31.247+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Generated random status: absent
+2025-05-01T20:22:31.248+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Getting subjects for student: 5
+2025-05-01T20:22:31.253+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Found 1 subjects for student 5
+2025-05-01T20:22:31.268+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.m.service.StudentService           : Successfully fetched 5 students
+2025-05-01T20:22:35.931+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/schedule
+2025-05-01T20:22:35.934+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:22:35.936+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:35.939+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:35.942+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/teachers
+2025-05-01T20:22:35.944+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:22:35.944+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:35.932+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/schedule/teachers
+2025-05-01T20:22:35.946+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:22:35.946+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:35.945+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:22:35.949+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:22:35.946+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:35.948+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:35.952+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:22:35.952+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:22:35.953+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:22:35.953+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:22:35.949+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:22:35.952+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:22:35.954+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:22:35.958+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:22:35.958+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:22:35.959+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:22:35.959+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:22:35.960+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:35.959+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:22:35.964+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:22:35.962+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:22:35.963+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:35.965+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:22:35.966+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:22:35.965+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:22:35.969+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:22:35.968+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:35.968+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:35.971+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:35.970+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:22:35.972+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:35.973+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:35.973+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:35.973+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:22:35.974+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:22:35.974+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:22:35.975+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:35.975+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:22:35.976+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:22:35.976+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:22:35.977+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:22:35.977+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:22:35.981+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:22:36.005+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/schedule/teachers
+2025-05-01T20:22:36.007+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:22:36.008+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:36.009+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:36.006+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/teachers
+2025-05-01T20:22:36.009+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:22:36.011+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:36.014+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:36.015+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:22:36.017+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:22:36.016+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:22:36.020+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:22:36.020+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:22:36.018+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:22:36.023+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:22:36.023+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:22:36.023+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:22:36.024+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:22:36.024+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:22:36.024+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:22:36.025+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:22:36.025+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:36.026+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:22:36.029+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:36.030+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:36.031+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:36.033+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:36.033+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:36.035+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:22:36.035+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:22:36.036+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:22:36.035+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:22:36.038+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:22:36.039+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:22:36.051+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/schedule
+2025-05-01T20:22:36.051+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:22:36.052+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:36.052+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:36.054+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:22:36.054+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:22:36.055+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:22:36.058+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:22:36.063+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:22:36.064+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:22:36.065+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:22:36.066+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:36.066+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:36.068+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:36.071+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:22:36.071+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:22:36.071+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:22:55.574+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/schedule
+2025-05-01T20:22:55.575+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:22:55.576+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:55.576+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:55.581+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:22:55.581+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:22:55.581+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:22:55.589+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:22:55.590+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:22:55.590+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:22:55.590+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:22:55.591+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:55.591+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:55.593+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:55.595+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:22:55.596+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:22:55.596+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:22:55.970+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/schedule
+2025-05-01T20:22:55.970+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:22:55.971+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:55.972+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:55.974+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:22:55.974+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:22:55.974+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:22:55.977+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:22:55.977+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:22:55.977+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:22:55.978+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:22:55.978+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:55.979+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:55.981+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:55.983+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:22:55.984+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:22:55.984+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:22:56.199+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/schedule
+2025-05-01T20:22:56.199+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:22:56.200+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:56.201+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:56.203+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:22:56.203+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:22:56.203+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:22:56.206+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:22:56.206+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:22:56.206+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:22:56.207+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:22:56.208+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:56.209+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:56.210+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:56.212+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:22:56.215+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:22:56.215+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:22:56.465+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/schedule
+2025-05-01T20:22:56.465+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:22:56.466+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:56.466+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:56.468+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:22:56.468+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:22:56.469+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:22:56.471+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:22:56.472+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:22:56.472+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:22:56.472+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:22:56.472+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:56.473+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:56.474+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:56.476+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:22:56.476+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:22:56.477+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:22:56.699+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/schedule
+2025-05-01T20:22:56.699+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:22:56.700+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:56.700+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:56.702+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:22:56.703+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:22:56.703+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:22:56.706+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:22:56.706+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:22:56.706+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:22:56.707+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:22:56.707+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:56.707+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:56.710+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:56.711+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:22:56.711+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:22:56.711+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:22:56.931+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/schedule
+2025-05-01T20:22:56.932+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:22:56.933+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:56.933+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:56.935+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:22:56.935+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:22:56.935+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:22:56.938+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:22:56.938+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:22:56.939+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:22:56.939+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:22:56.939+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:56.940+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:56.942+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:56.943+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:22:56.944+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:22:56.944+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:22:57.165+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/schedule
+2025-05-01T20:22:57.165+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:22:57.166+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:57.167+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:57.169+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:22:57.170+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:22:57.170+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:22:57.172+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:22:57.173+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:22:57.174+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:22:57.174+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:22:57.174+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:22:57.174+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:57.177+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:22:57.178+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:22:57.182+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:22:57.182+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:23:01.687+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/schedule/teachers
+2025-05-01T20:23:01.691+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:23:01.692+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:01.692+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:01.691+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/schedule
+2025-05-01T20:23:01.693+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:23:01.694+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:01.695+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:01.694+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:23:01.698+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:23:01.698+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:23:01.699+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:23:01.700+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:23:01.701+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:23:01.702+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:23:01.704+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:23:01.704+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:23:01.704+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:23:01.704+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:23:01.705+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:23:01.705+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:23:01.706+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:01.706+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:23:01.706+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:01.707+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:01.707+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:01.708+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:01.709+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:01.711+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:23:01.711+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:23:01.711+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:23:01.712+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:23:01.711+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:23:01.712+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:23:01.729+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/schedule/teachers
+2025-05-01T20:23:01.732+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/schedule
+2025-05-01T20:23:01.732+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:23:01.732+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:01.732+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:23:01.733+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:01.733+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:01.734+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:01.735+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/teachers
+2025-05-01T20:23:01.735+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:23:01.736+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:23:01.736+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:23:01.736+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:01.736+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:23:01.736+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:23:01.737+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:01.737+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:23:01.738+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:23:01.739+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:23:01.739+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:23:01.740+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:23:01.742+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:23:01.743+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:23:01.743+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:23:01.743+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:23:01.743+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:23:01.744+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:23:01.743+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:01.747+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:23:01.747+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:01.748+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:23:01.750+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:01.751+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:01.751+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:01.753+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:23:01.753+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:23:01.753+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:01.754+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:23:01.757+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:23:01.758+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:23:01.758+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:23:01.757+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:23:01.770+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:23:01.770+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:23:01.771+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:23:01.772+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:01.772+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:01.774+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:01.780+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:23:01.780+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:23:01.780+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-8] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:23:01.792+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/teachers
+2025-05-01T20:23:01.793+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:23:01.793+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:01.793+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:01.796+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:23:01.796+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:23:01.796+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:23:01.799+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:23:01.799+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:23:01.800+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:23:01.800+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:23:01.800+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:01.800+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:01.802+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:01.804+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:23:01.804+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:23:01.807+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-7] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:23:09.705+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/teachers
+2025-05-01T20:23:09.707+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:23:09.708+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:09.708+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:09.711+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:23:09.714+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:23:09.715+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:23:09.721+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:23:09.723+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:23:09.723+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:23:09.723+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:23:09.723+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:09.724+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:09.729+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:09.733+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:23:09.733+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:23:09.734+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:23:09.754+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/teachers
+2025-05-01T20:23:09.754+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:23:09.754+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:09.754+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:09.756+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:23:09.757+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:23:09.757+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:23:09.760+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:23:09.760+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:23:09.760+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:23:09.761+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:23:09.764+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:09.764+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:09.768+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:09.769+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:23:09.770+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:23:09.770+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:23:09.781+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/classes
+2025-05-01T20:23:09.781+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:23:09.782+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:09.782+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:09.784+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:23:09.785+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:23:09.785+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:23:09.789+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:23:09.823+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:23:09.824+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:23:09.824+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:23:09.825+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:09.825+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:09.855+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:09.868+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:23:09.868+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:23:09.868+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-1] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:23:10.533+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/classes
+2025-05-01T20:23:10.533+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:23:10.534+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:10.534+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:10.539+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:23:10.613+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:23:10.616+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:23:10.643+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:23:10.644+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:23:10.644+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:23:10.644+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:23:10.645+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:10.646+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:10.650+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:10.652+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:23:10.653+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:23:10.653+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-6] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:23:29.039+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/schedule/teachers
+2025-05-01T20:23:29.039+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:23:29.041+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:29.041+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:29.044+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:23:29.045+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:23:29.045+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:23:29.045+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/schedule
+2025-05-01T20:23:29.046+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:23:29.047+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:29.048+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:29.048+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:23:29.048+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:23:29.049+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:23:29.049+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:23:29.049+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:29.050+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:29.050+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:23:29.051+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:23:29.052+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:29.052+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:23:29.054+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:23:29.056+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:23:29.056+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-9] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:23:29.060+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:23:29.061+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:23:29.062+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:23:29.065+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:23:29.065+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:29.065+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:29.067+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:29.069+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/teachers
+2025-05-01T20:23:29.068+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/schedule/teachers
+2025-05-01T20:23:29.070+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:23:29.073+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:23:29.073+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-3] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:23:29.072+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:23:29.074+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:29.075+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:29.073+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:23:29.076+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:29.083+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:23:29.090+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:23:29.090+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:23:29.085+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:29.091+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/schedule
+2025-05-01T20:23:29.092+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:23:29.092+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:29.093+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:29.096+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:23:29.096+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:23:29.097+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:23:29.097+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:23:29.098+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:29.098+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:29.093+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:23:29.096+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:23:29.099+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:23:29.100+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:23:29.099+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:23:29.100+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:29.103+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:23:29.105+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:23:29.106+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:23:29.106+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-2] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:23:29.108+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:23:29.108+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:23:29.108+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:23:29.109+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:23:29.109+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:23:29.110+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:23:29.110+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:29.110+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:29.109+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:23:29.113+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:23:29.113+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:29.113+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:29.114+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:29.115+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:23:29.118+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:23:29.118+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-4] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:23:29.116+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : Processing request: /api/teachers
+2025-05-01T20:23:29.116+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:29.119+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token extracted from header
+2025-05-01T20:23:29.120+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:29.122+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:23:29.122+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:23:29.123+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-5] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext
+2025-05-01T20:23:29.122+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:29.127+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : Username extracted from token: admin
+2025-05-01T20:23:29.127+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : Loading user details for username: admin
+2025-05-01T20:23:29.127+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.e.a.service.UserDetailsServiceImpl   : Attempting to load user by username: admin
+2025-05-01T20:23:29.136+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.e.a.service.UserDetailsServiceImpl   : User found: admin
+2025-05-01T20:23:29.137+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.e.a.service.UserDetailsServiceImpl   : User role: admin
+2025-05-01T20:23:29.137+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.e.a.service.UserDetailsServiceImpl   : Creating authority for role: admin
+2025-05-01T20:23:29.137+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : Ki?m tra tính h?p l? c?a token cho user: admin
+2025-05-01T20:23:29.138+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : Trích xu?t username t? token
+2025-05-01T20:23:29.138+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:29.140+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : B?t ??u trích xu?t t?t c? claims t? token
+2025-05-01T20:23:29.141+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.service.JwtService       : Token h?p l? cho user: admin
+2025-05-01T20:23:29.141+07:00  INFO 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : JWT token validated successfully for user: admin
+2025-05-01T20:23:29.142+07:00 DEBUG 9580 --- [http-nio-0.0.0.0-8080-exec-10] c.e.eduweb.auth.config.JwtAuthFilter     : Authentication set in SecurityContext

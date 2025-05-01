@@ -42,7 +42,7 @@ export function LandingHeader() {
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="h-8 w-8 rounded-full bg-red-700"></div>
-          <span className="text-lg font-bold text-red-700">Bechovang</span>
+          <span className="text-lg font-bold text-red-700">Ánh Bình Minh</span>
         </div>
 
         {/* Mobile menu button */}
