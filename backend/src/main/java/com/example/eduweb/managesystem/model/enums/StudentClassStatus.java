@@ -1,4 +1,4 @@
-package com.example.eduweb.managesystem.model;
+package com.example.eduweb.managesystem.model.enums;
 
 
 public enum StudentClassStatus {
