@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import com.example.eduweb.managesystem.model.enums.CashierShiftStatus;
+import com.example.eduweb.auth.model.User; // Import User từ module auth
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

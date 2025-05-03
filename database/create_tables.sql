@@ -198,3 +198,37 @@ CREATE TABLE notifications (
 );
 
 COMMENT ON COLUMN notifications.notification_type IS 'payment|attendance|system';
+
+-- Bảng cashier_shifts
+CREATE TABLE cashier_shifts (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    shift_start_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    shift_end_time TIMESTAMP,
+    starting_cash DECIMAL(12,2) NOT NULL DEFAULT 0,
+    ending_cash_counted DECIMAL(12,2),
+    total_cash_received DECIMAL(12,2),
+    total_non_cash_received DECIMAL(12,2),
+    calculated_ending_cash DECIMAL(12,2),
+    cash_discrepancy DECIMAL(12,2),
+    status VARCHAR(20) NOT NULL DEFAULT 'open',
+    notes TEXT,
+    closed_by INTEGER,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE RESTRICT,
+    FOREIGN KEY (closed_by) REFERENCES users(id) ON DELETE SET NULL
+);
+
+-- COMMENT ON COLUMN cashier_shifts.user_id IS 'ID của nhân viên thu ngân (từ bảng users)';
+-- COMMENT ON COLUMN cashier_shifts.shift_start_time IS 'Thời gian bắt đầu nhận ca';
+-- COMMENT ON COLUMN cashier_shifts.shift_end_time IS 'Thời gian kết thúc bàn giao ca (null nếu ca đang mở)';
+-- COMMENT ON COLUMN cashier_shifts.starting_cash IS 'Số tiền mặt có trong ngăn kéo khi bắt đầu ca';
+-- COMMENT ON COLUMN cashier_shifts.ending_cash_counted IS 'Số tiền mặt thực tế đếm được khi kết thúc ca';
+-- COMMENT ON COLUMN cashier_shifts.total_cash_received IS 'Tổng tiền mặt thu vào trong ca (từ transactions)';
+-- COMMENT ON COLUMN cashier_shifts.total_non_cash_received IS 'Tổng tiền không phải tiền mặt (chuyển khoản, thẻ) thu vào trong ca';
+-- COMMENT ON COLUMN cashier_shifts.calculated_ending_cash IS 'Số tiền mặt LẼ RA phải có cuối ca (starting_cash + total_cash_received)';
+-- COMMENT ON COLUMN cashier_shifts.cash_discrepancy IS 'Chênh lệch tiền mặt (ending_cash_counted - calculated_ending_cash). Âm là thiếu, dương là thừa';
+-- COMMENT ON COLUMN cashier_shifts.status IS 'open|closed|reconciled';
+-- COMMENT ON COLUMN cashier_shifts.notes IS 'Ghi chú về ca làm việc, ví dụ: lý do chênh lệch';
+-- COMMENT ON COLUMN cashier_shifts.closed_by IS 'user_id người đóng ca (có thể là chính cashier hoặc quản lý)';

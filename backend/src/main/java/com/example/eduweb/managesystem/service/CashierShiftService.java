@@ -1,15 +1,17 @@
 // src/main/java/com/example/eduweb/managesystem/service/CashierShiftService.java
 package com.example.eduweb.managesystem.service;
 
-// Thay thế các DTO này bằng đường dẫn chính xác trong dự án của bạn
+// Import các DTO cần thiết
 import com.example.eduweb.managesystem.dto.CashierShiftResponseDto;
 import com.example.eduweb.managesystem.dto.CloseShiftRequestDto;
 import com.example.eduweb.managesystem.dto.StartShiftRequestDto;
 
+// Import các lớp khác nếu cần (ví dụ: cho kiểu trả về hoặc tham số)
 import java.util.List;
 
 /**
  * Interface định nghĩa các nghiệp vụ liên quan đến quản lý ca làm việc của nhân viên thu ngân.
+ * Nó chỉ định các hành động mà một service quản lý ca cần có khả năng thực hiện.
  */
 public interface CashierShiftService {
 
@@ -20,8 +22,8 @@ public interface CashierShiftService {
      *
      * @param requestDto DTO chứa thông tin để bắt đầu ca (userId, startingCash).
      * @return DTO chứa thông tin chi tiết của ca vừa được tạo.
-     * @throws com.yourpackage.exception.ResourceNotFoundException Nếu không tìm thấy User.
-     * @throws com.yourpackage.exception.BadRequestException Nếu User đã có ca đang mở.
+     * @throws com.example.eduweb.managesystem.exception.ResourceNotFoundException Nếu không tìm thấy User.
+     * @throws com.example.eduweb.managesystem.exception.BadRequestException Nếu User đã có ca đang mở.
      */
     CashierShiftResponseDto startShift(StartShiftRequestDto requestDto);
 
@@ -34,8 +36,8 @@ public interface CashierShiftService {
      * @param shiftId ID của ca làm việc cần đóng.
      * @param requestDto DTO chứa thông tin để đóng ca (endingCashCounted, notes, closedByUserId).
      * @return DTO chứa thông tin chi tiết của ca vừa được đóng và cập nhật.
-     * @throws com.yourpackage.exception.ResourceNotFoundException Nếu không tìm thấy CashierShift hoặc User đóng ca.
-     * @throws com.yourpackage.exception.BadRequestException Nếu ca không ở trạng thái 'OPEN'.
+     * @throws com.example.eduweb.managesystem.exception.ResourceNotFoundException Nếu không tìm thấy CashierShift hoặc User đóng ca.
+     * @throws com.example.eduweb.managesystem.exception.BadRequestException Nếu ca không ở trạng thái 'OPEN'.
      */
     CashierShiftResponseDto closeShift(Long shiftId, CloseShiftRequestDto requestDto);
 
@@ -44,7 +46,7 @@ public interface CashierShiftService {
      *
      * @param shiftId ID của ca làm việc cần lấy thông tin.
      * @return DTO chứa thông tin chi tiết của ca.
-     * @throws com.yourpackage.exception.ResourceNotFoundException Nếu không tìm thấy CashierShift với ID cung cấp.
+     * @throws com.example.eduweb.managesystem.exception.ResourceNotFoundException Nếu không tìm thấy CashierShift với ID cung cấp.
      */
     CashierShiftResponseDto getShiftById(Long shiftId);
 
@@ -61,7 +63,7 @@ public interface CashierShiftService {
      *
      * @param userId ID của người dùng (nhân viên thu ngân).
      * @return Danh sách các DTO chứa thông tin các ca làm việc của người dùng đó.
-     * @throws com.yourpackage.exception.ResourceNotFoundException Nếu kiểm tra và không tìm thấy User (tùy chọn).
+     * @throws com.example.eduweb.managesystem.exception.ResourceNotFoundException Nếu kiểm tra và không tìm thấy User (tùy chọn).
      */
     List<CashierShiftResponseDto> getShiftsByUserId(Long userId);
 
@@ -71,28 +73,12 @@ public interface CashierShiftService {
      *
      * @param userId ID của người dùng (nhân viên thu ngân).
      * @return DTO chứa thông tin chi tiết của ca đang mở, hoặc null (hoặc Optional.empty()) nếu không có ca nào đang mở cho người dùng đó.
-     * @throws com.yourpackage.exception.ResourceNotFoundException Nếu kiểm tra và không tìm thấy User (tùy chọn).
+     * @throws com.example.eduweb.managesystem.exception.ResourceNotFoundException Nếu kiểm tra và không tìm thấy User (tùy chọn).
      */
     CashierShiftResponseDto getCurrentOpenShiftByUserId(Long userId);
 
-    // --- Các phương thức tiềm năng khác có thể thêm vào ---
-    // /**
-    //  * Cập nhật trạng thái ca thành 'RECONCILED' (Đã đối soát).
-    //  * Thường được thực hiện bởi quản lý sau khi kiểm tra chênh lệch.
-    //  *
-    //  * @param shiftId ID của ca cần đối soát.
-    //  * @param reconciledByUserId ID của người thực hiện đối soát.
-    //  * @param notes Ghi chú bổ sung (nếu có).
-    //  * @return DTO của ca đã được cập nhật trạng thái.
-    //  */
+    // --- Các phương thức tiềm năng khác có thể thêm vào đây ---
+    // Ví dụ:
     // CashierShiftResponseDto reconcileShift(Long shiftId, Long reconciledByUserId, String notes);
-
-    // /**
-    //  * Cập nhật ghi chú cho một ca làm việc đã tồn tại.
-    //  *
-    //  * @param shiftId ID của ca cần cập nhật ghi chú.
-    //  * @param notes Nội dung ghi chú mới.
-    //  * @return DTO của ca đã được cập nhật.
-    //  */
     // CashierShiftResponseDto updateShiftNotes(Long shiftId, String notes);
 }
