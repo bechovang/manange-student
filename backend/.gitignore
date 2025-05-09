@@ -38,4 +38,5 @@ backend/target/
 
 
 ### log ###
-backend/logs/
+/backend/logs/
+/backend/logs/application.log
